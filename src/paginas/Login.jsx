@@ -1,10 +1,13 @@
 import bcrypt from 'bcryptjs';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 export function Login() {
     const [usuario, setUsuario] = useState('');
     const [senha, setSenha] = useState('');
     const [senhaHash, setSenhaHash] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Hashear a senha inicial 'Senha123' ao montar o componente
@@ -28,7 +31,7 @@ export function Login() {
             if (isCorrect) {
                 console.log('Senha correta');
                 // Redirecionar ou realizar ação de login
-                window.location.href = "./telaPrincipal/tempoReal/tempoReal.html";
+                navigate('/TempoReal');
             } else {
                 alert("Senha incorreta!");
             }
