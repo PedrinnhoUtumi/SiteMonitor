@@ -55,7 +55,7 @@ export function Login() {
     return (
         <div className="bg-gradient-to-r from-azul_bebê to-azul_escuro h-screen flex items-center justify-center">        
             <div className="caixaLogin w-1/4 h-3/5 flex flex-col justify-center items-center bg-white bg-opacity-10 rounded-3xl shadow-lg p-5 backdrop-blur-sm">
-                <img src="../../public/usuario.png" alt="Ícone de usuário" className="w-32 mb-24" />
+                <img src="../../usuario.png" alt="Ícone de usuário" className="w-32 mb-24" />
 
                 <div className="relative w-3/4 mt-5">
                     <input
@@ -66,7 +66,7 @@ export function Login() {
                         onChange={(e) => setUsuario(e.target.value)}
                         className="w-full py-2 pl-10 pr-4 border border-gray-400 rounded focus:outline-none focus:ring-2 focus:ring-azul_claro"
                     />
-                    <img src="../../public/usuarioGmail.png" alt="Ícone de email" className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5" />
+                    <img src="../../usuarioGmail.png" alt="Ícone de email" className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5" />
                 </div>
                 <div className="relative w-3/4 mt-5">
                     <input
@@ -77,7 +77,7 @@ export function Login() {
                         onChange={(e) => setSenha(e.target.value)}
                         className="w-full py-2 pl-10 pr-4 border border-gray-400 rounded focus:outline-none focus:ring-2 focus:ring-azul_claro"
                     />
-                    <img src="../../public/cadeado.png" alt="Ícone de senha" className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5" />
+                    <img src="../../cadeado.png" alt="Ícone de senha" className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5" />
                 </div>
                 <button
                     onClick={verificarLogin}
