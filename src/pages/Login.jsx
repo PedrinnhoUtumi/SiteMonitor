@@ -1,6 +1,8 @@
+
 import bcrypt from 'bcryptjs';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 
 
 export function Login() {
@@ -9,8 +11,9 @@ export function Login() {
     const [senhaHash, setSenhaHash] = useState('');
     const navigate = useNavigate();
 
+
+
     useEffect(() => {
-        // Hashear a senha inicial 'Senha123' ao montar o componente
         const hashearSenha = async () => {
             const hash = await bcrypt.hash('Senha123', 10);
             setSenhaHash(hash);
@@ -24,13 +27,12 @@ export function Login() {
             temMaiusculas(senha) &&
             temNumeros(senha) &&
             !temEspacos(senha) &&
-            usuario === "pedroutumi@gmail.com") {
+            usuario === "pedroutumi@gmail.com" || usuario === "brunopena454@gmail.com") {
             console.log('Verificando senha...');
             const isCorrect = await bcrypt.compare(senha, senhaHash);
 
             if (isCorrect) {
                 console.log('Senha correta');
-                // Redirecionar ou realizar ação de login
                 navigate('/TempoReal');
             } else {
                 alert("Senha incorreta!");
@@ -39,6 +41,8 @@ export function Login() {
             alert("Impossível cadastrar!");
         }
     };
+
+    
 
     function temMaiusculas(texto) {
         return /[A-Z]/.test(texto);

@@ -1,5 +1,5 @@
-import { Pagina } from "../Pagina"
-import { Cabecalho } from './Cabecalho'
+import { Pagina } from "../components/Pagina"
+import { Cabecalho } from '../components/Cabecalho'
 
 
 export function Configuracao(){
@@ -9,9 +9,7 @@ export function Configuracao(){
     return (
         <Pagina>
             <Cabecalho/>
-            <div className="bg-green-500 w-screen h-screen flex flex-col m-0">
-                    
-            </div>
+
         </Pagina>
     )
 } 

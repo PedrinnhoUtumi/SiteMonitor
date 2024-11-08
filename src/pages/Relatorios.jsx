@@ -1,5 +1,5 @@
-import { Pagina } from "../Pagina"
-import { Cabecalho } from './Cabecalho'
+import { Pagina } from "../components/Pagina"
+import { Cabecalho } from '../components/Cabecalho'
 
 
 export function Relatorios(){
