@@ -9,7 +9,9 @@ export function Configuracao(){
     return (
         <Pagina>
             <Cabecalho/>
+            <div className="w-screen h-screen bg-red-500">
 
+            </div>
         </Pagina>
     )
 } 
