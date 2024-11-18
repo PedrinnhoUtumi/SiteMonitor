@@ -1,21 +1,113 @@
 import { Pagina } from "../components/Pagina"
 import { Cabecalho } from '../components/Cabecalho'
-import { IconCsv, IconDownload } from "@tabler/icons-react";
+import { IconDownload } from "@tabler/icons-react";
+// import axios from 'axios';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+// import { useEffect, useState } from "react";
+
+const data = [
+    { name: 'Jan', uv: 4000, pv: 2400, amt: 2400, pedro: 1000 },
+    { name: 'Feb', uv: 3000, pv: 1398, amt: 2210, pedro: 1100 },
+    { name: 'Mar', uv: 2000, pv: 9800, amt: 2290, pedro: 1200 },
+    { name: 'Apr', uv: 2780, pv: 3908, amt: 2000, pedro: 1300 },
+    { name: 'May', uv: 1890, pv: 4800, amt: 2181, pedro: 1400 },
+    { name: 'Jun', uv: 2390, pv: 3800, amt: 2500, pedro: 1500 },
+    { name: 'Jul', uv: 3490, pv: 4300, amt: 2100, pedro: 1600 },
+    { name: 'Ago', uv: 3490, pv: 4300, amt: 2100, pedro: 1700 },
+    { name: 'Set', uv: 3490, pv: 4300, amt: 2100, pedro: 1800 },
+    { name: 'Jan', uv: 4000, pv: 2400, amt: 2400, pedro: 1000 },
+    { name: 'Feb', uv: 3000, pv: 1398, amt: 2210, pedro: 1100 },
+    { name: 'Mar', uv: 2000, pv: 9800, amt: 2290, pedro: 1200 },
+    { name: 'Apr', uv: 2780, pv: 3908, amt: 2000, pedro: 1300 },
+    { name: 'May', uv: 1890, pv: 4800, amt: 2181, pedro: 1400 },
+    { name: 'Jun', uv: 2390, pv: 3800, amt: 2500, pedro: 1500 },
+    { name: 'Jul', uv: 3490, pv: 4300, amt: 2100, pedro: 1600 },
+    { name: 'Ago', uv: 3490, pv: 4300, amt: 2100, pedro: 1700 },
+    { name: 'Set', uv: 3490, pv: 4300, amt: 2100, pedro: 1800 },
+    { name: 'Jan', uv: 4000, pv: 2400, amt: 2400, pedro: 1000 },
+    { name: 'Feb', uv: 3000, pv: 1398, amt: 2210, pedro: 1100 },
+    { name: 'Mar', uv: 2000, pv: 9800, amt: 2290, pedro: 1200 },
+    { name: 'Apr', uv: 2780, pv: 3908, amt: 2000, pedro: 1300 },
+    { name: 'May', uv: 1890, pv: 4800, amt: 2181, pedro: 1400 },
+    { name: 'Jun', uv: 2390, pv: 3800, amt: 2500, pedro: 1500 },
+    { name: 'Jul', uv: 3490, pv: 4300, amt: 2100, pedro: 1600 },
+    { name: 'Ago', uv: 3490, pv: 4300, amt: 2100, pedro: 1700 },
+    { name: 'Set', uv: 3490, pv: 4300, amt: 2100, pedro: 1800 },
+];
 
 
-export function Tecnico(){
+
+export function Tecnico() {
     const estiloContainerGrafico = "bg-azul_claro w-[30vw] h-[40vh] m-1 rounded-md";
     const estiloContainerGrafico2 = "bg-azul_claro w-[50vw] h-[25vh] m-1 p-2 rounded-md flex flex-row";
 
+    // const [ dados, setDados] = useState([]);
+
+    // useEffect(() => {
+    //     axios.get('http://localhost:3001/api/dados')
+    //     .then(response => {
+    //         setDados(response.dados);
+    //     })
+    //     .catch(error => {
+    //         console.error('Erro ao buscar dados:', error);
+    //     });
+    // }, []);
+
+
     return (
         <Pagina>
-            <Cabecalho/>
+            <Cabecalho />
             <div className="w-full h-full flex flex-col">
                 <div className="flex flex-row justify-around">
-                    <div className={estiloContainerGrafico}></div>
-                    <div className={estiloContainerGrafico}></div>
-                    <div className={estiloContainerGrafico}></div>
-                    <div className={estiloContainerGrafico}></div>
+                    <div className={estiloContainerGrafico}>
+
+                        <ResponsiveContainer width="90%" height={380}>
+                            <LineChart data={data} margin={{ top: 20, right: 30, left: 40, bottom: 20 }}>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="name" />
+                                <YAxis />
+                                <Line type="monotone" dataKey="pv" stroke="#8884d8" dot={false} />
+                                <Tooltip />
+                                <Legend />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
+                    <div className={estiloContainerGrafico}>
+                        <ResponsiveContainer width="90%" height={380}>
+                            <LineChart data={data}>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="name" />
+                                <YAxis />
+                                <Tooltip />
+                                <Legend />
+                                <Line type="monotone" dataKey="uv" stroke="#8884d8" dot={false} />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
+                    <div className={estiloContainerGrafico}>
+                        <ResponsiveContainer width="90%" height={380}>
+                            <LineChart data={data}>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="name" />
+                                <YAxis />
+                                <Tooltip />
+                                <Legend />
+                                <Line type="monotone" dataKey="amt" stroke="#8884d8" dot={false} />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
+                    <div className={estiloContainerGrafico}>
+                        <ResponsiveContainer width="90%" height={380}>
+                            <LineChart data={data}>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="name" />
+                                <YAxis />
+                                <Tooltip />
+                                <Legend />
+                                <Line type="monotone" dataKey="pedro" stroke="#8884d8" dot={false} />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
                 </div>
                 <div className="flex flex-row justify-around">
                     <div className={estiloContainerGrafico}></div>
@@ -31,8 +123,7 @@ export function Tecnico(){
                 </div>
                 <div className="flex flex-row justify-around">
                     <div className={estiloContainerGrafico2}>
-                        <IconDownload/> exportar CSV
-                        {/* <input type="file" /> */}
+                        <IconDownload className="mr-1" /> exportar CSV
                     </div>
                     <div className={estiloContainerGrafico2}></div>
                 </div>
