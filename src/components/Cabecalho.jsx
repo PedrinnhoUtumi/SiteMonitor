@@ -1,7 +1,5 @@
 import { NavLink } from "react-router-dom"
 
-
-
 export function Cabecalho(){
     const estiloBotao = "bg-azul_bebê rounded-md w-72 h-12 m-5 text-cinza_escuro hover:bg-azul_escuro hover:text-branco flex flex-row justify-center items-center"
     
