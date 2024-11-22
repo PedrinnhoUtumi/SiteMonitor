@@ -1,26 +1,26 @@
 
-import bcrypt from 'bcryptjs';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import bcrypt from 'bcryptjs'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 
 
 export function Login() {
-    const [usuario, setUsuario] = useState('');
-    const [senha, setSenha] = useState('');
-    const [senhaHash, setSenhaHash] = useState('');
-    const navigate = useNavigate();
+    const [usuario, setUsuario] = useState('')
+    const [senha, setSenha] = useState('')
+    const [senhaHash, setSenhaHash] = useState('')
+    const navigate = useNavigate()
 
 
 
     useEffect(() => {
         const hashearSenha = async () => {
-            const hash = await bcrypt.hash('Senha123', 10);
-            setSenhaHash(hash);
-            console.log('Senha hasheada:', hash);
-        };
-        hashearSenha();
-    }, []);
+            const hash = await bcrypt.hash('Senha123', 10)
+            setSenhaHash(hash)
+            console.log('Senha hasheada:', hash)
+        }
+        hashearSenha()
+    }, [])
 
     const verificarLogin = async () => {
         if (senha.length >= 8 &&
@@ -28,32 +28,32 @@ export function Login() {
             temNumeros(senha) &&
             !temEspacos(senha) &&
             usuario === "pedroutumi@gmail.com" || usuario === "brunopena454@gmail.com") {
-            console.log('Verificando senha...');
-            const isCorrect = await bcrypt.compare(senha, senhaHash);
+            console.log('Verificando senha...')
+            const isCorrect = await bcrypt.compare(senha, senhaHash)
 
             if (isCorrect) {
-                console.log('Senha correta');
-                navigate('/TempoReal');
+                console.log('Senha correta')
+                navigate('/TempoReal')
             } else {
-                alert("Senha incorreta!");
+                alert("Senha incorreta!")
             }
         } else {
-            alert("Impossível cadastrar!");
+            alert("Impossível cadastrar!")
         }
-    };
+    }
 
     
 
     function temMaiusculas(texto) {
-        return /[A-Z]/.test(texto);
+        return /[A-Z]/.test(texto)
     }
 
     function temNumeros(texto) {
-        return /[0-9]/.test(texto);
+        return /[0-9]/.test(texto)
     }
 
     function temEspacos(texto) {
-        return texto.includes(' ');
+        return texto.includes(' ')
     }
 
     return (
@@ -91,5 +91,5 @@ export function Login() {
                 </button>
             </div>
         </div>
-    );
+    )
 }

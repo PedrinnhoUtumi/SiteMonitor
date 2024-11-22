@@ -1,11 +1,11 @@
-import { Pagina } from "../components/Pagina";
-import { Cabecalho } from "../components/Cabecalho";
+import { Pagina } from "../components/Pagina"
+import { Cabecalho } from "../components/Cabecalho"
 
 export function TempoReal() {
-    const estiloContainerGrafico = "bg-azul_claro w-1/3 h-48 m-1 rounded-md";
-    const estiloContainerGrafico2 = "bg-azul_claro w-1/3 h-36 m-1 rounded-md";
-    const estiloContainerGrafico3 = "bg-azul_claro w-1/2 h-[50vh] m-1 rounded-md";
-    const estiloTitulo = "bg-azul_claro h-16 flex justify-center items-center text-2xl m-1 rounded-md font-bold";
+    const estiloContainerGrafico = "bg-azul_claro w-1/3 h-48 m-1 rounded-md"
+    const estiloContainerGrafico2 = "bg-azul_claro w-1/3 h-36 m-1 rounded-md"
+    const estiloContainerGrafico3 = "bg-azul_claro w-1/2 h-[50vh] m-1 rounded-md"
+    const estiloTitulo = "bg-azul_claro h-16 flex justify-center items-center text-2xl m-1 rounded-md font-bold"
 
     return (
         <Pagina>
@@ -67,5 +67,5 @@ export function TempoReal() {
                 </div>
             </div>
         </Pagina>
-    );
+    )
 }

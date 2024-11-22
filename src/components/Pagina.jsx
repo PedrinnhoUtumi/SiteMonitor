@@ -1,6 +1,6 @@
 
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 export function Pagina(props) {
   const opcoes = {
@@ -8,31 +8,31 @@ export function Pagina(props) {
     2: "Configuração",
     3: "Técnico",
     4: "Relatórios",
-  };
+  }
 
-  const [estado, setEstado] = useState(1);
-  const navigate = useNavigate();
+  const [estado, setEstado] = useState(1)
+  const navigate = useNavigate()
 
   function handleChange(event) {
-    const value = event.target.value;
-    setEstado(value);
+    const value = event.target.value
+    setEstado(value)
   }
 
     // switch (value) {
     //   case 1:
-    //     navigate("/TempoReal");
-    //     break;
+    //     navigate("/TempoReal")
+    //     break
     //   case 2:
-    //     navigate("/Configuracao");
-    //     break;
+    //     navigate("/Configuracao")
+    //     break
     //   case 3:
-    //     navigate("/Tecnico");
-    //     break;
+    //     navigate("/Tecnico")
+    //     break
     //   case 4:
-    //     navigate("/Relatorios");
-    //     break;
+    //     navigate("/Relatorios")
+    //     break
     //   default:
-    //     break;
+    //     break
     // }
 
   return (
@@ -55,6 +55,6 @@ export function Pagina(props) {
         {props.children}
       </main>
     </div>
-    );
+    )
   }
 

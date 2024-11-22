@@ -14,7 +14,8 @@ export function Configuracao(){
     const [aparelhos, setAparelhos] = useState(nomeAparelhos)
     const [quantidadeAparelhos, setQuantidadeAparelhos] = useState(nomeAparelhos.length)
 
-    const estiloContainerGrafico = "bg-azul_claro w-1/3 h-48 m-1 p-4 rounded-md"
+    // const estiloContainerGrafico = "bg-azul_claro w-1/3 h-48 m-1 p-4 rounded-md"
+    const estiloContainerGrafico = "bg-azul_claro w-1/2 h-screen m-1 p-4 rounded-md"
 
     function editarNome(event) {
         setNome(event.target.value)   
@@ -57,11 +58,11 @@ export function Configuracao(){
                         </div>
                     </div>
 
-                    <div className={estiloContainerGrafico}>
+                    {/* <div className={estiloContainerGrafico}>
                         <div>
                             
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </Pagina>
