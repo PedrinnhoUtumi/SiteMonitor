@@ -31,7 +31,7 @@ export function Configuracao(){
     return (
         <Pagina>
             <Cabecalho/>
-            <div className="w-full h-full flex flex-col">
+            <div className="w-full h-screen flex flex-col">
                 <div className="flex flex-row justify-normal">
                     <div className={estiloContainerGrafico}>
                         <div className="w-full h-full flex flex-col justify-center items-center ">
@@ -58,11 +58,11 @@ export function Configuracao(){
                         </div>
                     </div>
 
-                    {/* <div className={estiloContainerGrafico}>
+                    <div className={estiloContainerGrafico}>
                         <div>
                             
                         </div>
-                    </div> */}
+                    </div> 
                 </div>
             </div>
         </Pagina>

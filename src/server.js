@@ -6,15 +6,23 @@ import cors from 'cors'
 // verificar porta
 // 
 const app = express()
-const PORT = 3306
+const PORT = 3000
 
 app.use(cors())
 
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'seu_usuario',
-  password: 'sua_senha',
-  database: 'nome_do_banco',
+  host: '127.0.0.1',
+  user: 'educnodered',
+  password: 'EDUCEREnodered1584',
+  database: 'BancoDeDadosNodEducere',
+})
+
+db.connect((err) => {
+  if (err) {
+    console.error('Erro de conexãoOOOOO: ' + err.stack)
+    return
+  }
+  console.log('Conexão com o banco de dados estabelecida!')
 })
 
 app.get('/api/dados', (req, res) => {

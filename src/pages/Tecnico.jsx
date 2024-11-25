@@ -54,18 +54,21 @@ export function Tecnico() {
     // }, [])
 
     function exportCSV() {
-        const dataArray = [
-            ['Nome', 'Idade', 'Cidade'],
-            ['João', 30, 'Campo Mourão'],
-            ['Bruno', 25, 'Engenheiro Beltrão'],
-            ['Pedro', 35, 'Araruna']
-        ]
+        function convertToCSV(data) {
+            const headers = Object.keys(data[0]); 
+            const csvRows = [];
         
-        const convertToCSV = (array) => {
-            return array.map(row => row.join(',')).join('\n')
+            csvRows.push(headers.join(','));
+        
+            for (const row of data) {
+                const values = headers.map(header => row[header]);
+                csvRows.push(values.join(','));
+            }
+        
+            return csvRows.join('\n');
         }
         
-        const csvData = convertToCSV(dataArray)
+        const csvData = convertToCSV(data)
         
         const blob = new Blob([csvData], { type: 'text/csv' })
         
@@ -88,7 +91,7 @@ export function Tecnico() {
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis dataKey="name" />
                                 <YAxis />
-                                <Line type="monotone" dataKey="pv" stroke="#8884d8" dot={false} />
+                                <Line type="bump" dataKey="pv" stroke="#4E769B" dot={false} strokeWidth={2}/>
                                 <Tooltip />
                                 <Legend />
                             </LineChart>
@@ -102,7 +105,7 @@ export function Tecnico() {
                                 <YAxis />
                                 <Tooltip />
                                 <Legend />
-                                <Line type="monotone" dataKey="uv" stroke="#8884d8" dot={false} />
+                                <Line type="bump" dataKey="uv" stroke="#4E769B" dot={false} strokeWidth={2} />
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
@@ -114,7 +117,7 @@ export function Tecnico() {
                                 <YAxis />
                                 <Tooltip />
                                 <Legend />
-                                <Line type="monotone" dataKey="amt" stroke="#8884d8" dot={false} />
+                                <Line type="bump" dataKey="amt" stroke="#4E769B" dot={false} strokeWidth={2}/>
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
@@ -126,7 +129,7 @@ export function Tecnico() {
                                 <YAxis />
                                 <Tooltip />
                                 <Legend />
-                                <Line type="monotone" dataKey="pedro" stroke="#8884d8" dot={false} />
+                                <Line type="bump" dataKey="pedro" stroke="#4E769B" dot={false} strokeWidth={2} />
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
@@ -145,7 +148,7 @@ export function Tecnico() {
                 </div>
                 <div className="flex flex-row justify-around">
                     <div className={estiloContainerGrafico2}>
-                        <button className="bg-azul_escuro flex items-center justify-center w-48 h-10 rounded-md" onClick={exportCSV}><IconDownload className="mr-1" /> exportar CSV</button>
+                        <button className="bg-azul_escuro flex items-center justify-center w-48 h-10 rounded-md" onClick={exportCSV}><IconDownload className="mr-1" /> Exportar CSV</button>
                     </div>
                     <div className={estiloContainerGrafico2}></div>
                 </div>
