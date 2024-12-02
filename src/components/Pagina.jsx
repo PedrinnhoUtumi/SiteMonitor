@@ -18,14 +18,27 @@ export function Pagina(props) {
     setEstado(value)
   }
 
+    // switch (value) {
+    //   case 1:
+    //     navigate("/TempoReal")
+    //     break
+    //   case 2:
+    //     navigate("/Configuracao")
+    //     break
+    //   case 3:
+    //     navigate("/Tecnico")
+    //     break
+    //   case 4:
+    //     navigate("/Relatorios")
+    //     break
+    //   default:
+    //     break
+    // }
+
   return (
     <div className={`flex flex-col flex-1`}>
       <header
-<<<<<<< HEAD
-        className={`flex flex-row justify-start items-center pl-10 px-5 h-16 border-b bg-azul_escuro text-branco`}
-=======
         className={`flex flex-row justify-center items-center px-5 h-16 border-b bg-azul_mais_escuro text-branco`}
->>>>>>> da2f818c6b59376560c4cfc2ae2b4a9a1182b0f5
       >
         <select
           value={estado}
