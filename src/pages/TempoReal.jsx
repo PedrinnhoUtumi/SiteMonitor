@@ -1,10 +1,10 @@
 import { Pagina } from "../components/Pagina"
 import { Cabecalho } from "../components/Cabecalho"
 import  { data } from "./Tecnico"
-import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
+import { Bar, BarChart, CartesianGrid, Legend, PolarAngleAxis, RadialBar, RadialBarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
 export function TempoReal() {
-    const estiloContainerGrafico = "bg-azul_escuro w-1/3 h-48 m-1 rounded-md"
+    const estiloContainerGrafico = "bg-azul_escuro w-1/3 h-48 m-1 rounded-md flex justify-center "
     const estiloContainerGrafico2 = "bg-azul_escuro w-1/3 h-36 m-1 rounded-md p-4"
     const estiloContainerGrafico3 = "bg-azul_escuro w-1/2 h-[50vh] m-1 rounded-md flex justify-center items-center"
     const estiloTitulo = "bg-azul_escuro h-16 flex justify-center items-center text-2xl m-1 rounded-md font-bold"
@@ -23,6 +23,12 @@ export function TempoReal() {
 
                 <div className="flex flex-row justify-around">
                     <div className={estiloContainerGrafico}>
+                        <ResponsiveContainer width="100%" height={300}>
+                        <RadialBarChart innerRadius="60%" outerRadius="40%" data={data} startAngle={180} endAngle={0}>
+                            <PolarAngleAxis type="number" domain={[0, 100]} angleAxisId={0} tick={false} />
+                            <RadialBar minAngle={15} label={{ fill: '#2C4F75', fontSize: 20 }} background clockWise dataKey="anta" />
+                        </RadialBarChart>
+                        </ResponsiveContainer>
                     </div>
                     <div className={estiloContainerGrafico}></div>
                     <div className={estiloContainerGrafico}></div>
