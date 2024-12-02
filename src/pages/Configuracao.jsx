@@ -6,7 +6,7 @@ import MQTTComponent from '../components/MQTTComponent';
 
 
 export function Configuracao(){
-    //const estiloBotao = "bg-azul_bebê rounded-md w-32 h-12 m-5 text-cinza_escuro hover:bg-azul_escuro hover:text-branco "
+    //const estiloBotao = "bg-azul_bebe rounded-md w-32 h-12 m-5 text-cinza_escuro hover:bg-azul_escuro hover:text-branco "
 
     const [nome, setNome] = useState("João Reni")
     const [endereco, setEndereco] = useState("Engenheiro Beltrão")
@@ -16,8 +16,13 @@ export function Configuracao(){
     const [aparelhos, setAparelhos] = useState(nomeAparelhos)
     const [quantidadeAparelhos, setQuantidadeAparelhos] = useState(nomeAparelhos.length)
 
+<<<<<<< HEAD
     // const estiloContainerGrafico = "bg-azul_claro w-1/3 h-48 m-1 p-4 rounded-md"
     const estiloContainerGrafico = "bg-azul_claro w-1/2 h-72 m-1 p-4 rounded-md"
+=======
+    // const estiloContainerGrafico = "bg-azul_escuro w-1/3 h-48 m-1 p-4 rounded-md"
+    const estiloContainerGrafico = "bg-azul_escuro w-1/2 h-screen m-1 p-4 rounded-md"
+>>>>>>> da2f818c6b59376560c4cfc2ae2b4a9a1182b0f5
 
     function editarNome(event) {
         setNome(event.target.value)   
@@ -39,13 +44,13 @@ export function Configuracao(){
                         <div className="w-full h-full flex flex-col justify-center items-center ">
                             <ul className="p-4 ">
                                 <li>
-                                    Nome:     <input type="text" value={nome} onChange={editarNome} className="w-64 p-1 bg-azul_claro"/>
+                                    Nome:     <input type="text" value={nome} onChange={editarNome} className="w-64 p-1 bg-azul_escuro"/>
                                 </li>
                                 <li>
-                                    Endereço: <input type="text" value={endereco} onChange={editarEndereco} className="w-64 p-1 bg-azul_claro" />
+                                    Endereço: <input type="text" value={endereco} onChange={editarEndereco} className="w-64 p-1 bg-azul_escuro" />
                                 </li>
                                 <li>
-                                    Empresa:  <input type="text" value={empresa} onChange={editarEmpresa} className="w-64 p-1 bg-azul_claro" />
+                                    Empresa:  <input type="text" value={empresa} onChange={editarEmpresa} className="w-64 p-1 bg-azul_escuro" />
 
                                 </li>
                             </ul>
@@ -53,7 +58,11 @@ export function Configuracao(){
                     </div>
 
                     <div className={estiloContainerGrafico}>
+<<<<<<< HEAD
                         <div className="w-full h-full flex flex-col justify-center items-center text-3xl text-verde_menta_escuro">
+=======
+                        <div className="w-full h-full flex flex-col justify-center items-center text-3xl text-red-600 glow">
+>>>>>>> da2f818c6b59376560c4cfc2ae2b4a9a1182b0f5
                             Nome dos Aparelhos: {aparelhos.join(', ')}
                             <br />
                             Quantidade de Aparelhos: {quantidadeAparelhos}
