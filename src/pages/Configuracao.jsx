@@ -1,6 +1,7 @@
 import { Pagina } from "../components/Pagina"
 import { Cabecalho } from '../components/Cabecalho'
 import { useState } from "react"
+import MQTTComponent from "../components/MQTTComponent"
 
 
 export function Configuracao(){
@@ -60,7 +61,7 @@ export function Configuracao(){
 
                     <div className={estiloContainerGrafico}>
                         <div>
-                            
+                            <MQTTComponent/>
                         </div>
                     </div> 
                 </div>

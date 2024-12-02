@@ -12,6 +12,10 @@ export function TempoReal() {
     const estiloInformacoesContainerConsumo = "flex justify-center items-end h-20 text-7xl font-thin text-yellow-500"
     const estiloTituloContainerGeracao = "text-3xl text-green-500 font-bold"
     const estiloInformacoesContainerGeracao = "flex justify-center items-end h-20 text-7xl font-thin text-green-500"
+    const estiloTituloContainerCorrente = "text-3xl text-orange-500 font-bold"
+    const estiloInformacoesContainerCorrente = "flex justify-center items-end h-20 text-7xl font-thin text-orange-500"
+    const estiloTituloContainerPotencia = "text-3xl text-amber-500 font-bold"
+    const estiloInformacoesContainerPotencia = "flex justify-center items-end h-20 text-7xl font-thin text-amber-500"
 
     return (
         <Pagina>
@@ -34,20 +38,20 @@ export function TempoReal() {
                 </header>
                 <div className="flex flex-row justify-around">
                     <div className={estiloContainerGrafico2}>
-                        <h1 className={estiloTituloContainerConsumo}>Fase A</h1>
-                        <div className={estiloInformacoesContainerConsumo}>
+                        <h1 className={estiloTituloContainerCorrente}>Fase A</h1>
+                        <div className={estiloInformacoesContainerCorrente}>
                             0.0A
                         </div>
                     </div>
                     <div className={estiloContainerGrafico2}>
-                        <h1 className={estiloTituloContainerConsumo}>Fase B</h1>
-                        <div className={estiloInformacoesContainerConsumo}>
+                        <h1 className={estiloTituloContainerCorrente}>Fase B</h1>
+                        <div className={estiloInformacoesContainerCorrente}>
                             0.0A
                         </div>
                     </div>
                     <div className={estiloContainerGrafico2}>
-                        <h1 className={estiloTituloContainerConsumo}>Fase C</h1>
-                        <div className={estiloInformacoesContainerConsumo}>
+                        <h1 className={estiloTituloContainerCorrente}>Fase C</h1>
+                        <div className={estiloInformacoesContainerCorrente}>
                             0.0A
                         </div>
                     </div>
@@ -58,26 +62,26 @@ export function TempoReal() {
                 </header>
                 <div className="flex flex-row justify-around">
                     <div className={estiloContainerGrafico2}>
-                        <h1 className={estiloTituloContainerConsumo}>Fase A</h1>
-                        <div className={estiloInformacoesContainerConsumo}>
+                        <h1 className={estiloTituloContainerPotencia}>Fase A</h1>
+                        <div className={estiloInformacoesContainerPotencia}>
                             0.00W
                         </div>
                     </div>
                     <div className={estiloContainerGrafico2}>
-                        <h1 className={estiloTituloContainerConsumo}>Fase B</h1>
-                        <div className={estiloInformacoesContainerConsumo}>
+                        <h1 className={estiloTituloContainerPotencia}>Fase B</h1>
+                        <div className={estiloInformacoesContainerPotencia}>
                             0.00W
                         </div>
                     </div>
                     <div className={estiloContainerGrafico2}>
-                        <h1 className={estiloTituloContainerConsumo}>Fase C</h1>
-                        <div className={estiloInformacoesContainerConsumo}>
+                        <h1 className={estiloTituloContainerPotencia}>Fase C</h1>
+                        <div className={estiloInformacoesContainerPotencia}>
                             0.00W
                         </div>
                     </div>
                     <div className={estiloContainerGrafico2}>
-                        <h1 className={estiloTituloContainerConsumo}>Total</h1>
-                        <div className={estiloInformacoesContainerConsumo}>
+                        <h1 className={estiloTituloContainerPotencia}>Total</h1>
+                        <div className={estiloInformacoesContainerPotencia}>
                             0.00W
                         </div>
                     </div>
