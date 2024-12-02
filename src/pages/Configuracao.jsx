@@ -1,6 +1,8 @@
 import { Pagina } from "../components/Pagina"
 import { Cabecalho } from '../components/Cabecalho'
 import { useState } from "react"
+import MQTTComponent from '../components/MQTTComponent';
+
 
 
 export function Configuracao(){
@@ -15,7 +17,7 @@ export function Configuracao(){
     const [quantidadeAparelhos, setQuantidadeAparelhos] = useState(nomeAparelhos.length)
 
     // const estiloContainerGrafico = "bg-azul_claro w-1/3 h-48 m-1 p-4 rounded-md"
-    const estiloContainerGrafico = "bg-azul_claro w-1/2 h-screen m-1 p-4 rounded-md"
+    const estiloContainerGrafico = "bg-azul_claro w-1/2 h-72 m-1 p-4 rounded-md"
 
     function editarNome(event) {
         setNome(event.target.value)   
@@ -51,7 +53,7 @@ export function Configuracao(){
                     </div>
 
                     <div className={estiloContainerGrafico}>
-                        <div className="w-full h-full flex flex-col justify-center items-center text-3xl text-verde_menta_claro">
+                        <div className="w-full h-full flex flex-col justify-center items-center text-3xl text-verde_menta_escuro">
                             Nome dos Aparelhos: {aparelhos.join(', ')}
                             <br />
                             Quantidade de Aparelhos: {quantidadeAparelhos}
@@ -60,7 +62,7 @@ export function Configuracao(){
 
                     <div className={estiloContainerGrafico}>
                         <div>
-                            
+                            <MQTTComponent/>
                         </div>
                     </div> 
                 </div>

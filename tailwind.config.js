@@ -15,6 +15,7 @@ export default {
         azul_bebê: '#DDE5ED',
         bege_claro: '#D1C6B1',
         verde_menta_claro: '#A8D5BA',
+        verde_menta_escuro: '#70DC9B',
 
       }
     },
