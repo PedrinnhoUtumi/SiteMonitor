@@ -38,12 +38,12 @@ export function Pagina(props) {
   return (
     <div className={`flex flex-col flex-1`}>
       <header
-        className={`flex flex-row justify-center items-center px-5 h-16 border-b bg-azul_escuro text-branco`}
+        className={`flex flex-row justify-center items-center px-5 h-16 border-b bg-azul_mais_escuro text-branco`}
       >
         <select
           value={estado}
           onChange={handleChange}
-          className="rounded-md p-0 bg-azul_escuro text-branco"
+          className="rounded-md p-0 bg-azul_mais_escuro text-branco"
         >
           <option value={1}>{opcoes[1]}</option>
           <option value={2}>{opcoes[2]}</option>

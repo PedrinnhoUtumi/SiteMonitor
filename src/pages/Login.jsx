@@ -57,7 +57,7 @@ export function Login() {
     }
 
     return (
-        <div className="bg-gradient-to-r from-azul_bebê to-azul_escuro h-screen flex items-center justify-center">        
+        <div className="bg-gradient-to-r from-azul_bebe to-azul_escuro h-screen flex items-center justify-center">        
             <div className="caixaLogin w-1/4 h-3/5 flex flex-col justify-center items-center bg-white bg-opacity-10 rounded-3xl shadow-lg p-5 backdrop-blur-sm">
                 <img src="../../usuario.png" alt="Ícone de usuário" className="w-32 mb-24" />
 
