@@ -23,12 +23,7 @@ export function TempoReal() {
 
                 <div className="flex flex-row justify-around">
                     <div className={estiloContainerGrafico}>
-                        <ResponsiveContainer width="100%" height={300}>
-                        <RadialBarChart innerRadius="60%" outerRadius="40%" data={data} startAngle={180} endAngle={0}>
-                            <PolarAngleAxis type="number" domain={[0, 100]} angleAxisId={0} tick={false} />
-                            <RadialBar minAngle={15} label={{ fill: '#2C4F75', fontSize: 20 }} background clockWise dataKey="anta" />
-                        </RadialBarChart>
-                        </ResponsiveContainer>
+
                     </div>
                     <div className={estiloContainerGrafico}></div>
                     <div className={estiloContainerGrafico}></div>
