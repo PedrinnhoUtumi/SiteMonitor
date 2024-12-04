@@ -1,6 +1,4 @@
 import  { useEffect } from 'react';
-import mqtt from 'mqtt';
-
 
 const MQTTComponent = () => {
   useEffect(() => {
