@@ -1,7 +1,7 @@
 import { Pagina } from "../components/Pagina"
 import { Cabecalho } from "../components/Cabecalho"
 import  { data } from "./Tecnico"
-import { Bar, BarChart, CartesianGrid, Legend, PolarAngleAxis, RadialBar, RadialBarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
+import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
 export function TempoReal() {
     const estiloContainerGrafico = "bg-azul_escuro w-1/3 h-48 m-1 rounded-md flex justify-center "
@@ -16,7 +16,7 @@ export function TempoReal() {
     const estiloInformacoesContainerCorrente = "flex justify-center items-end h-20 text-7xl font-thin text-orange-500"
     const estiloTituloContainerPotencia = "text-3xl text-amber-500 font-bold"
     const estiloInformacoesContainerPotencia = "flex justify-center items-end h-20 text-7xl font-thin text-amber-500"
-
+    
     return (
         <Pagina>
             <Cabecalho />

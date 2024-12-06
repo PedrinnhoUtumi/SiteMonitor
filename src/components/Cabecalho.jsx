@@ -5,7 +5,7 @@ export function Cabecalho(){
     
 
     return (
-        <div className="bg-branco min-w-full h-20 flex justify-evenly ">
+        <div className="bg-azul_bebe min-w-full h-20 flex justify-evenly ">
             <nav className="bg-azul_escuro m-1 w-full flex justify-evenly items-center rounded-md">
                 <NavLink to="/TempoReal" className={estiloBotao}>
                     Tempo Real

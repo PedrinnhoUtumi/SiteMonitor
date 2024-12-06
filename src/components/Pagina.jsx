@@ -1,6 +1,5 @@
 
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
 
 export function Pagina(props) {
   const opcoes = {
@@ -11,7 +10,6 @@ export function Pagina(props) {
   }
 
   const [estado, setEstado] = useState(1)
-  const navigate = useNavigate()
 
   function handleChange(event) {
     const value = event.target.value
@@ -51,7 +49,7 @@ export function Pagina(props) {
           <option value={4}>{opcoes[4]}</option>
         </select>
       </header>
-      <main className={`flex flex-col items-start flex-1 text-base text-branco`}>
+      <main className={`flex flex-col items-start flex-1 text-base text-branco bg-azul_bebe`}>
         {props.children}
       </main>
     </div>

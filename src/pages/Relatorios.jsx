@@ -9,7 +9,7 @@ export function Relatorios(){
     return (
         <Pagina>
             <Cabecalho/>
-            <div className="bg-blue-500 w-screen h-screen flex flex-col m-0">
+            <div className="w-screen h-screen flex flex-col m-0">
                     
             </div>
         </Pagina>
