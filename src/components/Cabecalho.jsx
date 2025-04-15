@@ -11,16 +11,16 @@ export function Cabecalho(){
                     Tempo Real
                 </NavLink>
                
-                <NavLink to="/Configuracao" className={estiloBotao}>
-                    Configurações
+                <NavLink to="/Tecnico" className={estiloBotao}>
+                    Técnico
                 </NavLink>
                
                 <NavLink to="/Relatorios" className={estiloBotao}>
                     Relatório
                 </NavLink>
-               
-                <NavLink to="/Tecnico" className={estiloBotao}>
-                    Técnico
+
+                <NavLink to="/Configuracao" className={estiloBotao}>
+                    Configurações
                 </NavLink>
             </nav>
         </div>

@@ -22,7 +22,7 @@ export function TempoReal() {
             <Cabecalho />
             <div className="w-full h-full flex flex-col">
                 <header className={estiloTitulo}>
-                    <h1 className=" text-red-500 glow">Tensão [V]</h1>
+                    <h1 className=" text-red-500">Tensão [V]</h1>
                 </header>
 
                 <div className="flex flex-row justify-around">
@@ -34,7 +34,7 @@ export function TempoReal() {
                 </div>
 
                 <header className={estiloTitulo}>
-                    <h1 className="text-orange-500 glow">Corrente [A]</h1>
+                    <h1 className="text-orange-500 ">Corrente [A]</h1>
                 </header>
                 <div className="flex flex-row justify-around">
                     <div className={estiloContainerGrafico2}>
@@ -58,7 +58,7 @@ export function TempoReal() {
                 </div>
 
                 <header className={estiloTitulo}>
-                    <h1 className="text-amber-500 glow">Potência Ativa [W]</h1>
+                    <h1 className="text-amber-500 ">Potência Ativa [W]</h1>
                 </header>
                 <div className="flex flex-row justify-around">
                     <div className={estiloContainerGrafico2}>
@@ -88,7 +88,7 @@ export function TempoReal() {
                 </div>
 
                 <header className={estiloTitulo}>
-                    <h1 className="text-yellow-500 glow">Consumo [kWh]</h1>
+                    <h1 className="text-yellow-500 ">Consumo [kWh]</h1>
                 </header>
                 <div className="flex flex-row justify-around">
                     <div className={estiloContainerGrafico2}>
@@ -118,7 +118,7 @@ export function TempoReal() {
                 </div>
 
                 <header className={estiloTitulo}>
-                    <h1 className="drop-shadow-xl text-green-500 glow">Geração [kWh]</h1>
+                    <h1 className="drop-shadow-xl text-green-500 ">Geração [kWh]</h1>
                 </header>
                 <div className="flex flex-row justify-around">
                     <div className={estiloContainerGrafico2}>
