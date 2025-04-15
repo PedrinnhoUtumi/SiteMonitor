@@ -40,8 +40,8 @@ export const data = [
 
 
 export function Tecnico() {
-    const estiloContainerGrafico = "bg-azul_escuro w-[30vw] h-[40vh] m-1 p-4 rounded-md"
-    const estiloContainerGrafico2 = "bg-azul_escuro w-[50vw] h-[25vh] m-1 p-2 rounded-md flex flex-row"
+    const estiloContainerGrafico = "bg-fundo_azul_escuro_elegante w-[30vw] h-[40vh] m-1 p-4 rounded-md border-b"
+    const estiloContainerGrafico2 = "bg-fundo_azul_escuro_elegante w-[50vw] h-[25vh] m-1 p-2 rounded-md flex flex-row"
     const [dados, setDados] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -90,7 +90,7 @@ export function Tecnico() {
     return (
         <Pagina>
             <Cabecalho />
-            <div className="w-full h-full flex flex-col">
+            <div className="w-full h-full flex flex-col bg-fundo_azul_claro_elegante">
                 <div className="flex flex-row justify-around">
                     <div className={estiloContainerGrafico}>
 
@@ -99,7 +99,7 @@ export function Tecnico() {
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis dataKey="name" />
                                 <YAxis />
-                                <Line type="bump" dataKey="pv" stroke="#2C4F75" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="pv" stroke="#f5af33" dot={false} strokeWidth={2} />
                                 <Tooltip />
                                 <Legend />
                             </LineChart>
@@ -113,7 +113,7 @@ export function Tecnico() {
                                 <YAxis />
                                 <Tooltip />
                                 <Legend />
-                                <Line type="bump" dataKey="uv" stroke="#2C4F75" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="uv" stroke="#f5af33" dot={false} strokeWidth={2} />
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
@@ -125,7 +125,7 @@ export function Tecnico() {
                                 <YAxis />
                                 <Tooltip />
                                 <Legend />
-                                <Line type="bump" dataKey="amt" stroke="#2C4F75" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="amt" stroke="#f5af33" dot={false} strokeWidth={2} />
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
@@ -137,7 +137,7 @@ export function Tecnico() {
                                 <YAxis />
                                 <Tooltip />
                                 <Legend />
-                                <Line type="bump" dataKey="pedro" stroke="#2C4F75" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="pedro" stroke="#f5af33" dot={false} strokeWidth={2} />
                             </LineChart>
                         </ResponsiveContainer>
                     </div>

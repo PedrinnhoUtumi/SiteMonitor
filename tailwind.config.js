@@ -18,7 +18,9 @@ export default {
         bege_claro: '#D1C6B1',
         verde_menta_claro: '#A8D5BA',
         verde_menta_escuro: '#70DC9B',
-
+        fonte_elegante_amarelo: '#f5af33',
+        fundo_azul_escuro_elegante: '#124881',
+        fundo_azul_claro_elegante: '#29659f',
       }
     },
   },

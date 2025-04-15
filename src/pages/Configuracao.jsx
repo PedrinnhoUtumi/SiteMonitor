@@ -4,7 +4,7 @@ import { useState } from "react"
 
 export function Configuracao(){
     const estiloBotao = "bg-azul_bebe rounded-md w-32 h-12 m-5 text-cinza_escuro hover:bg-azul_claro hover:text-branco "
-    const estiloLi = "m-3"
+    const estiloLi = "m-3 text-fonte_elegante_amarelo"
 
     const [nome, setNome] = useState("João Reni")
     const [endereco, setEndereco] = useState("Engenheiro Beltrão")
@@ -16,7 +16,7 @@ export function Configuracao(){
     const [aparelhos, setAparelhos] = useState(nomeAparelhos)
     const [quantidadeAparelhos, setQuantidadeAparelhos] = useState(nomeAparelhos.length)
 
-    const estiloContainerGrafico = "bg-azul_escuro w-1/2 h-auto m-1 p-4 rounded-md flex flex-col justify-center items-center"
+    const estiloContainerGrafico = "bg-fundo_azul_escuro_elegante w-1/2 h-auto m-1 p-4 rounded-md flex flex-col justify-center items-center"
 
     function editarNome(event) {
         setNome(event.target.value)   
@@ -35,7 +35,7 @@ export function Configuracao(){
     return (
         <Pagina>
             <Cabecalho/>
-            <div className="w-full h-screen flex flex-col">
+            <div className="w-full h-screen flex flex-col bg-fundo_azul_claro_elegante">
                 <div className="flex flex-row justify-normal">
                     <div className={estiloContainerGrafico}>
                         <div className="w-full h-96 flex flex-col justify-center items-center">
@@ -47,7 +47,7 @@ export function Configuracao(){
                                         value={nome} 
                                         onChange={editarNome} 
                                         disabled={!modoEdicao}
-                                        className={`w-64 p-1 bg-azul_escuro ${modoEdicao ? 'border border-white' : 'opacity-50'}`}
+                                        className={`w-64 p-1 bg-fundo_azul_escuro_elegante ${modoEdicao ? 'border border-white' : 'opacity-70'}`}
                                     />
                                 </li>
                                 <li className={estiloLi}>
@@ -57,7 +57,7 @@ export function Configuracao(){
                                         value={endereco} 
                                         onChange={editarEndereco} 
                                         disabled={!modoEdicao}
-                                        className={`w-64 p-1 bg-azul_escuro ${modoEdicao ? 'border border-white' : 'opacity-50'}`}
+                                        className={`w-64 p-1 bg-fundo_azul_escuro_elegante ${modoEdicao ? 'border border-white' : 'opacity-70'}`}
                                     />
                                 </li>
                                 <li className={estiloLi}>
@@ -67,7 +67,7 @@ export function Configuracao(){
                                         value={empresa} 
                                         onChange={editarEmpresa} 
                                         disabled={!modoEdicao}
-                                        className={`w-64 p-1 bg-azul_escuro ${modoEdicao ? 'border border-white' : 'opacity-50'}`}
+                                        className={`w-64 p-1 bg-fundo_azul_escuro_elegante ${modoEdicao ? 'border border-white' : 'opacity-70'}`}
                                     />
                                 </li>
                             </ul>
@@ -81,7 +81,7 @@ export function Configuracao(){
                     </div>
 
                     <div className={estiloContainerGrafico}>
-                        <div className="w-full h-min flex flex-col justify-center items-center text-3xl text-red-600">
+                        <div className="w-full h-min flex flex-col justify-center items-center text-3xl text-fonte_elegante_amarelo">
                             Nome dos Aparelhos: {aparelhos.join(', ')}
                             <br /> <br /> 
                             Quantidade de Aparelhos: {quantidadeAparelhos}

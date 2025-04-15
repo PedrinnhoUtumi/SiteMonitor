@@ -1,8 +1,8 @@
 
-import { useState } from "react"
+/*import { useState } from "react"*/ 
 
 export function Pagina(props) {
-  const opcoes = {
+  /*const opcoes = {
     1: "Tempo Real",
     2: "Configuração",
     3: "Técnico",
@@ -32,12 +32,17 @@ export function Pagina(props) {
     //   default:
     //     break
     // }
-
+*/
   return (
     <div className={`flex flex-col flex-1`}>
       <header
-        className={`flex flex-row justify-center items-center px-5 h-16 border-b bg-azul_mais_escuro text-branco`}
+        className={`flex flex-row justify-between items-center px-5 h-16 border-b bg-fundo_azul_escuro_elegante text-branco`}
       >
+        <div className="ml-4" >
+          <h1>Nome Lugar</h1>
+        </div>
+
+        {/* <div>
         <select
           value={estado}
           onChange={handleChange}
@@ -48,6 +53,20 @@ export function Pagina(props) {
           <option value={3}>{opcoes[3]}</option>
           <option value={4}>{opcoes[4]}</option>
         </select>
+        </div> */}
+        <div className={`flex flex-row justify-right items-center px-5 h-16 border-b text-branco`}>
+          <div className="mx-4">
+            <h2>modelo</h2>
+          </div>
+
+          <div className="mx-4">
+            <h2>intituição</h2>
+          </div>
+
+          <div className="mx-4">
+            Joao reni
+          </div>
+        </div>
       </header>
       <main className={`flex flex-col items-start flex-1 text-base text-branco bg-azul_bebe`}>
         {props.children}

@@ -5,16 +5,17 @@ export function Cabecalho(){
     
 
     return (
-        <div className="bg-azul_bebe min-w-full h-20 flex justify-evenly ">
-            <nav className="bg-azul_escuro m-1 w-full flex justify-evenly items-center rounded-md">
+        <div className="bg-fundo_azul_claro_elegante min-w-full h-20 flex justify-evenly ">
+
+            <nav className="bg-fundo_azul_claro_elegante m-1 w-full flex justify-evenly items-center rounded-md">
                 <NavLink to="/TempoReal" className={estiloBotao}>
                     Tempo Real
                 </NavLink>
-               
+            
                 <NavLink to="/Tecnico" className={estiloBotao}>
                     Técnico
                 </NavLink>
-               
+            
                 <NavLink to="/Relatorios" className={estiloBotao}>
                     Relatório
                 </NavLink>
@@ -23,6 +24,8 @@ export function Cabecalho(){
                     Configurações
                 </NavLink>
             </nav>
+
         </div>
+
     )
 } 
