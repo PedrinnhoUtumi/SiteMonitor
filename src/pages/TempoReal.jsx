@@ -26,11 +26,31 @@ export function TempoReal() {
                 </header>
 
                 <div className="flex flex-row justify-around">
-                    <div className={estiloContainerGrafico}>
+
+                    <div className={estiloContainerGrafico2}>
+                        <h1 className={estiloTituloContainerCorrente}>Fase A</h1>
+                        <div className={estiloInformacoesContainerCorrente}>
+                            0.0V
+                        </div>
+                    </div>
+                    <div className={estiloContainerGrafico2}>
+                        <h1 className={estiloTituloContainerCorrente}>Fase B</h1>
+                        <div className={estiloInformacoesContainerCorrente}>
+                            0.0V
+                        </div>
+                    </div>
+                    <div className={estiloContainerGrafico2}>
+                        <h1 className={estiloTituloContainerCorrente}>Fase C</h1>
+                        <div className={estiloInformacoesContainerCorrente}>
+                            0.0V
+                        </div>
+                    </div>
+
+                    {/* <div className={estiloContainerGrafico}>
 
                     </div>
                     <div className={estiloContainerGrafico}></div>
-                    <div className={estiloContainerGrafico}></div>
+                    <div className={estiloContainerGrafico}></div> */}
                 </div>
 
                 <header className={estiloTitulo}>
@@ -58,7 +78,7 @@ export function TempoReal() {
                 </div>
 
                 <header className={estiloTitulo}>
-                    <h1 className="text-amber-500 ">Potência Ativa [W]</h1>
+                    <h1 className="text-fonte_elegante_amarelo ">Potência Ativa [W]</h1>
                 </header>
                 <div className="flex flex-row justify-around">
                     <div className={estiloContainerGrafico2}>
@@ -88,7 +108,7 @@ export function TempoReal() {
                 </div>
 
                 <header className={estiloTitulo}>
-                    <h1 className="text-yellow-500 ">Consumo [kWh]</h1>
+                    <h1 className="text-fonte_elegante_amarelo ">Consumo [kWh]</h1>
                 </header>
                 <div className="flex flex-row justify-around">
                     <div className={estiloContainerGrafico2}>

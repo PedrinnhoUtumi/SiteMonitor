@@ -1,60 +1,73 @@
-
-/*import { useState } from "react"*/ 
+import { useState, useEffect } from "react";
+import { useNavigate, NavLink, useLocation } from "react-router-dom";
 
 export function Pagina(props) {
-  /*const opcoes = {
+  const estiloBotao = "text-white flex flex-row justify-center items-center";
+
+  const opcoes = {
     1: "Tempo Real",
     2: "Configuração",
     3: "Técnico",
     4: "Relatórios",
-  }
+    5: "Usuário"
+  };
+  
+  const rotaParaValor = {
+    "/TempoReal": 1,
+    "/Configuracao": 2,
+    "/Tecnico": 3,
+    "/Relatorios": 4,
+    "/User": 5, 
+  };
+  
+  const valorParaRota = {
+    1: "/TempoReal",
+    2: "/Configuracao",
+    3: "/Tecnico",
+    4: "/Relatorios",
+    5: "/User", 
+  };
+  
 
-  const [estado, setEstado] = useState(1)
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [estado, setEstado] = useState(rotaParaValor[location.pathname] || 1);
+
+  useEffect(() => {
+    const novoEstado = rotaParaValor[location.pathname];
+    if (novoEstado !== undefined && novoEstado !== estado) {
+      setEstado(novoEstado);
+    }
+  }, [location.pathname]);
 
   function handleChange(event) {
-    const value = event.target.value
-    setEstado(value)
+    const value = Number(event.target.value);
+    setEstado(value);
+    navigate(valorParaRota[value]);
   }
 
-    // switch (value) {
-    //   case 1:
-    //     navigate("/TempoReal")
-    //     break
-    //   case 2:
-    //     navigate("/Configuracao")
-    //     break
-    //   case 3:
-    //     navigate("/Tecnico")
-    //     break
-    //   case 4:
-    //     navigate("/Relatorios")
-    //     break
-    //   default:
-    //     break
-    // }
-*/
   return (
-    <div className={`flex flex-col flex-1`}>
-      <header
-        className={`flex flex-row justify-between items-center px-5 h-16 border-b bg-fundo_azul_escuro_elegante text-branco`}
-      >
-        <div className="ml-4" >
+    <div className="flex flex-col flex-1">
+      <header className="flex flex-row justify-between items-center px-5 h-16 border-b bg-fundo_azul_escuro_elegante text-branco">
+        <div className="ml-4">
           <h1>Nome Lugar</h1>
         </div>
 
-        {/* <div>
-        <select
-          value={estado}
-          onChange={handleChange}
-          className="rounded-md p-0 bg-azul_mais_escuro text-branco"
-        >
-          <option value={1}>{opcoes[1]}</option>
-          <option value={2}>{opcoes[2]}</option>
-          <option value={3}>{opcoes[3]}</option>
-          <option value={4}>{opcoes[4]}</option>
-        </select>
-        </div> */}
-        <div className={`flex flex-row justify-right items-center px-5 h-16 border-b text-branco`}>
+        <div className="flex flex-row items-center mr-15 p-9">
+          <div>
+            <select
+              value={estado}
+              onChange={handleChange}
+              className="rounded-md p-1 bg-fundo_azul_escuro_elegante text-branco mr-5"
+            >
+              {Object.entries(opcoes).map(([key, label]) => (
+                <option key={key} value={key}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </div>
+
           <div className="mx-4">
             <h2>modelo</h2>
           </div>
@@ -63,15 +76,17 @@ export function Pagina(props) {
             <h2>intituição</h2>
           </div>
 
-          <div className="mx-4">
-            Joao reni
-          </div>
+          <nav className="mx-4">
+            <NavLink to="/User" className={estiloBotao}>
+              João Reni
+            </NavLink>
+          </nav>
         </div>
       </header>
-      <main className={`flex flex-col items-start flex-1 text-base text-branco bg-azul_bebe`}>
+
+      <main className="flex flex-col items-start flex-1 text-base text-branco bg-azul_bebe">
         {props.children}
       </main>
     </div>
-    )
-  }
-
+  );
+}
