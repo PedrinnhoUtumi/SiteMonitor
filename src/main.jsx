@@ -13,6 +13,7 @@ const rotas = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<Login />} />
+      
       <Route path="TempoReal" element={<TempoReal />} />
       <Route path="Relatorios" element={<Relatorios />} />
       <Route path="Configuracao" element={<Configuracao />} />
