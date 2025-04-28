@@ -1,32 +1,33 @@
-import bcrypt from 'bcryptjs'
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import bcrypt from 'bcryptjs';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function Login() {
-  const [usuario, setUsuario] = useState('')
-  const [senha, setSenha] = useState('')
-  const [senhaHash, setSenhaHash] = useState('')
-  const navigate = useNavigate()
+  const [usuario, setUsuario] = useState('');
+  const [senha, setSenha] = useState('');
+  const [senhaHash, setSenhaHash] = useState('');
+  const navigate = useNavigate();
 
   // Redireciona automaticamente caso o usuário já esteja logado
   useEffect(() => {
-    const isAuthenticated = localStorage.getItem("usuario_logado")
+    const isAuthenticated = localStorage.getItem("usuario_logado");
     if (isAuthenticated) {
-      navigate('/TempoReal', { replace: true })
+      navigate('/TempoReal', { replace: true });
     }
-  }, [navigate])
+  }, [navigate]);
 
+  // Cria um hash da senha válida na primeira montagem
   useEffect(() => {
     const hashearSenha = async () => {
-      const hash = await bcrypt.hash('Senha123', 10)
-      setSenhaHash(hash)
-      console.log('Senha hasheada:', hash)
-    }
-    hashearSenha()
-  }, [])
+      const hash = await bcrypt.hash('Senha123', 10);
+      setSenhaHash(hash);
+      console.log('Senha hasheada:', hash);
+    };
+    hashearSenha();
+  }, []);
 
   const verificarLogin = async () => {
-    const usuarioValido = usuario === "pedroutumi@gmail.com" || usuario === "brunopena454@gmail.com"
+    const usuarioValido = usuario === "pedroutumi@gmail.com" || usuario === "brunopena454@gmail.com";
 
     if (
       senha.length >= 8 &&
@@ -35,31 +36,40 @@ export function Login() {
       !temEspacos(senha) &&
       usuarioValido
     ) {
-      console.log('Verificando senha...')
-      const isCorrect = await bcrypt.compare(senha, senhaHash)
+      console.log('Verificando senha...');
+      const isCorrect = await bcrypt.compare(senha, senhaHash);
 
       if (isCorrect) {
-        console.log('Senha correta')
-        localStorage.setItem("usuario_logado", "true") // Marca como logado
-        navigate('/TempoReal', { replace: true })
+        console.log('Senha correta');
+
+        // Salvar informações do usuário
+        const dadosUsuario = {
+          email: usuario,
+          loginAt: new Date().toISOString(), // Data e hora do login
+        };
+
+        localStorage.setItem("usuario", JSON.stringify(dadosUsuario)); // Armazena o usuário
+        localStorage.setItem("usuario_logado", "true"); // Marca como logado
+
+        navigate('/TempoReal', { replace: true }); // Redireciona
       } else {
-        alert("Senha incorreta!")
+        alert("Senha incorreta!");
       }
     } else {
-      alert("Impossível cadastrar!")
+      alert("Usuário ou senha inválidos!");
     }
-  }
+  };
 
   function temMaiusculas(texto) {
-    return /[A-Z]/.test(texto)
+    return /[A-Z]/.test(texto);
   }
 
   function temNumeros(texto) {
-    return /[0-9]/.test(texto)
+    return /[0-9]/.test(texto);
   }
 
   function temEspacos(texto) {
-    return texto.includes(' ')
+    return texto.includes(' ');
   }
 
   return (
@@ -99,5 +109,5 @@ export function Login() {
         </button>
       </div>
     </div>
-  )
+  );
 }

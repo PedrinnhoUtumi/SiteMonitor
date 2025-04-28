@@ -7,6 +7,7 @@ import { Relatorios } from './pages/Relatorios.jsx'
 import { Configuracao } from './pages/Configuracao.jsx'
 import { Tecnico } from './pages/Tecnico.jsx'
 import { User } from './pages/User.jsx'
+import { RotaProtegida } from './components/RotaProtegida.jsx'
 import './index.css'
 
 const rotas = createBrowserRouter(
@@ -18,7 +19,9 @@ const rotas = createBrowserRouter(
       <Route path="Relatorios" element={<Relatorios />} />
       <Route path="Configuracao" element={<Configuracao />} />
       <Route path="Tecnico" element={<Tecnico />} />
-      <Route path="User" element={<User />} />
+      <Route element={<RotaProtegida />}>
+        <Route path="User" element={<User />} />
+      </Route>
     </>
   )
 )

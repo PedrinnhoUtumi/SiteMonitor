@@ -1,12 +1,14 @@
-// RotaProtegida.jsx
 import { Navigate, Outlet } from "react-router-dom";
 
 export function RotaProtegida() {
-  const usuarioLogado = localStorage.getItem("usuario"); // ou sessionStorage, token, etc.
+  const usuarioLogado = localStorage.getItem("usuario");
 
-  if (!usuarioLogado) {
+  // Verifica se realmente tem informação
+  const estaAutenticado = usuarioLogado !== null && usuarioLogado !== "";
+
+  if (!estaAutenticado) {
     return <Navigate to="/" replace />;
   }
 
-  return <Outlet />; // renderiza as rotas "filhas"
+  return <Outlet />;
 }
