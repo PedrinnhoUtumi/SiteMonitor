@@ -1,8 +1,14 @@
 import { Pagina } from "../components/Pagina"
 import { Cabecalho } from "../components/Cabecalho"
-import  { data } from "./Tecnico"
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
+
+const data = [
+    {
+        name: 'Page A',
+        uv: 4000,
+        pv: 2400,}
+]
 export function TempoReal() {
     const estiloContainerGrafico = "bg-fundo_azul_escuro_elegante w-1/3 h-48 m-1 rounded-md flex justify-center "
     const estiloContainerGrafico2 = "bg-fundo_azul_escuro_elegante w-1/3 h-36 m-1 rounded-md p-4"
@@ -188,7 +194,7 @@ export function TempoReal() {
                             <YAxis />
                             <Tooltip />
                             <Legend />
-                            <Bar dataKey="pedro" fill="#f5af33" />
+                            <Bar dataKey="pv" fill="#f5af33" />
                         </BarChart>
                         </ResponsiveContainer>
                     </div>

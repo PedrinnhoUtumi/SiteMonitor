@@ -3,63 +3,45 @@ import { Cabecalho } from '../components/Cabecalho'
 import { IconDownload } from "@tabler/icons-react"
 // import axios from 'axios'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { DataContext } from "../context/DataContext"
 import axios from "axios"
 // import { useEffect, useState } from "react"
 
-export const data = [
-    { name: 'Jan', uv: 4000, pv: 2400, amt: 2400, pedro: 1000, anta: 1233 },
-    { name: 'Feb', uv: 3000, pv: 1398, amt: 2210, pedro: 1100 },
-    { name: 'Mar', uv: 2000, pv: 9800, amt: 2290, pedro: 1200 },
-    { name: 'Apr', uv: 2780, pv: 3908, amt: 2000, pedro: 1300 },
-    { name: 'May', uv: 1890, pv: 4800, amt: 2181, pedro: 1400 },
-    { name: 'Jun', uv: 2390, pv: 3800, amt: 2500, pedro: 1500 },
-    { name: 'Jul', uv: 3490, pv: 4300, amt: 2100, pedro: 1600 },
-    { name: 'Ago', uv: 3490, pv: 4300, amt: 2100, pedro: 1700 },
-    { name: 'Set', uv: 3490, pv: 4300, amt: 2100, pedro: 1800 },
-    { name: 'Jan', uv: 4000, pv: 2400, amt: 2400, pedro: 1000 },
-    { name: 'Feb', uv: 3000, pv: 1398, amt: 2210, pedro: 1100 },
-    { name: 'Mar', uv: 2000, pv: 9800, amt: 2290, pedro: 1200 },
-    { name: 'Apr', uv: 2780, pv: 3908, amt: 2000, pedro: 1300 },
-    { name: 'May', uv: 1890, pv: 4800, amt: 2181, pedro: 1400 },
-    { name: 'Jun', uv: 2390, pv: 3800, amt: 2500, pedro: 1500 },
-    { name: 'Jul', uv: 3490, pv: 4300, amt: 2100, pedro: 1600 },
-    { name: 'Ago', uv: 3490, pv: 4300, amt: 2100, pedro: 1700 },
-    { name: 'Set', uv: 3490, pv: 4300, amt: 2100, pedro: 1800 },
-    { name: 'Jan', uv: 4000, pv: 2400, amt: 2400, pedro: 1000 },
-    { name: 'Feb', uv: 3000, pv: 1398, amt: 2210, pedro: 1100 },
-    { name: 'Mar', uv: 2000, pv: 9800, amt: 2290, pedro: 1200 },
-    { name: 'Apr', uv: 2780, pv: 3908, amt: 2000, pedro: 1300 },
-    { name: 'May', uv: 1890, pv: 4800, amt: 2181, pedro: 1400 },
-    { name: 'Jun', uv: 2390, pv: 3800, amt: 2500, pedro: 1500 },
-    { name: 'Jul', uv: 3490, pv: 4300, amt: 2100, pedro: 1600 },
-    { name: 'Ago', uv: 3490, pv: 4300, amt: 2100, pedro: 1700 },
-    { name: 'Set', uv: 3490, pv: 4300, amt: 2100, pedro: 1800 },
-]
-
-
-
 export function Tecnico() {
+    const { data, adicionarDados } = useContext(DataContext)
+    // useEffect(() => {
+    //     const fetchMachbase = async () => {
+    //       try {
+    //         const response = await fetch("https://servermagvia.onrender.com/api")
+    //         if (!response.ok) {
+    //           throw new Error("Erro ao buscar os usuários")
+    //         }
+      
+    //         const json = await response.json()
+    //         const { columns, rows } = json.message.data
+    //         const dadosFormatados = rows.map(linha => {
+    //           const obj = {}
+    //           columns.forEach((coluna, index) => {
+    //             obj[coluna] = linha[index]
+    //           })
+    //           return obj
+    //         })
+      
+    //         adicionarDados(dadosFormatados)
+    //       } catch (error) {
+    //         console.log(error.message)
+    //       }
+    //     }
+      
+    //     fetchMachbase()
+    //   }, [])
+    
     const estiloContainerGrafico = "bg-fundo_azul_escuro_elegante w-[30vw] h-[40vh] m-1 p-4 rounded-md border-b"
     const estiloContainerGrafico2 = "bg-fundo_azul_escuro_elegante w-[50vw] h-[25vh] m-1 p-2 rounded-md flex flex-row"
     const [dados, setDados] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    useEffect(() => {
-        // Fazendo a requisição para o servidor Node.js
-        axios.post('http://localhost:1883/api/machbase')  // Requisição para o back-end Node.js
-            .then((response) => {
-                setDados(response.data);  // Armazena os dados no estado
-                setLoading(false);  // Marca que o carregamento foi concluído
-            })
-            .catch((error) => {
-                setError('Erro ao carregar dados');  // Armazena o erro no estado
-                setLoading(false);  // Marca que o carregamento foi concluído
-            });
-    }, []);
-
-
-
 
     function exportCSV() {
         function convertToCSV(data) {
@@ -97,9 +79,9 @@ export function Tecnico() {
                         <ResponsiveContainer width="90%" height={380}>
                             <LineChart data={data} margin={{ top: 20, right: 30, left: 40, bottom: 20 }}>
                                 <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="name" />
+                                <XAxis dataKey="NAME" />
                                 <YAxis />
-                                <Line type="bump" dataKey="pv" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="NAME" stroke="#f5af33" dot={false} strokeWidth={2} />
                                 <Tooltip />
                                 <Legend />
                             </LineChart>
@@ -109,11 +91,11 @@ export function Tecnico() {
                         <ResponsiveContainer width="90%" height={380}>
                             <LineChart data={data} margin={{ top: 20, right: 30, left: 40, bottom: 20 }}>
                                 <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="name" />
+                                <XAxis dataKey="TIME" />
                                 <YAxis />
                                 <Tooltip />
                                 <Legend />
-                                <Line type="bump" dataKey="uv" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="TIME" stroke="#f5af33" dot={false} strokeWidth={2} />
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
@@ -121,11 +103,11 @@ export function Tecnico() {
                         <ResponsiveContainer width="90%" height={380}>
                             <LineChart data={data} margin={{ top: 20, right: 30, left: 40, bottom: 20 }}>
                                 <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="name" />
+                                <XAxis dataKey="VALUE" />
                                 <YAxis />
                                 <Tooltip />
                                 <Legend />
-                                <Line type="bump" dataKey="amt" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="VALUE" stroke="#f5af33" dot={false} strokeWidth={2} />
                             </LineChart>
                         </ResponsiveContainer>
                     </div>

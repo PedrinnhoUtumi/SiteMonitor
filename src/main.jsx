@@ -9,6 +9,7 @@ import { Tecnico } from './pages/Tecnico.jsx'
 import { User } from './pages/User.jsx'
 import { RotaProtegida } from './components/RotaProtegida.jsx'
 import './index.css'
+import { DataProvider } from './context/DataContext.jsx'
 
 const rotas = createBrowserRouter(
   createRoutesFromElements(
@@ -28,6 +29,9 @@ const rotas = createBrowserRouter(
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={rotas} />
+    <DataProvider>
+
+      <RouterProvider router={rotas} />
+    </DataProvider>
   </StrictMode>,
 )
