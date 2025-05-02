@@ -50,7 +50,7 @@ export function Pagina(props) {
     <div className="flex flex-col flex-1">
       <header className="flex flex-row justify-between items-center px-5 h-16 border-b bg-fundo_azul_escuro_elegante text-branco">
         <div className="ml-4">
-          <h1>Nome Lugar</h1>
+          <h1>Monitor de Energia Educere</h1>
         </div>
 
         <div className="flex flex-row items-center mr-15 p-9">

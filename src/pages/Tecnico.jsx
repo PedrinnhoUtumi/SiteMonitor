@@ -10,38 +10,25 @@ import axios from "axios"
 
 export function Tecnico() {
     const { data, adicionarDados } = useContext(DataContext)
-    // useEffect(() => {
-    //     const fetchMachbase = async () => {
-    //       try {
-    //         const response = await fetch("https://servermagvia.onrender.com/api")
-    //         if (!response.ok) {
-    //           throw new Error("Erro ao buscar os usuários")
-    //         }
-      
-    //         const json = await response.json()
-    //         const { columns, rows } = json.message.data
-    //         const dadosFormatados = rows.map(linha => {
-    //           const obj = {}
-    //           columns.forEach((coluna, index) => {
-    //             obj[coluna] = linha[index]
-    //           })
-    //           return obj
-    //         })
-      
-    //         adicionarDados(dadosFormatados)
-    //       } catch (error) {
-    //         console.log(error.message)
-    //       }
-    //     }
-      
-    //     fetchMachbase()
-    //   }, [])
     
     const estiloContainerGrafico = "bg-fundo_azul_escuro_elegante w-[30vw] h-[40vh] m-1 p-4 rounded-md border-b"
     const estiloContainerGrafico2 = "bg-fundo_azul_escuro_elegante w-[50vw] h-[25vh] m-1 p-2 rounded-md flex flex-row"
     const [dados, setDados] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const potenciaAtiva = data.filter(item => item.__tabela === "ACTIVEPOWER")
+    const corrente = data.filter(item => item.__tabela === "CURRENT")
+    const consumo = data.filter(item => item.__tabela === "CONSUMPTION")
+    const tensao = data.filter(item => item.__tabela === "VOLTAGE")
+    const geracao = data.filter(item => item.__tabela === "GENERATED")
+    
+
+    const ultimaLeituraPotenciaAtiva = potenciaAtiva[potenciaAtiva.length - 1] || {}
+    const ultimaLeituraCorrente = corrente[corrente.length - 1] || {}
+    const ultimaLeituraTensao = tensao[tensao.length - 1] || {}
+    const ultimaLeituraGeracao = geracao[geracao.length - 1] || {}
+    const ultimaLeituraConsumo = consumo[consumo.length - 1] || {}
 
     function exportCSV() {
         function convertToCSV(data) {
@@ -77,56 +64,93 @@ export function Tecnico() {
                     <div className={estiloContainerGrafico}>
 
                         <ResponsiveContainer width="90%" height={380}>
-                            <LineChart data={data} margin={{ top: 20, right: 30, left: 40, bottom: 20 }}>
+                            <LineChart data={potenciaAtiva} margin={{ top: 20, right: 30, left: 40, bottom: 20 }}>
+                                <text x="50%" y={10} textAnchor="middle" dominantBaseline="central" style={{ fill: 'white', fontSize: 18 }}>
+                                    Potência Ativa
+                                </text>
+
                                 <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="NAME" />
-                                <YAxis />
-                                <Line type="bump" dataKey="NAME" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <XAxis domain={[0, 5]} tick={{fill: 'white'}} />
+                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} />
+                                <Line type="bump" dataKey="PHASEA" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="PHASEB" stroke="#ffaa00" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="PHASEC" stroke="#ffcc00" dot={false} strokeWidth={2} />
                                 <Tooltip />
-                                <Legend />
+                                <Legend wrapperStyle={{ color: 'white' }}  />
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
                     <div className={estiloContainerGrafico}>
                         <ResponsiveContainer width="90%" height={380}>
-                            <LineChart data={data} margin={{ top: 20, right: 30, left: 40, bottom: 20 }}>
+                            <LineChart data={corrente} margin={{ top: 20, right: 30, left: 40, bottom: 20 }}>
+                                <text x="50%" y={10} textAnchor="middle" dominantBaseline="central" style={{ fill: 'white', fontSize: 18 }}>
+                                    Corrente
+                                </text>
                                 <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="TIME" />
-                                <YAxis />
+                                <XAxis domain={[0, 10]} tick={{fill: 'white'}} />
+                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} />
+                                <Line type="bump" dataKey="PHASEA" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="PHASEB" stroke="#ffaa00" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="PHASEC" stroke="#ffcc00" dot={false} strokeWidth={2} />
                                 <Tooltip />
-                                <Legend />
-                                <Line type="bump" dataKey="TIME" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Legend wrapperStyle={{ color: 'white' }} />
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
                     <div className={estiloContainerGrafico}>
                         <ResponsiveContainer width="90%" height={380}>
-                            <LineChart data={data} margin={{ top: 20, right: 30, left: 40, bottom: 20 }}>
+                            <LineChart data={tensao} margin={{ top: 20, right: 30, left: 40, bottom: 20 }}>
+                                <text x="50%" y={10} textAnchor="middle" dominantBaseline="central" style={{ fill: 'white', fontSize: 18 }}>
+                                    Tensão
+                                </text>
                                 <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="VALUE" />
-                                <YAxis />
+                                <XAxis domain={[0, 5]} tick={{fill: 'white'}} />
+                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} />
+                                <Line type="bump" dataKey="PHASEA" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="PHASEB" stroke="#ffaa00" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="PHASEC" stroke="#ffcc00" dot={false} strokeWidth={2} />
                                 <Tooltip />
-                                <Legend />
-                                <Line type="bump" dataKey="VALUE" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Legend wrapperStyle={{ color: 'white' }} />
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
                     <div className={estiloContainerGrafico}>
                         <ResponsiveContainer width="90%" height={380}>
-                            <LineChart data={data} margin={{ top: 20, right: 30, left: 40, bottom: 20 }}>
+                            <LineChart data={consumo} margin={{ top: 20, right: 30, left: 40, bottom: 20 }}>
+                                <text x="50%" y={10} textAnchor="middle" dominantBaseline="central" style={{ fill: 'white', fontSize: 18 }}>
+                                    Consumo
+                                </text>
                                 <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="name" />
-                                <YAxis />
+                                <XAxis domain={[0, 5]} tick={{fill: 'white'}} />
+                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} />
                                 <Tooltip />
                                 <Legend />
-                                <Line type="bump" dataKey="pedro" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="TODAY" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="WEEK" stroke="#ffaa00" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="MONTHNOW" stroke="#ffcc00" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="LASTMONTH" stroke="#ffdd00" dot={false} strokeWidth={2} />
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
                 </div>
                 <div className="flex flex-row justify-around">
                     <div className={estiloContainerGrafico}>                        
-                            <pre>{JSON.stringify(dados, null, 2)}</pre>
+                        <ResponsiveContainer width="90%" height={380}>
+                            <LineChart data={geracao} margin={{ top: 20, right: 30, left: 40, bottom: 20 }}>
+                                <text x="50%" y={10} textAnchor="middle" dominantBaseline="central" style={{ fill: 'white', fontSize: 18 }}>
+                                    Geração
+                                </text>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis domain={[0, 5]} tick={{fill: 'white'}} />
+                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} />
+                                <Tooltip />
+                                <Legend />
+                                <Line type="bump" dataKey="TODAY" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="WEEK" stroke="#ffaa00" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="MONTHNOW" stroke="#ffcc00" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="LASTMONTH" stroke="#ffdd00" dot={false} strokeWidth={2} />
+                            </LineChart>
+                        </ResponsiveContainer>
                     </div>
                     <div className={estiloContainerGrafico}></div>
                     <div className={estiloContainerGrafico}></div>
