@@ -1,20 +1,37 @@
 import bcrypt from 'bcryptjs';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { DataContext } from '../context/DataContext';
 
 export function Login() {
-  const [usuario, setUsuario] = useState('');
+  const { data, adicionarDados } = useContext(DataContext); // Importa o contexto de dados
+  const [usuario, setUsuario] = useState([]);
+  const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [senhaHash, setSenhaHash] = useState('');
   const navigate = useNavigate();
 
-  // Redireciona automaticamente caso o usuário já esteja logado
+  const myUser = data.filter(item => item.__tabela === "MYUSER")
+  
   useEffect(() => {
-    const isAuthenticated = localStorage.getItem("usuario_logado");
-    if (isAuthenticated) {
-      navigate('/TempoReal', { replace: true });
-    }
-  }, [navigate]);
+    const myUser = data.filter(item => item.__tabela === "MYUSER")
+
+    const listaUsuarios = myUser.map(usuario => ({
+        id: usuario.ID,
+        nome: usuario.NOME,
+        email: usuario.EMAIL,
+    }))
+
+    setUsuario(listaUsuarios)
+  }, [data])
+
+  // Redireciona automaticamente caso o usuário já esteja logado
+  // useEffect(() => {
+  //   const isAuthenticated = localStorage.getItem("usuario_logado");
+  //   if (isAuthenticated) {
+  //     navigate('/TempoReal', { replace: true });
+  //   }
+  // }, [navigate]);
 
   // Cria um hash da senha válida na primeira montagem
   useEffect(() => {
@@ -27,14 +44,13 @@ export function Login() {
   }, []);
 
   const verificarLogin = async () => {
-    const usuarioValido = usuario === "pedroutumi@gmail.com" || usuario === "brunopena454@gmail.com";
-
+    let usuarioEncontrado = usuario.find(user => user.email === email);
     if (
       senha.length >= 8 &&
       temMaiusculas(senha) &&
       temNumeros(senha) &&
       !temEspacos(senha) &&
-      usuarioValido
+      usuarioEncontrado
     ) {
       console.log('Verificando senha...');
       const isCorrect = await bcrypt.compare(senha, senhaHash);
@@ -44,7 +60,7 @@ export function Login() {
 
         // Salvar informações do usuário
         const dadosUsuario = {
-          email: usuario,
+          email: email,
           loginAt: new Date().toISOString(), // Data e hora do login
         };
 
@@ -82,8 +98,8 @@ export function Login() {
             type="email"
             placeholder="Email"
             required
-            value={usuario}
-            onChange={(e) => setUsuario(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="w-full py-2 pl-10 pr-4 border border-gray-400 rounded focus:outline-none focus:ring-2 focus:ring-azul_claro"
           />
           <img src="../../usuarioGmail.png" alt="Ícone de email" className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5" />
