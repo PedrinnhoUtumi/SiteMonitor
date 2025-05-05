@@ -4,6 +4,8 @@ export const DataContext = createContext();
 
 export function DataProvider({ children }) {
   const [data, setData] = useState([]);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
   function adicionarDados(novosDados) {
     setData((prev) => {
@@ -16,6 +18,13 @@ export function DataProvider({ children }) {
       return atualizados;
     });
   }
+  const adicionarNomes = (novoNome) => {
+    setName(novoNome);
+  };
+  const adicionarEmail = (novoEmail) => {
+    setEmail(novoEmail);
+  };
+
 
   useEffect(() => {
     const fetchMachbase = async () => {
@@ -58,6 +67,10 @@ export function DataProvider({ children }) {
   const exportar = {
     data,
     adicionarDados,
+    name, 
+    adicionarNomes,
+    email,
+    adicionarEmail,
   };
 
   return (

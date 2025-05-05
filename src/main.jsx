@@ -30,7 +30,6 @@ const rotas = createBrowserRouter(
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <DataProvider>
-
       <RouterProvider router={rotas} />
     </DataProvider>
   </StrictMode>,

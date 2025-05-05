@@ -9,7 +9,7 @@ import axios from "axios"
 // import { useEffect, useState } from "react"
 
 export function Tecnico() {
-    const { data, adicionarDados } = useContext(DataContext)
+    const { data, adicionarDados, name, adicionarNomes } = useContext(DataContext)
     
     const estiloContainerGrafico = "bg-fundo_azul_escuro_elegante w-[30vw] h-[40vh] m-1 p-4 rounded-md border-b"
     const estiloContainerGrafico2 = "bg-fundo_azul_escuro_elegante w-[50vw] h-[25vh] m-1 p-2 rounded-md flex flex-row"

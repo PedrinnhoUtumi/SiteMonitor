@@ -1,7 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate, NavLink, useLocation } from "react-router-dom";
+import { DataContext } from "../context/DataContext";
 
 export function Pagina(props) {
+  const { data, adicionarDados, name, adicionarNomes } = useContext(DataContext);
+  const myUser = data.filter(item => item.__tabela === "MYUSER")
+
+
   const estiloBotao = "text-white flex flex-row justify-center items-center";
 
   const opcoes = {
@@ -78,7 +83,7 @@ export function Pagina(props) {
 
           <nav className="mx-4">
             <NavLink to="/User" className={estiloBotao}>
-              João Reni
+              {name}
             </NavLink>
           </nav>
         </div>
