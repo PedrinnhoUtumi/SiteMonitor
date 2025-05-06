@@ -14,7 +14,6 @@ export function DataProvider({ children }) {
         (item) => !existentes.has(JSON.stringify(item))
       );
       const atualizados = [...prev, ...novosUnicos];
-      console.log("Atualizando dados:", atualizados);
       return atualizados;
     });
   }
@@ -37,7 +36,6 @@ export function DataProvider({ children }) {
         const json = await response.json();
         const tabelas = json.message;
 
-        console.log("📥 Resposta bruta do servidor:", json);
 
         Object.entries(tabelas).forEach(([nomeTabela, conteudo]) => {
           const { columns, rows } = conteudo.data;

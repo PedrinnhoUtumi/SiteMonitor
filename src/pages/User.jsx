@@ -8,6 +8,8 @@ export function User() {
   const { data, adicionarDados, name, adicionarNomes, email, adicionarEmail } = useContext(DataContext);
   const [usuario, setUsuario] = useState([]);
   const myUser = data.filter((item) => item.__tabela === "MYUSER");
+  console.log("Dados do usuário:", data);
+  
   
   useEffect(() => {
     const listaUsuarios = myUser.map((usuario) => ({
@@ -20,6 +22,8 @@ export function User() {
   }, [data]);
   
   let usuarioEncontrado = usuario.find((user) => user.email === email);
+  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", email);
+  
   function handleLogout() {
     localStorage.clear();
     sessionStorage.clear();

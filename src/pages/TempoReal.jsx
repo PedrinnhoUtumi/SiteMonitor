@@ -7,8 +7,9 @@ import { DataContext } from "../context/DataContext"
 
 
 export function TempoReal() {
-    const { data, adicionarDados, name, adicionarNomes } = useContext(DataContext)
-
+    const { data, adicionarDados, name, adicionarNomes, email, adicionarEmail } = useContext(DataContext)
+    console.log("data", email);
+    
     const estiloContainerGrafico = "bg-fundo_azul_escuro_elegante w-1/3 h-48 m-1 rounded-md flex justify-center "
     const estiloContainerGrafico2 = "bg-fundo_azul_escuro_elegante w-1/3 h-36 m-1 rounded-md p-4"
     const estiloContainerGrafico3 = "bg-fundo_azul_escuro_elegante w-1/2 h-[50vh] m-1 rounded-md flex justify-center items-center"

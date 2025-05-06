@@ -37,48 +37,42 @@ export function Login() {
   // }, []);
 
   // Cria um hash da senha válida na primeira montagem
-  useEffect(() => {
-    const hashearSenha = async () => {
-      const hash = await bcrypt.hash("Senha123", 10);
-      setSenhaHash(hash);
-      console.log("Senha hasheada:", hash);
-    };
-    hashearSenha();
-  }, []);
 
+
+  // useEffect(() => {
+  //   const hashearSenha = async () => {
+  //     const hash = await bcrypt.hash("Senha123", 10);
+  //     setSenhaHash(hash);
+  //     console.log("Senha hasheada:", hash);
+  //   };
+  //   hashearSenha();
+  // }, []);
+  
   const verificarLogin = async () => {
-    let usuarioEncontrado = usuario.find((user) => user.email === email);
-    console.log("Nome do usuário:", usuarioEncontrado);
-
-
-    if (
-      senha.length >= 8 &&
-      temMaiusculas(senha) &&
-      temNumeros(senha) &&
-      !temEspacos(senha) &&
-      usuarioEncontrado &&
-      usuarioEncontrado.senha === senhaHash
-    ) {
-      console.log("Verificando senha...");
-      const isCorrect = await bcrypt.compare(senha, senhaHash);
-
+    const usuarioEncontrado = usuario.find((user) => user.email === email);
+    console.log("Email digitado:", email);
+    if (usuarioEncontrado) {
+      console.log("Usuário encontrado:", usuarioEncontrado);
+      console.log("Senha digitada:", senha);
+      
+      // Comparar a senha digitada com a hash armazenada no banco
+      const isCorrect = await bcrypt.compare(senha, usuarioEncontrado.senha);
+  
       if (isCorrect) {
         console.log("Senha correta");
-
-        // Salvar informações do usuário
+  
         const dadosUsuario = {
-          email: email,
-          nome: usuarioEncontrado.nome, 
+          email: usuarioEncontrado.email,
+          nome: usuarioEncontrado.nome,
           id: usuarioEncontrado.id,
-          loginAt: new Date().toISOString(), // Data e hora do login
+          loginAt: new Date().toISOString(),
         };
-
-        adicionarNomes(usuarioEncontrado.nome); 
-
-        localStorage.setItem("usuario", JSON.stringify(dadosUsuario)); // Armazena o usuário
-        localStorage.setItem("usuario_logado", "true"); // Marca como logado
-
-        navigate("/TempoReal", { replace: true }); // Redireciona
+  
+        adicionarNomes(usuarioEncontrado.nome);
+        localStorage.setItem("usuario", JSON.stringify(dadosUsuario));
+        localStorage.setItem("usuario_logado", "true");
+  
+        navigate("/TempoReal", { replace: true });
       } else {
         alert("Senha incorreta!");
       }
@@ -86,6 +80,7 @@ export function Login() {
       alert("Usuário ou senha inválidos!");
     }
   };
+  
 
   function temMaiusculas(texto) {
     return /[A-Z]/.test(texto);
@@ -114,7 +109,7 @@ export function Login() {
             placeholder="Email"
             required
             value={email}
-            onChange={(e) => adicionarEmail(e.target.value ? e.target.value : "")}
+            onChange={(e) => adicionarEmail(e.target.value)}
             className="w-full py-2 pl-10 pr-4 border border-gray-400 rounded focus:outline-none focus:ring-2 focus:ring-azul_claro"
           />
           <img
