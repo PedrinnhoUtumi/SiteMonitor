@@ -17,11 +17,13 @@ export function Login() {
   useEffect(() => {
     const listaUsuarios = myUser.map((usuario) => ({
       id: usuario.ID,
+      senha: usuario.SENHA,
       nome: usuario.NAME,
       email: usuario.EMAIL,
     }));
 
     setUsuario(listaUsuarios);
+    console.log("Lista de usuários:", listaUsuarios);
     
   }, [data]);
 
@@ -54,7 +56,8 @@ export function Login() {
       temMaiusculas(senha) &&
       temNumeros(senha) &&
       !temEspacos(senha) &&
-      usuarioEncontrado
+      usuarioEncontrado &&
+      usuarioEncontrado.senha === senhaHash
     ) {
       console.log("Verificando senha...");
       const isCorrect = await bcrypt.compare(senha, senhaHash);
@@ -111,7 +114,7 @@ export function Login() {
             placeholder="Email"
             required
             value={email}
-            onChange={(e) => adicionarEmail(e.target.value)}
+            onChange={(e) => adicionarEmail(e.target.value ? e.target.value : "")}
             className="w-full py-2 pl-10 pr-4 border border-gray-400 rounded focus:outline-none focus:ring-2 focus:ring-azul_claro"
           />
           <img

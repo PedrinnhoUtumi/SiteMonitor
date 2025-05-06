@@ -8,17 +8,17 @@ export function User() {
   const { data, adicionarDados, name, adicionarNomes, email, adicionarEmail } = useContext(DataContext);
   const [usuario, setUsuario] = useState([]);
   const myUser = data.filter((item) => item.__tabela === "MYUSER");
-
+  
   useEffect(() => {
     const listaUsuarios = myUser.map((usuario) => ({
       id: usuario.ID,
       nome: usuario.NAME,
       email: usuario.EMAIL,
     }));
-
+    
     setUsuario(listaUsuarios);
   }, [data]);
-
+  
   let usuarioEncontrado = usuario.find((user) => user.email === email);
   function handleLogout() {
     localStorage.clear();
@@ -26,7 +26,6 @@ export function User() {
 
     navigate("/", { replace: true });
   }
-  console.log("Nome do usuário:", usuarioEncontrado.nome);
   
   const infoUsuario = {
     nome: usuarioEncontrado.nome,
