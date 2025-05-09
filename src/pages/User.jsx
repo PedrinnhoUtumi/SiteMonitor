@@ -20,9 +20,9 @@ export function User() {
         id: usuario.ID,
         nome: usuario.NAME,
         email: usuario.EMAIL,
-        role: usuario.ROLE,          // conforme o diagrama (não é 'role')
+        role: usuario.ROLE,        
         conta: usuario.ACCOUNT,
-        ultimoLogin: usuario.LASTLOGIN, // opcional
+        ultimoLogin: usuario.LASTLOGIN, 
       }));
 
       const listaNegocios = business.map((negocio) => ({
@@ -54,13 +54,20 @@ export function User() {
   const relacao = negocioDoUsuario.find((negocio) => negocio.userId === usuarioEncontrado.id);
   const negocio = negocios.find((negocio) => negocio.id === relacao?.businessId);
 
+
+  console.log("Usuário encontrado:", usuarioEncontrado);
+  console.log("email:", email);
+  console.log("Negócio do usuário:", negocio);
+  console.log("Relação do usuário:", relacao);
+  
+
   const infoUsuario = {
     nome: usuarioEncontrado.nome,
     email: usuarioEncontrado.email,
     instituicao: negocio?.nome || "Não vinculado",
     cargo: usuarioEncontrado.role,
     tipoConta: usuarioEncontrado.conta,
-    ultimoLogin: usuarioEncontrado.ultimoLogin || "22/04/2025 08:30", // valor de fallback
+    ultimoLogin: usuarioEncontrado.ultimoLogin || "22/04/2025 08:30", 
   };
 
   const Box = ({ label, value }) => (
