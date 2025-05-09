@@ -52,14 +52,7 @@ export function User() {
   }
 
   const relacao = negocioDoUsuario.find((negocio) => negocio.userId === usuarioEncontrado.id);
-  const negocio = negocios.find((negocio) => negocio.id === relacao?.businessId);
-
-
-  console.log("Usuário encontrado:", usuarioEncontrado);
-  console.log("email:", email);
-  console.log("Negócio do usuário:", negocio);
-  console.log("Relação do usuário:", relacao);
-  
+  const negocio = negocios.find((negocio) => negocio.id === relacao?.businessId);  
 
   const infoUsuario = {
     nome: usuarioEncontrado.nome,
