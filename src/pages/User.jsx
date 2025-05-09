@@ -5,39 +5,62 @@ import { DataContext } from "../context/DataContext";
 
 export function User() {
   const navigate = useNavigate();
-  const { data, adicionarDados, name, adicionarNomes, email, adicionarEmail } = useContext(DataContext);
+  const { data, email } = useContext(DataContext);
   const [usuario, setUsuario] = useState([]);
-  const myUser = data.filter((item) => item.__tabela === "MYUSER");
-  console.log("Dados do usuário:", data);
-  
-  
-  useEffect(() => {
-    const listaUsuarios = myUser.map((usuario) => ({
-      id: usuario.ID,
-      nome: usuario.NAME,
-      email: usuario.EMAIL,
-    }));
-    
-    setUsuario(listaUsuarios);
-  }, [data]);
-  
-  let usuarioEncontrado = usuario.find((user) => user.email === email);
-  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", email);
-  
-  function handleLogout() {
-    localStorage.clear();
-    sessionStorage.clear();
+  const [negocios, setNegocios] = useState([]);
+  const [negocioDoUsuario, setNegocioDoUsuario] = useState([]);
 
-    navigate("/", { replace: true });
+  useEffect(() => {
+    if (data && data.length > 0) {
+      const myUser = data.filter((item) => item.__tabela === "MYUSER");
+      const userBusiness = data.filter((item) => item.__tabela === "USER_BUSINESS");
+      const business = data.filter((item) => item.__tabela === "BUSINESS");
+
+      const listaUsuarios = myUser.map((usuario) => ({
+        id: usuario.ID,
+        nome: usuario.NAME,
+        email: usuario.EMAIL,
+        role: usuario.ROLE,          // conforme o diagrama (não é 'role')
+        conta: usuario.ACCOUNT,
+        ultimoLogin: usuario.LASTLOGIN, // opcional
+      }));
+
+      const listaNegocios = business.map((negocio) => ({
+        id: negocio.ID,
+        nome: negocio.NAME,
+      }));
+
+      const listaRelacao = userBusiness.map((relacao) => ({
+        userId: relacao.USERID,
+        businessId: relacao.BUSINESSID,
+      }));
+
+      setUsuario(listaUsuarios);
+      setNegocios(listaNegocios);
+      setNegocioDoUsuario(listaRelacao);
+    }
+  }, [data]);
+
+  const usuarioEncontrado = usuario.find((user) => user.email === email);
+
+  if (!usuarioEncontrado) {
+    return (
+      <Pagina>
+        <div className="text-white p-10 text-center">Carregando perfil do usuário...</div>
+      </Pagina>
+    );
   }
-  
+
+  const relacao = negocioDoUsuario.find((negocio) => negocio.userId === usuarioEncontrado.id);
+  const negocio = negocios.find((negocio) => negocio.id === relacao?.businessId);
+
   const infoUsuario = {
     nome: usuarioEncontrado.nome,
     email: usuarioEncontrado.email,
-    instituicao: "Fundação Educere",
-    cargo: "Patrão",
-    tipoConta: "Administrador",
-    ultimoLogin: "22/04/2025 08:30",
+    instituicao: negocio?.nome || "Não vinculado",
+    cargo: usuarioEncontrado.role,
+    tipoConta: usuarioEncontrado.conta,
+    ultimoLogin: usuarioEncontrado.ultimoLogin || "22/04/2025 08:30", // valor de fallback
   };
 
   const Box = ({ label, value }) => (
@@ -47,12 +70,16 @@ export function User() {
     </div>
   );
 
+  function handleLogout() {
+    localStorage.clear();
+    sessionStorage.clear();
+    navigate("/", { replace: true });
+  }
+
   return (
     <Pagina>
       <div className="flex flex-col items-center justify-start w-full p-4 bg-fundo_azul_claro_elegante min-h-screen text-white">
-        <h1 className="text-2xl font-bold text-fonte_elegante_amarelo mb-4">
-          Perfil do Usuário
-        </h1>
+        <h1 className="text-2xl font-bold text-fonte_elegante_amarelo mb-4">Perfil do Usuário</h1>
 
         <div className="flex flex-wrap justify-center w-full max-w-5xl">
           <Box label="Nome" value={infoUsuario.nome} />

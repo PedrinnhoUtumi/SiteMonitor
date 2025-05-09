@@ -26,45 +26,22 @@ export function Login() {
     console.log("Lista de usuários:", listaUsuarios);
     
   }, [data]);
-
-  // Redireciona automaticamente caso o usuário já esteja logado
-  // useEffect(() => {
-  //   const usuarioSalvo = localStorage.getItem("usuario");
-  //   if (usuarioSalvo) {
-  //     const { nome } = JSON.parse(usuarioSalvo);
-      
-  //   }
-  // }, []);
-
-  // Cria um hash da senha válida na primeira montagem
-
-
-  // useEffect(() => {
-  //   const hashearSenha = async () => {
-  //     const hash = await bcrypt.hash("Senha123", 10);
-  //     setSenhaHash(hash);
-  //     console.log("Senha hasheada:", hash);
-  //   };
-  //   hashearSenha();
-  // }, []);
   
   const verificarLogin = async () => {
     const usuarioEncontrado = usuario.find((user) => user.email === email);
     console.log("Email digitado:", email);
     if (usuarioEncontrado) {
       console.log("Usuário encontrado:", usuarioEncontrado);
-      console.log("Senha digitada:", senha);
       
       // Comparar a senha digitada com a hash armazenada no banco
       const isCorrect = await bcrypt.compare(senha, usuarioEncontrado.senha);
   
-      if (isCorrect) {
-        console.log("Senha correta");
-  
+      if (isCorrect) {  
         const dadosUsuario = {
           email: usuarioEncontrado.email,
           nome: usuarioEncontrado.nome,
           id: usuarioEncontrado.id,
+          role: usuarioEncontrado.role,
           loginAt: new Date().toISOString(),
         };
   
