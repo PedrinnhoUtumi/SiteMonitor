@@ -9,6 +9,8 @@ import { DataContext } from "../context/DataContext"
 export function TempoReal() {
     const { data, adicionarDados, name, adicionarNomes, email, adicionarEmail } = useContext(DataContext)
     console.log("data", email);
+
+    
     
     const estiloContainerGrafico = "bg-fundo_azul_escuro_elegante w-1/3 h-48 m-1 rounded-md flex justify-center "
     const estiloContainerGrafico2 = "bg-fundo_azul_escuro_elegante w-1/3 h-36 m-1 rounded-md p-4"
@@ -28,7 +30,6 @@ export function TempoReal() {
     const tensao = data.filter(item => item.__tabela === "VOLTAGE")
     const geracao = data.filter(item => item.__tabela === "GENERATED")
     
-
     const ultimaLeituraPotenciaAtiva = potenciaAtiva[potenciaAtiva.length - 1] || {}
     const ultimaLeituraCorrente = corrente[corrente.length - 1] || {}
     const ultimaLeituraTensao = tensao[tensao.length - 1] || {}
@@ -146,13 +147,13 @@ export function TempoReal() {
                 </header>
                 <div className="flex flex-row justify-around">
                     <div className={estiloContainerGrafico2}>
-                        <h1 className={estiloTituloContainerConsumo}>HojeConsumo</h1>
+                        <h1 className={estiloTituloContainerConsumo}>Hoje</h1>
                         <div className={estiloInformacoesContainerConsumo}>
                             {hojeConsumo.toFixed(2) || "0.00"}kWh
                         </div>
                     </div>
                     <div className={estiloContainerGrafico2}>
-                        <h1 className={estiloTituloContainerConsumo}>SemanaConsumo Atual</h1>
+                        <h1 className={estiloTituloContainerConsumo}>Semana Atual</h1>
                         <div className={estiloInformacoesContainerConsumo}>
                             {semanaConsumo.toFixed(2) || "0.00"}kWh
                         </div>
@@ -176,13 +177,13 @@ export function TempoReal() {
                 </header>
                 <div className="flex flex-row justify-around">
                     <div className={estiloContainerGrafico2}>
-                        <h1 className={estiloTituloContainerGeracao}>HojeConsumo</h1>
+                        <h1 className={estiloTituloContainerGeracao}>Hoje</h1>
                         <div className={estiloInformacoesContainerGeracao}>
                             {hojeGeracao.toFixed(2) || "0.00"}kWh
                         </div>
                     </div>
                     <div className={estiloContainerGrafico2}>
-                        <h1 className={estiloTituloContainerGeracao}>SemanaConsumo Atual</h1>
+                        <h1 className={estiloTituloContainerGeracao}>Semana Atual</h1>
                         <div className={estiloInformacoesContainerGeracao}>
                             {semanaGeracao.toFixed(2) || "0.00"}kWh
                         </div>

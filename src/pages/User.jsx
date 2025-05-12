@@ -5,7 +5,7 @@ import { DataContext } from "../context/DataContext";
 
 export function User() {
   const navigate = useNavigate();
-  const { data, email } = useContext(DataContext);
+  const { data, email, instituicao, adicionarInstituicao } = useContext(DataContext);
   const [usuario, setUsuario] = useState([]);
   const [negocios, setNegocios] = useState([]);
   const [negocioDoUsuario, setNegocioDoUsuario] = useState([]);
@@ -53,7 +53,7 @@ export function User() {
 
   const relacao = negocioDoUsuario.find((negocio) => negocio.userId === usuarioEncontrado.id);
   const negocio = negocios.find((negocio) => negocio.id === relacao?.businessId);  
-
+  adicionarInstituicao(negocio?.nome || "Não vinculado");
   const infoUsuario = {
     nome: usuarioEncontrado.nome,
     email: usuarioEncontrado.email,

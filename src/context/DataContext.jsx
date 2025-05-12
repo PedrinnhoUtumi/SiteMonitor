@@ -6,6 +6,7 @@ export function DataProvider({ children }) {
   const [data, setData] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [instituicao, setInstituicao] = useState("");
 
   function adicionarDados(novosDados) {
     setData((prev) => {
@@ -22,6 +23,9 @@ export function DataProvider({ children }) {
   };
   const adicionarEmail = (novoEmail) => {
     setEmail(novoEmail);
+  };
+  const adicionarInstituicao = (novaInstituicao) => {
+    setInstituicao(novaInstituicao);
   };
 
 
@@ -69,6 +73,9 @@ export function DataProvider({ children }) {
     adicionarNomes,
     email,
     adicionarEmail,
+    instituicao,
+    adicionarInstituicao,
+    
   };
 
   return (
