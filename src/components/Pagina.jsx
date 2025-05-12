@@ -72,10 +72,11 @@ export function Pagina(props) {
               ))}
             </select>
           </div>
-
+          
+          {/* if user.role == adm */}
           <div className="mx-4">
-            <h2>modelo</h2>
-          </div>
+              cadastrar
+          </div> 
 
           <div className="mx-4">
             <h2>{instituicao}</h2>
@@ -95,3 +96,4 @@ export function Pagina(props) {
     </div>
   );
 }
+

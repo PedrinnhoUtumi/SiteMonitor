@@ -64,9 +64,9 @@ export function User() {
   };
 
   const Box = ({ label, value }) => (
-    <div className="bg-fundo_azul_escuro_elegante text-fonte_elegante_amarelo rounded-md p-4 flex flex-col items-center w-full sm:w-1/3 m-2 shadow-md">
-      <span className="font-semibold text-lg">{label}</span>
-      <span className="text-3xl mt-2">{value}</span>
+    <div className="bg-fundo_azul_escuro_elegante text-fonte_elegante_amarelo rounded-md p-4 flex flex-col items-center sm:w-1/3 m-2 shadow-md w-auto max-w-full">
+      <span className="font-semibold text-lg text-center w-full">{label}</span>
+      <span className="text-2xl mt-2 break-words text-center w-full">{value}</span>
     </div>
   );
 
