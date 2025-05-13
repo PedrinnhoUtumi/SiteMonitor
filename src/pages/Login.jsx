@@ -42,7 +42,7 @@ export function Login() {
           nome: usuarioEncontrado.nome,
           id: usuarioEncontrado.id,
           role: usuarioEncontrado.role,
-          loginAt: new Date().toISOString(),
+          account: usuarioEncontrado.account,
         };
   
         adicionarNomes(usuarioEncontrado.nome);

@@ -33,7 +33,6 @@ export function TempoReal() {
         email: usuario.EMAIL,
         role: usuario.ROLE,
         conta: usuario.ACCOUNT,
-        ultimoLogin: usuario.LASTLOGIN,
       }));
 
       const listaNegocios = business.map((negocio) => ({
@@ -71,7 +70,7 @@ export function TempoReal() {
     (negocio) => negocio.id === relacao?.businessId
   );
   adicionarInstituicao(negocio?.nome || "Não vinculado");
-  adicionarCargo(usuarioEncontrado.role || "Não trabalha");
+  adicionarCargo(usuarioEncontrado.ACCOUNT || "Não trabalha");
 
 
   const estiloContainerGrafico =

@@ -22,7 +22,6 @@ export function User() {
         email: usuario.EMAIL,
         role: usuario.ROLE,        
         conta: usuario.ACCOUNT,
-        ultimoLogin: usuario.LASTLOGIN, 
       }));
 
       const listaNegocios = business.map((negocio) => ({
@@ -54,13 +53,16 @@ export function User() {
   const relacao = negocioDoUsuario.find((negocio) => negocio.userId === usuarioEncontrado.id);
   const negocio = negocios.find((negocio) => negocio.id === relacao?.businessId);  
   adicionarInstituicao(negocio?.nome || "Não vinculado");
+  const date = new Date().toLocaleString("pt-BR", {
+    timeZone: "America/Sao_Paulo"
+  });
   const infoUsuario = {
     nome: usuarioEncontrado.nome,
     email: usuarioEncontrado.email,
     instituicao: negocio?.nome || "Não vinculado",
     cargo: usuarioEncontrado.role,
     tipoConta: usuarioEncontrado.conta,
-    ultimoLogin: usuarioEncontrado.ultimoLogin || "22/04/2025 08:30", 
+    ultimoLogin: date, 
   };
 
   const Box = ({ label, value }) => (
