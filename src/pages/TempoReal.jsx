@@ -14,7 +14,7 @@ import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../context/DataContext";
 
 export function TempoReal() {
-  const { data, adicionarDados, name, adicionarNomes, email, adicionarEmail, adicionarInstituicao} = useContext(DataContext);
+  const { data, adicionarDados, name, adicionarNomes, email, adicionarEmail, adicionarInstituicao, cargo, adicionarCargo} = useContext(DataContext);
   const [usuario, setUsuario] = useState([]);
   const [negocios, setNegocios] = useState([]);
   const [negocioDoUsuario, setNegocioDoUsuario] = useState([]);
@@ -71,6 +71,8 @@ export function TempoReal() {
     (negocio) => negocio.id === relacao?.businessId
   );
   adicionarInstituicao(negocio?.nome || "Não vinculado");
+  adicionarCargo(usuarioEncontrado.role || "Não trabalha");
+
 
   const estiloContainerGrafico =
     "bg-fundo_azul_escuro_elegante w-1/3 h-48 m-1 rounded-md flex justify-center ";

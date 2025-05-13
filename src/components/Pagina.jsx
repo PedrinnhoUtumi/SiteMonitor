@@ -3,7 +3,7 @@ import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import { DataContext } from "../context/DataContext";
 
 export function Pagina(props) {
-  const { data, adicionarDados, name, adicionarNomes, instituicao } = useContext(DataContext);
+  const { data, name, instituicao, cargo } = useContext(DataContext);
   const myUser = data.filter(item => item.__tabela === "MYUSER")
 
 
@@ -73,10 +73,13 @@ export function Pagina(props) {
             </select>
           </div>
           
-          {/* if user.role == adm */}
-          <div className="mx-4">
+          
+          
+          {cargo === "Administrador" && (
+            <div className="mx-4">
               cadastrar
-          </div> 
+            </div> 
+          )}
 
           <div className="mx-4">
             <h2>{instituicao}</h2>

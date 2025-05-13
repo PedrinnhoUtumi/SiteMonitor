@@ -7,6 +7,7 @@ export function DataProvider({ children }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [instituicao, setInstituicao] = useState("");
+  const [cargo, setCargo] = useState("");
 
   function adicionarDados(novosDados) {
     setData((prev) => {
@@ -27,6 +28,10 @@ export function DataProvider({ children }) {
   const adicionarInstituicao = (novaInstituicao) => {
     setInstituicao(novaInstituicao);
   };
+  const adicionarCargo = (novoCargo) => {
+    setCargo(novoCargo);
+  }
+
 
 
   useEffect(() => {
@@ -75,6 +80,8 @@ export function DataProvider({ children }) {
     adicionarEmail,
     instituicao,
     adicionarInstituicao,
+    cargo,
+    adicionarCargo,
     
   };
 
