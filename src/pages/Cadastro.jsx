@@ -58,7 +58,7 @@ export function Cadastro() {
     return texto.includes(" ");
   }
   const opcoesRole = {
-    1: "Adiministrador",
+    1: "adm",
     2: "Usuário",
    
   };
@@ -175,11 +175,11 @@ export function Cadastro() {
         </div>
 
         <div className="relative w-3/4 mt-5 flex justify-center items-center m-5">
-          <select name="selectRole" id="selectRole" className="bg-transparent" value={novoUsuario.account} onChange={(e) => setNovoUsuario({ ...novoUsuario, account: e.target.value })}>
+          <select name="selectRole" id="selectRole" className="bg-transparent bg-roxo rounded-md" value={novoUsuario.account} onChange={(e) => setNovoUsuario({ ...novoUsuario, account: e.target.value })}>
             <option value="" disabled selected hidden>Selecione Função</option>
             <option value={opcoesRole[1]}>Administrador</option>
             <option value={opcoesRole[2]}>Usuário</option>
-          </select>
+          </select> 
         </div>
 
         <button
