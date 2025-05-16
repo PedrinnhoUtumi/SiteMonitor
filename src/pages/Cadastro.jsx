@@ -5,7 +5,7 @@ import { DataContext } from "../context/DataContext";
 
 export function Cadastro() {
 
-  const { data, adicionarDados, name, adicionarNomes, email, adicionarEmail } = useContext(DataContext); // Importa o contexto de dados
+  const { data, adicionarDados, name, adicionarNomes, email, adicionarEmail } = useContext(DataContext); 
   const [usuario, setUsuario] = useState([]);
   const [senha, setSenha] = useState("");
   const [senhaHash, setSenhaHash] = useState("");
@@ -21,7 +21,6 @@ export function Cadastro() {
     if (usuarioEncontrado) {
       console.log("Usuário encontrado:", usuarioEncontrado);
       
-      // Comparar a senha digitada com a hash armazenada no banco
       const isCorrect = await bcrypt.compare(senha, usuarioEncontrado.senha);
   
       if (isCorrect) {  
