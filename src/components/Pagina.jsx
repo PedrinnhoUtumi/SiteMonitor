@@ -50,6 +50,7 @@ export function Pagina(props) {
     setEstado(value);
     navigate(valorParaRota[value]);
   }
+  console.log("cargo", cargo)
 
   return (
     <div className="flex flex-col flex-1">

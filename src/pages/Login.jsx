@@ -20,6 +20,8 @@ export function Login() {
       senha: usuario.SENHA,
       nome: usuario.NAME,
       email: usuario.EMAIL,
+      role: usuario.ROLE,
+      account: usuario.ACCOUNT,
     }));
 
     setUsuario(listaUsuarios);
