@@ -6,7 +6,7 @@ export function DataProvider({ children }) {
   const [data, setData] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [instituicao, setInstituicao] = useState("");
+  const [instituicao, setInstituicao] = useState([]);
   const [cargo, setCargo] = useState("");
 
   function adicionarDados(novosDados) {
@@ -26,8 +26,14 @@ export function DataProvider({ children }) {
     setEmail(novoEmail);
   };
   const adicionarInstituicao = (novaInstituicao) => {
-    setInstituicao(novaInstituicao);
+    setInstituicao((prev) => {
+      if (!prev.includes(novaInstituicao)) {
+        return [...prev, novaInstituicao];
+      }
+      return prev;
+    });
   };
+
   const adicionarCargo = (novoCargo) => {
     setCargo(novoCargo);
   }
