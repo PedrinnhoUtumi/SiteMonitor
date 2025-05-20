@@ -58,7 +58,7 @@ export function Cadastro() {
     return texto.includes(" ");
   }
   const opcoesRole = {
-    1: "adm",
+    1: "Administrador",
     2: "Usuário",
    
   };

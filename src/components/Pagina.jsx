@@ -76,7 +76,7 @@ export function Pagina(props) {
           
           
           
-          {cargo === "adm" && (
+          {cargo === "Administrador" && (
             <div className="mx-4">
               <NavLink to="/Cadastro" className={estiloBotao}>
                 Cadastrar

@@ -77,6 +77,9 @@ export function User() {
     sessionStorage.clear();
     navigate("/", { replace: true });
   }
+  // function isAdm(infoUsuario){
+  //   if (infoUsuario.tipoConta === "adm")
+  // }
 
   return (
     <Pagina>
