@@ -92,7 +92,6 @@ export function User() {
           <Box label="Instituição" value={infoUsuario.instituicao} />
           <Box label="Cargo" value={infoUsuario.cargo} />
           <Box label="Tipo de Conta" value={infoUsuario.tipoConta} />
-          <Box label="Último Login" value={infoUsuario.ultimoLogin} />
         </div>
 
         <div className="mt-8 flex gap-4">
