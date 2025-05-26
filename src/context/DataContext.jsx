@@ -38,12 +38,12 @@ export function DataProvider({ children }) {
     setCargo(novoCargo);
   }
 
-
+  
 
   useEffect(() => {
     const fetchMachbase = async () => {
       try {
-        const response = await fetch("https://servermagvia.onrender.com/api");
+        const response = await fetch("http://127.0.0.1:1883/api");
         if (!response.ok) {
           throw new Error("Erro ao buscar os dados do servidor");
         }
