@@ -83,13 +83,13 @@ export function Login() {
         src={logoEducere}
         alt="logoEducere"
         className="absolute w-32 max-sm:w-32 z-0
-                  top-[2%] right-2
+                  top-2 right-2
                   max-sm:top-4 max-sm:left-1/2 
                   max-sm:transform max-sm:-translate-x-1/2 
                   max-sm:translate-y-0" 
                   
       />
-      <div className="caixaLogin max-sm:w-2/3 sm:w-1/2 lg:w-1/4 h-3/5 flex flex-col justify-center items-center bg-white bg-opacity-20 rounded-3xl shadow-lg backdrop-blur-sm pt-32" >
+      <div className="caixaLogin max-sm:w-2/3 sm:w-1/2 lg:w-2/5 h-3/5 flex flex-col justify-center items-center bg-white bg-opacity-20 rounded-3xl shadow-lg backdrop-blur-sm pt-32" >
         <img
           src="../../usuario.png"
           alt="Ícone de usuário"

@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../context/DataContext";
+import logoEducere from '../assets/educere-removebg-preview.png';
 
 export function Cadastro() {
 
@@ -103,12 +104,24 @@ export function Cadastro() {
   }
 
   return (
-    <form method="POST" className="bg-gradient-to-r from-azul_bebe to-azul_escuro h-screen flex items-center justify-center">
-      <div className="caixaLogin w-1/4 h-3/5 flex flex-col justify-center items-center bg-white bg-opacity-10 rounded-3xl shadow-lg p-5 backdrop-blur-sm">
+    <form method="POST" className="bg-gradient-to-r from-fundo_azul_claro_elegante to-azul_escuro h-screen flex items-center justify-center">
+      <img
+              src={logoEducere}
+              alt="logoEducere"
+              className="absolute w-32 max-sm:w-32 z-0
+                        top-2 right-2
+                        max-sm:top-4 max-sm:left-1/2 
+                        max-sm:transform max-sm:-translate-x-1/2 
+                        max-sm:translate-y-0" 
+                        
+            />
+
+
+      <div className="caixaLogin max-sm:w-2/3 sm:w-1/2 lg:w-2/5 h-3/5 flex flex-col justify-center items-center bg-white bg-opacity-20 rounded-3xl shadow-lg backdrop-blur-sm pt-32">
         <img
           src="../../usuario.png"
           alt="Ícone de usuário"
-          className="w-32 relative"
+          className="max-sm:w-32 sm:w-32 lg:w-32 absolute top-2 "
         />
 
         <div className="relative w-3/4 mt-5">
@@ -118,7 +131,7 @@ export function Cadastro() {
             required
             value={novoUsuario.email}
             onChange={(e) => setNovoUsuario({ ...novoUsuario, email: e.target.value })}
-            className="w-full py-2 pl-10 pr-4 border border-gray-400 rounded focus:outline-none focus:ring-2 focus:ring-azul_claro"
+            className="w-full py-2 pl-10 pr-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-azul_claro"
           />
           <img
             src="../../usuarioGmail.png"
@@ -135,7 +148,7 @@ export function Cadastro() {
             required
             value={novoUsuario.senha}
             onChange={(e) => setNovoUsuario({ ...novoUsuario, senha: e.target.value })}
-            className="w-full py-2 pl-10 pr-4 border border-gray-400 rounded focus:outline-none focus:ring-2 focus:ring-azul_claro"
+            className="w-full py-2 pl-10 pr-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-azul_claro"
           />
           <img
             src="../../cadeado.png"
@@ -150,7 +163,7 @@ export function Cadastro() {
             required
             value={novoUsuario.nome}
             onChange={(e) => setNovoUsuario({ ...novoUsuario, nome: e.target.value })}
-            className="w-full py-2 pl-10 pr-4 border border-gray-400 rounded focus:outline-none focus:ring-2 focus:ring-azul_claro"
+            className="w-full py-2 pl-10 pr-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-azul_claro"
           />
           <img
             src="../../cadeado.png"
@@ -165,7 +178,7 @@ export function Cadastro() {
             required
             value={novoUsuario.role}
             onChange={(e) => setNovoUsuario({ ...novoUsuario, role: e.target.value })}
-            className="w-full py-2 pl-10 pr-4 border border-gray-400 rounded focus:outline-none focus:ring-2 focus:ring-azul_claro"
+            className="w-full py-2 pl-10 pr-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-azul_claro"
           />
           <img
             src="../../cadeado.png"
