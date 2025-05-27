@@ -113,10 +113,12 @@ export function TempoReal() {
   const phaseA = ultimaLeituraPotenciaAtiva.PHASEA || 0.0;
   const phaseB = ultimaLeituraPotenciaAtiva.PHASEB || 0.0;
   const phaseC = ultimaLeituraPotenciaAtiva.PHASEC || 0.0;
+  const phaseT = ultimaLeituraPotenciaAtiva.PHASET || 0.0;
 
   const phaseATensao = ultimaLeituraTensao.PHASEA || 0.0;
   const phaseBTensao = ultimaLeituraTensao.PHASEB || 0.0;
   const phaseCTensao = ultimaLeituraTensao.PHASEC || 0.0;
+  const phaseTTensao = ultimaLeituraTensao.PHASET || 0.0;
 
   const phaseACorrente = ultimaLeituraCorrente.PHASEA || 0.0;
   const phaseBCorrente = ultimaLeituraCorrente.PHASEB || 0.0;
@@ -143,20 +145,20 @@ export function TempoReal() {
           <div className={estiloContainerGrafico2}>
             <h1 className={estiloTituloContainerCorrente}>Fase A</h1>
             <div className={estiloInformacoesContainerCorrente}>
-              {phaseATensao.toFixed(1) || "0.0"}V
+              {phaseATensao || "0.0"}V
               {console.log("todos os dados", data)}
             </div>
           </div>
           <div className={estiloContainerGrafico2}>
             <h1 className={estiloTituloContainerCorrente}>Fase B</h1>
             <div className={estiloInformacoesContainerCorrente}>
-              {phaseBTensao.toFixed(1) || "0.0"}V
+              {phaseBTensao || "0.0"}V
             </div>
           </div>
           <div className={estiloContainerGrafico2}>
             <h1 className={estiloTituloContainerCorrente}>Fase C</h1>
             <div className={estiloInformacoesContainerCorrente}>
-              {phaseCTensao.toFixed(1) || "0.0"}V
+              {phaseCTensao || "0.0"}V
             </div>
           </div>
         </div>
@@ -168,19 +170,19 @@ export function TempoReal() {
           <div className={estiloContainerGrafico2}>
             <h1 className={estiloTituloContainerCorrente}>Fase A</h1>
             <div className={estiloInformacoesContainerCorrente}>
-              {phaseACorrente.toFixed(1) || "0.0"}A
+              {phaseACorrente || "0.0"}A
             </div>
           </div>
           <div className={estiloContainerGrafico2}>
             <h1 className={estiloTituloContainerCorrente}>Fase B</h1>
             <div className={estiloInformacoesContainerCorrente}>
-              {phaseBCorrente.toFixed(1) || "0.0"}A
+              {phaseBCorrente || "0.0"}A
             </div>
           </div>
           <div className={estiloContainerGrafico2}>
             <h1 className={estiloTituloContainerCorrente}>Fase C</h1>
             <div className={estiloInformacoesContainerCorrente}>
-              {phaseCCorrente.toFixed(1) || "0.0"}A
+              {phaseCCorrente || "0.0"}A
             </div>
           </div>
         </div>
@@ -192,25 +194,25 @@ export function TempoReal() {
           <div className={estiloContainerGrafico2}>
             <h1 className={estiloTituloContainerPotencia}>Fase A</h1>
             <div className={estiloInformacoesContainerPotencia}>
-              {phaseA.toFixed(2) || "0.00"}W
+              {phaseA || "0.00"}W
             </div>
           </div>
           <div className={estiloContainerGrafico2}>
             <h1 className={estiloTituloContainerPotencia}>Fase B</h1>
             <div className={estiloInformacoesContainerPotencia}>
-              {phaseB.toFixed(2) || "0.00"}W
+              {phaseB || "0.00"}W
             </div>
           </div>
           <div className={estiloContainerGrafico2}>
             <h1 className={estiloTituloContainerPotencia}>Fase C</h1>
             <div className={estiloInformacoesContainerPotencia}>
-              {phaseC.toFixed(2) || "0.00"}W
+              {phaseC || "0.00"}W
             </div>
           </div>
           <div className={estiloContainerGrafico2}>
             <h1 className={estiloTituloContainerPotencia}>Total</h1>
             <div className={estiloInformacoesContainerPotencia}>
-              {(phaseA + phaseB + phaseC)?.toFixed(2) || "0.00"}W
+              {parseFloat(phaseA) + parseFloat(phaseB) + parseFloat(phaseC) || "0.00"}W
             </div>
           </div>
         </div>
@@ -222,25 +224,25 @@ export function TempoReal() {
           <div className={estiloContainerGrafico2}>
             <h1 className={estiloTituloContainerConsumo}>Hoje</h1>
             <div className={estiloInformacoesContainerConsumo}>
-              {hojeConsumo.toFixed(2) || "0.00"}kWh
+              {hojeConsumo || "0.00"}kWh
             </div>
           </div>
           <div className={estiloContainerGrafico2}>
             <h1 className={estiloTituloContainerConsumo}>Semana Atual</h1>
             <div className={estiloInformacoesContainerConsumo}>
-              {semanaConsumo.toFixed(2) || "0.00"}kWh
+              {semanaConsumo || "0.00"}kWh
             </div>
           </div>
           <div className={estiloContainerGrafico2}>
             <h1 className={estiloTituloContainerConsumo}>Mês Atual</h1>
             <div className={estiloInformacoesContainerConsumo}>
-              {mesAtualConsumo.toFixed(2) || "0.00"}kWh
+              {mesAtualConsumo || "0.00"}kWh
             </div>
           </div>
           <div className={estiloContainerGrafico2}>
             <h1 className={estiloTituloContainerConsumo}>Mês Anterior</h1>
             <div className={estiloInformacoesContainerConsumo}>
-              {mesPassadoConsumo.toFixed(2) || "0.00"}kWh
+              {mesPassadoConsumo || "0.00"}kWh
             </div>
           </div>
         </div>
@@ -254,25 +256,25 @@ export function TempoReal() {
           <div className={estiloContainerGrafico2}>
             <h1 className={estiloTituloContainerGeracao}>Hoje</h1>
             <div className={estiloInformacoesContainerGeracao}>
-              {hojeGeracao.toFixed(2) || "0.00"}kWh
+              {hojeGeracao || "0.00"}kWh
             </div>
           </div>
           <div className={estiloContainerGrafico2}>
             <h1 className={estiloTituloContainerGeracao}>Semana Atual</h1>
             <div className={estiloInformacoesContainerGeracao}>
-              {semanaGeracao.toFixed(2) || "0.00"}kWh
+              {semanaGeracao || "0.00"}kWh
             </div>
           </div>
           <div className={estiloContainerGrafico2}>
             <h1 className={estiloTituloContainerGeracao}>Mês Atual</h1>
             <div className={estiloInformacoesContainerGeracao}>
-              {mesAtualGeracao.toFixed(2) || "0.00"}kWh
+              {mesAtualGeracao || "0.00"}kWh
             </div>
           </div>
           <div className={estiloContainerGrafico2}>
             <h1 className={estiloTituloContainerGeracao}>Mês Anterior</h1>
             <div className={estiloInformacoesContainerGeracao}>
-              {mesPassadoGeracao.toFixed(2) || "0.00"}kWh
+              {mesPassadoGeracao || "0.00"}kWh
             </div>
           </div>
         </div>
