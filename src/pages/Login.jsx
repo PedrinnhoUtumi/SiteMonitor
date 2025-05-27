@@ -82,21 +82,21 @@ export function Login() {
         className="absolute w-32 z-0"
         style={{ top: '7%', right: '0%', transform: 'translate(-50%, -50%)' }}
       />
-      <div className="caixaLogin w-1/4 h-3/5 flex flex-col justify-center items-center bg-white bg-opacity-20 rounded-3xl shadow-lg p-5 backdrop-blur-sm">
+      <div className="caixaLogin max-sm:w-2/3 sm:w-1/2 lg:w-1/4 h-3/5 flex flex-col justify-center items-center bg-white bg-opacity-20 rounded-3xl shadow-lg backdrop-blur-sm">
         <img
           src="../../usuario.png"
           alt="Ícone de usuário"
-          className="w-32 mb-24"
+          className="max-sm:w-32 sm:w-32 lg:w-32 absolute top-2 "
         />
 
-        <div className="relative w-3/4 mt-5">
+        <div className="relative w-3/4 ">
           <input
             type="email"
             placeholder="Email"
             required
             value={email}
             onChange={(e) => adicionarEmail(e.target.value)}
-            className="w-full py-2 pl-10 pr-4 border border-gray-400 rounded focus:outline-none focus:ring-2 focus:ring-azul_claro"
+            className="w-full py-2 pl-10 pr-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-azul_claro"
           />
           <img
             src="../../usuarioGmail.png"
@@ -112,7 +112,7 @@ export function Login() {
             required
             value={senha}
             onChange={(e) => setSenha(e.target.value)}
-            className="w-full py-2 pl-10 pr-4 border border-gray-400 rounded focus:outline-none focus:ring-2 focus:ring-azul_claro"
+            className="w-full py-2 pl-10 pr-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-azul_claro"
           />
           <img
             src="../../cadeado.png"
