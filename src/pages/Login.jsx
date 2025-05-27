@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../context/DataContext";
+import logoEducere from '../assets/educere-removebg-preview.png';
 
 export function Login() {
   const { data, adicionarDados, name, adicionarNomes, email, adicionarEmail } = useContext(DataContext); // Importa o contexto de dados
@@ -74,8 +75,14 @@ export function Login() {
   }
 
   return (
-    <div className="bg-gradient-to-r from-azul_bebe to-azul_escuro h-screen flex items-center justify-center">
-      <div className="caixaLogin w-1/4 h-3/5 flex flex-col justify-center items-center bg-white bg-opacity-10 rounded-3xl shadow-lg p-5 backdrop-blur-sm">
+    <div className="bg-gradient-to-r from-fundo_azul_claro_elegante to-azul_escuro h-screen flex items-center justify-center">
+      <img
+        src={logoEducere}
+        alt="logoEducere"
+        className="absolute w-32 z-0"
+        style={{ top: '7%', right: '0%', transform: 'translate(-50%, -50%)' }}
+      />
+      <div className="caixaLogin w-1/4 h-3/5 flex flex-col justify-center items-center bg-white bg-opacity-20 rounded-3xl shadow-lg p-5 backdrop-blur-sm">
         <img
           src="../../usuario.png"
           alt="Ícone de usuário"
@@ -119,7 +126,7 @@ export function Login() {
           className="bg-cinza text-white rounded-full w-1/2 py-2 mt-5 hover:bg-roxo hover:opacity-70 font-[Bagel Fat One]"
         >
           Login
-        </button>
+        </button> 
       </div>
     </div>
   );
