@@ -212,7 +212,7 @@ export function TempoReal() {
           <div className={estiloContainerGrafico2}>
             <h1 className={estiloTituloContainerPotencia}>Total</h1>
             <div className={estiloInformacoesContainerPotencia}>
-              {parseFloat(phaseA) + parseFloat(phaseB) + parseFloat(phaseC) || "0.00"}W
+              {(parseFloat(phaseA) + parseFloat(phaseB) + parseFloat(phaseC)).toFixed(2) || "0.00"}W
             </div>
           </div>
         </div>
