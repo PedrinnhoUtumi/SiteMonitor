@@ -89,11 +89,11 @@ export function Login() {
                   max-sm:translate-y-0" 
                   
       />
-      <div className="caixaLogin max-sm:w-2/3 sm:w-1/2 lg:w-2/5 h-3/5 flex flex-col justify-center items-center bg-white bg-opacity-20 rounded-3xl shadow-lg backdrop-blur-sm pt-32" >
+      <div className="caixaLogin max-sm:w-2/3 sm:w-1/2 lg:w-2/5 h-3/5 flex flex-col justify-end items-center bg-white bg-opacity-20 rounded-3xl shadow-lg backdrop-blur-sm pb-16" >
         <img
           src="../../usuario.png"
           alt="Ícone de usuário"
-          className="max-sm:w-32 sm:w-32 lg:w-32 absolute top-2 "
+          className="max-sm:w-32 sm:w-32 lg:w-32 absolute top-20"
         />
 
         <div className="relative w-3/4 m-4 ">

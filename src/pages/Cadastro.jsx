@@ -61,7 +61,6 @@ export function Cadastro() {
   const opcoesRole = {
     1: "Administrador",
     2: "Usuário",
-   
   };
   
   async function criarUsuario(e) {

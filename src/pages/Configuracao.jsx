@@ -16,7 +16,7 @@ export function Configuracao(){
     const [aparelhos, setAparelhos] = useState(nomeAparelhos)
     const [quantidadeAparelhos, setQuantidadeAparelhos] = useState(nomeAparelhos.length)
 
-    const estiloContainerGrafico = "bg-fundo_azul_escuro_elegante w-1/2 h-auto m-1 p-4 rounded-md flex flex-col justify-center items-center"
+    const estiloContainerGrafico = "bg-fundo_azul_escuro_elegante w-full md:w-1/2 lg:w-1/3 h-auto m-1 p-4 rounded-md flex flex-col justify-center items-center"
 
     function editarNome(event) {
         setNome(event.target.value)   
@@ -36,10 +36,11 @@ export function Configuracao(){
         <Pagina>
             <Cabecalho/>
             <div className="w-full h-screen flex flex-col bg-fundo_azul_claro_elegante">
-                <div className="flex flex-row justify-normal">
-                    <div className={estiloContainerGrafico}>
+                <div className="flex flex-wrap justify-center">
+                    <div className={`${estiloContainerGrafico} min-w-[300px]`}>
                         <div className="w-full h-96 flex flex-col justify-center items-center">
-                            <ul className="p-4">
+                            <h1 className={estiloLi}>Usuário</h1>
+                            <ul className="p-2 ">
                                 <li className={estiloLi}>
                                     Nome:     
                                     <input 
@@ -80,7 +81,7 @@ export function Configuracao(){
                         </div>
                     </div>
 
-                    <div className={estiloContainerGrafico}>
+                    <div className={`${estiloContainerGrafico} min-w-[300px]`}>
                         <div className="w-full h-min flex flex-col justify-center items-center text-3xl text-fonte_elegante_amarelo">
                             Nome dos Aparelhos: {aparelhos.join(', ')}
                             <br /> <br /> 
@@ -88,11 +89,6 @@ export function Configuracao(){
                         </div>
                     </div>
 
-                    <div className={estiloContainerGrafico}>
-                        <div>
-
-                        </div>
-                    </div> 
                 </div>
             </div>
         </Pagina>
