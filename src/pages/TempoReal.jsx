@@ -78,29 +78,65 @@ export function TempoReal() {
   adicionarCargo(usuarioEncontrado.account || "Não trabalha");
 
 
+  // const estiloContainerGrafico =
+  //   "bg-fundo_azul_escuro_elegante w-1/3 h-48 m-1 rounded-md flex justify-center ";
+  // const estiloContainerGrafico2 =
+  //   "bg-fundo_azul_escuro_elegante w-1/3 h-36 m-1 rounded-md p-4";
+  // const estiloContainerGrafico3 =
+  //   "bg-fundo_azul_escuro_elegante w-1/2 h-[50vh] m-1 rounded-md flex justify-center items-center";
+  // const estiloTitulo =
+  //   "bg-fundo_azul_escuro_elegante h-16 flex justify-center items-center text-2xl m-1 rounded-md font-bold border-b-2";
+  // const estiloTituloContainerConsumo =
+  //   "text-3xl text-fonte_elegante_amarelo font-bold";
+  // const estiloInformacoesContainerConsumo =
+  //   "flex justify-center items-end h-20 text-7xl font-thin text-fonte_elegante_amarelo";
+  // const estiloTituloContainerGeracao =
+  //   "text-3xl text-fonte_elegante_amarelo font-bold";
+  // const estiloInformacoesContainerGeracao =
+  //   "flex justify-center items-end h-20 text-7xl font-thin text-fonte_elegante_amarelo";
+  // const estiloTituloContainerCorrente =
+  //   "text-3xl text-fonte_elegante_amarelo font-bold";
+  // const estiloInformacoesContainerCorrente =
+  //   "flex justify-center items-end h-20 text-7xl font-thin text-fonte_elegante_amarelo";
+  // const estiloTituloContainerPotencia = "text-3xl text-amber-500 font-bold";
+  // const estiloInformacoesContainerPotencia =
+  //   "flex justify-center items-end h-20 text-7xl font-thin text-amber-500";
   const estiloContainerGrafico =
-    "bg-fundo_azul_escuro_elegante w-1/3 h-48 m-1 rounded-md flex justify-center ";
-  const estiloContainerGrafico2 =
-    "bg-fundo_azul_escuro_elegante w-1/3 h-36 m-1 rounded-md p-4";
-  const estiloContainerGrafico3 =
-    "bg-fundo_azul_escuro_elegante w-1/2 h-[50vh] m-1 rounded-md flex justify-center items-center";
-  const estiloTitulo =
-    "bg-fundo_azul_escuro_elegante h-16 flex justify-center items-center text-2xl m-1 rounded-md font-bold border-b-2";
-  const estiloTituloContainerConsumo =
-    "text-3xl text-fonte_elegante_amarelo font-bold";
-  const estiloInformacoesContainerConsumo =
-    "flex justify-center items-end h-20 text-7xl font-thin text-fonte_elegante_amarelo";
-  const estiloTituloContainerGeracao =
-    "text-3xl text-fonte_elegante_amarelo font-bold";
-  const estiloInformacoesContainerGeracao =
-    "flex justify-center items-end h-20 text-7xl font-thin text-fonte_elegante_amarelo";
-  const estiloTituloContainerCorrente =
-    "text-3xl text-fonte_elegante_amarelo font-bold";
-  const estiloInformacoesContainerCorrente =
-    "flex justify-center items-end h-20 text-7xl font-thin text-fonte_elegante_amarelo";
-  const estiloTituloContainerPotencia = "text-3xl text-amber-500 font-bold";
-  const estiloInformacoesContainerPotencia =
-    "flex justify-center items-end h-20 text-7xl font-thin text-amber-500";
+  "bg-fundo_azul_escuro_elegante w-full sm:w-1/2 md:w-1/3 h-48 m-1 rounded-md flex justify-center";
+
+const estiloContainerGrafico2 =
+  "bg-fundo_azul_escuro_elegante w-full sm:w-1/2 md:w-1/3 h-36 m-1 rounded-md p-4";
+
+const estiloContainerGrafico3 =
+  "bg-fundo_azul_escuro_elegante w-full sm:w-2/3 md:w-1/2 h-[50vh] m-1 rounded-md flex justify-center items-center";
+
+const estiloTitulo =
+  "bg-fundo_azul_escuro_elegante h-16 flex justify-center items-center text-2xl m-1 rounded-md font-bold border-b-2";
+
+const estiloTituloContainerConsumo =
+  "text-3xl text-fonte_elegante_amarelo font-bold";
+
+const estiloInformacoesContainerConsumo =
+  "flex justify-center items-end h-20 text-7xl font-thin text-fonte_elegante_amarelo";
+
+const estiloTituloContainerGeracao =
+  "text-3xl text-fonte_elegante_amarelo font-bold";
+
+const estiloInformacoesContainerGeracao =
+  "flex justify-center items-end h-20 text-7xl font-thin text-fonte_elegante_amarelo";
+
+const estiloTituloContainerCorrente =
+  "text-3xl text-fonte_elegante_amarelo font-bold";
+
+const estiloInformacoesContainerCorrente =
+  "flex justify-center items-end h-20 text-7xl font-thin text-fonte_elegante_amarelo";
+
+const estiloTituloContainerPotencia =
+  "text-3xl text-amber-500 font-bold";
+
+const estiloInformacoesContainerPotencia =
+  "flex justify-center items-end h-20 text-7xl font-thin text-amber-500";
+
   const potenciaAtiva = data.filter((item) => item.__tabela === "ACTIVEPOWER");
   const corrente = data.filter((item) => item.__tabela === "CURRENT");
   const consumo = data.filter((item) => item.__tabela === "CONSUMPTION");
@@ -146,22 +182,7 @@ export function TempoReal() {
         </header>
 
         {mostrarTensoes && (
-          <div className="flex flex-col md:flex-row justify-around gap-4 mt-4">
-            <div className="bg-gray-100 p-4 rounded shadow-md">
-              <h1 className="text-lg font-semibold">Fase A</h1>
-              <div>{phaseATensao || "0.0"}V</div>
-            </div>
-            <div className="bg-gray-100 p-4 rounded shadow-md">
-              <h1 className="text-lg font-semibold">Fase B</h1>
-              <div>{phaseBTensao || "0.0"}V</div>
-            </div>
-            <div className="bg-gray-100 p-4 rounded shadow-md">
-              <h1 className="text-lg font-semibold">Fase C</h1>
-              <div>{phaseCTensao || "0.0"}V</div>
-            </div>
-          </div>
-        )}
-        {/* <div className="flex flex-row justify-around">
+          <div className="flex flex-row justify-around">
           <div className={estiloContainerGrafico2}>
             <h1 className={estiloTituloContainerCorrente}>Fase A</h1>
             <div className={estiloInformacoesContainerCorrente}>
@@ -181,7 +202,25 @@ export function TempoReal() {
               {phaseCTensao || "0.0"}V
             </div>
           </div>
-        </div> */}
+        </div>
+        )}
+      {/* {mostrarTensoes && (
+        <div className="flex flex-col md:flex-row justify-center items-center gap-4 mt-4">
+          <div className="bg-gray-100 p-4 rounded shadow-md w-60 text-center">
+            <h1 className="text-lg font-semibold">Fase A</h1>
+            <div>{phaseATensao || "0.0"}V</div>
+          </div>
+          <div className="bg-gray-100 p-4 rounded shadow-md w-60 text-center">
+            <h1 className="text-lg font-semibold">Fase B</h1>
+            <div>{phaseBTensao || "0.0"}V</div>
+          </div>
+          <div className="bg-gray-100 p-4 rounded shadow-md w-60 text-center">
+            <h1 className="text-lg font-semibold">Fase C</h1>
+            <div>{phaseCTensao || "0.0"}V</div>
+          </div>
+        </div>
+      )} */}
+
 
         <header className={estiloTitulo}>
           <h1 className="text-fonte_elegante_amarelo ">Corrente [A]</h1>
