@@ -43,7 +43,7 @@ export function DataProvider({ children }) {
   useEffect(() => {
     const fetchMachbase = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:1883/api");
+        const response = await fetch("http://127.0.0.1:3000/api");
         if (!response.ok) {
           throw new Error("Erro ao buscar os dados do servidor");
         }

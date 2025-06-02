@@ -4,7 +4,7 @@ import { useState } from "react"
 
 export function Configuracao(){
     const estiloBotao = "bg-azul_bebe rounded-md w-32 h-12 m-5 text-cinza_escuro hover:bg-azul_claro hover:text-branco "
-    const estiloLi = "m-3 text-fonte_elegante_amarelo"
+    const estiloLi = "m-3 text-fonte_elegante_amarelo "
 
     const [nome, setNome] = useState("João Reni")
     const [endereco, setEndereco] = useState("Engenheiro Beltrão")
@@ -16,7 +16,7 @@ export function Configuracao(){
     const [aparelhos, setAparelhos] = useState(nomeAparelhos)
     const [quantidadeAparelhos, setQuantidadeAparelhos] = useState(nomeAparelhos.length)
 
-    const estiloContainerGrafico = "bg-fundo_azul_escuro_elegante w-full md:w-1/2 lg:w-1/3 h-auto m-1 p-4 rounded-md flex flex-col justify-center items-center"
+    const estiloContainerGrafico = "bg-fundo_azul_escuro_elegante  w-full md:w-1/2 lg:w-1/3 h-auto m-1 p-4 rounded-md flex flex-col justify-center items-center"
 
     function editarNome(event) {
         setNome(event.target.value)   
@@ -36,9 +36,9 @@ export function Configuracao(){
         <Pagina>
             {/* <Cabecalho/> */}
             <div className="w-full h-screen flex flex-col bg-fundo_azul_claro_elegante">
-                <div className="flex flex-wrap justify-center">
+                <div className="flex flex-wrap justify-center mt-10  p-5">
                     <div className={`${estiloContainerGrafico} min-w-[300px]`}>
-                        <div className="w-full h-96 flex flex-col justify-center items-center">
+                        <div className="w-full h-96 flex flex-col justify-center items-center ">
                             <h1 className={estiloLi}>Usuário</h1>
                             <ul className="p-2 ">
                                 <li className={estiloLi}>
