@@ -11,26 +11,20 @@ export function Pagina(props) {
 
   const opcoes = {
     1: "Tempo Real",
-    2: "Configuração",
-    3: "Técnico",
-    4: "Relatórios",
-    5: "Usuário"
+    2: "Técnico",
+    3: "Usuário",
   };
   
   const rotaParaValor = {
     "/TempoReal": 1,
-    "/Configuracao": 2,
-    "/Tecnico": 3,
-    "/Relatorios": 4,
-    "/User": 5, 
+    "/Tecnico": 2,
+    "/User": 3,
   };
   
   const valorParaRota = {
     1: "/TempoReal",
-    2: "/Configuracao",
-    3: "/Tecnico",
-    4: "/Relatorios",
-    5: "/User", 
+    2: "/Tecnico",
+    3: "/User", 
   };
   
 

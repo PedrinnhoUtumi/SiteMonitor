@@ -93,7 +93,7 @@ export function Login() {
         <img
           src="../../usuario.png"
           alt="Ícone de usuário"
-          className="max-sm:w-32 sm:w-32 lg:w-32 absolute top-20"
+          className="max-sm:w-32 sm:w-32 lg:w-32 absolute top-2"
         />
 
         <div className="relative w-3/4 m-4 ">

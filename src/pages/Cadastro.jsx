@@ -120,7 +120,7 @@ export function Cadastro() {
             />
 
 
-      <div className="caixaLogin max-sm:w-2/3 sm:w-1/2 lg:w-1/4 h-3/5 flex flex-col justify-center items-center bg-white bg-opacity-20 rounded-3xl shadow-lg backdrop-blur-sm pt-32">
+      <div className="caixaLogin max-sm:w-2/3 sm:w-1/2 lg:w-1/4 h-4/7 flex flex-col justify-center items-center bg-white bg-opacity-20 rounded-3xl shadow-lg backdrop-blur-sm pt-32">
         <img
           src="../../usuario.png"
           alt="Ícone de usuário"
@@ -214,7 +214,7 @@ export function Cadastro() {
 
         <button
           onClick={criarUsuario}
-          className="bg-cinza text-white rounded-full w-1/2 py-2 mt-5 hover:bg-roxo hover:opacity-70 font-[Bagel Fat One]"
+          className="bg-cinza text-white rounded-full w-1/2 py-2 mb-2 hover:bg-roxo hover:opacity-70 font-[Bagel Fat One]"
         >
           Cadastrar
         </button>
