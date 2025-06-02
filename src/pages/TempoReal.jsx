@@ -18,6 +18,7 @@ export function TempoReal() {
   const [usuario, setUsuario] = useState([]);
   const [negocios, setNegocios] = useState([]);
   const [negocioDoUsuario, setNegocioDoUsuario] = useState([]);
+  const [mostrarTensoes, setMostrarTensoes] = useState(false);
 
   useEffect(() => {
     if (data && data.length > 0) {
@@ -53,6 +54,9 @@ export function TempoReal() {
   }, [data]);
 
   const usuarioEncontrado = usuario.find((user) => user.email === email);
+  const toggleTensoes = () => {
+    setMostrarTensoes(!mostrarTensoes);
+  };
 
   if (!usuarioEncontrado) {
     return (
@@ -137,11 +141,27 @@ export function TempoReal() {
     <Pagina>
       <Cabecalho />
       <div className="w-full h-full flex flex-col bg-fundo_azul_claro_elegante">
-        <header className={estiloTitulo}>
-          <h1 className=" text-fonte_elegante_amarelo">Tensão [V]</h1>
+        <header className={estiloTitulo} onClick={toggleTensoes}>
+          <h1 className=" text-fonte_elegante_amarelo text-xl">Tensão [V]</h1>
         </header>
 
-        <div className="flex flex-row justify-around">
+        {mostrarTensoes && (
+          <div className="flex flex-col md:flex-row justify-around gap-4 mt-4">
+            <div className="bg-gray-100 p-4 rounded shadow-md">
+              <h1 className="text-lg font-semibold">Fase A</h1>
+              <div>{phaseATensao || "0.0"}V</div>
+            </div>
+            <div className="bg-gray-100 p-4 rounded shadow-md">
+              <h1 className="text-lg font-semibold">Fase B</h1>
+              <div>{phaseBTensao || "0.0"}V</div>
+            </div>
+            <div className="bg-gray-100 p-4 rounded shadow-md">
+              <h1 className="text-lg font-semibold">Fase C</h1>
+              <div>{phaseCTensao || "0.0"}V</div>
+            </div>
+          </div>
+        )}
+        {/* <div className="flex flex-row justify-around">
           <div className={estiloContainerGrafico2}>
             <h1 className={estiloTituloContainerCorrente}>Fase A</h1>
             <div className={estiloInformacoesContainerCorrente}>
@@ -161,7 +181,7 @@ export function TempoReal() {
               {phaseCTensao || "0.0"}V
             </div>
           </div>
-        </div>
+        </div> */}
 
         <header className={estiloTitulo}>
           <h1 className="text-fonte_elegante_amarelo ">Corrente [A]</h1>

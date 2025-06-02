@@ -14,9 +14,9 @@ export function Cabecalho() {
                     Técnico
                 </NavLink>
 
-                {/* <NavLink to="/Relatorios" className={estiloBotao}>
-                    Relatório
-                </NavLink> */}
+                <NavLink to="/User" className={estiloBotao}>
+                    Usuário
+                </NavLink>
 
                 {/* <NavLink to="/Configuracao" className={estiloBotao}>
                     Configurações
