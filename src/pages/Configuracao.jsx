@@ -1,5 +1,5 @@
 import { Pagina } from "../components/Pagina"
-import { Cabecalho } from '../components/Cabecalho'
+// import { Cabecalho } from '../components/Cabecalho'
 import { useState } from "react"
 
 export function Configuracao(){
@@ -34,7 +34,7 @@ export function Configuracao(){
 
     return (
         <Pagina>
-            <Cabecalho/>
+            {/* <Cabecalho/> */}
             <div className="w-full h-screen flex flex-col bg-fundo_azul_claro_elegante">
                 <div className="flex flex-wrap justify-center">
                     <div className={`${estiloContainerGrafico} min-w-[300px]`}>

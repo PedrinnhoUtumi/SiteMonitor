@@ -65,17 +65,17 @@ export function Login() {
   };
   
 
-  function temMaiusculas(texto) {
-    return /[A-Z]/.test(texto);
-  }
+  // function temMaiusculas(texto) {
+  //   return /[A-Z]/.test(texto);
+  // }
 
-  function temNumeros(texto) {
-    return /[0-9]/.test(texto);
-  }
+  // function temNumeros(texto) {
+  //   return /[0-9]/.test(texto);
+  // }
 
-  function temEspacos(texto) {
-    return texto.includes(" ");
-  }
+  // function temEspacos(texto) {
+  //   return texto.includes(" ");
+  // }
 
   return (
     <div className="bg-gradient-to-r from-fundo_azul_claro_elegante to-azul_escuro h-screen flex items-center justify-center">
@@ -89,7 +89,7 @@ export function Login() {
                   max-sm:translate-y-0" 
                   
       />
-      <div className="caixaLogin max-sm:w-2/3 sm:w-1/2 lg:w-2/5 h-3/5 flex flex-col justify-end items-center bg-white bg-opacity-20 rounded-3xl shadow-lg backdrop-blur-sm pb-16" >
+      <div className="caixaLogin max-sm:w-2/3 sm:w-1/2 lg:w-1/4 h-3/5 flex flex-col justify-end items-center bg-white bg-opacity-20 rounded-3xl shadow-lg backdrop-blur-sm pb-16" >
         <img
           src="../../usuario.png"
           alt="Ícone de usuário"
@@ -119,7 +119,7 @@ export function Login() {
             required
             value={senha}
             onChange={(e) => setSenha(e.target.value)}
-            className="w-full py-2 pl-10 pr-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-azul_claro"
+            className="w-full py-2 pl-10 pr-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-azul_claro"
           />
 
           <img

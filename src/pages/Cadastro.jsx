@@ -3,6 +3,9 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../context/DataContext";
 import logoEducere from '../assets/educere-removebg-preview.png';
+import cracha from "../assets/cracha.png";
+import olhoAberto from "../assets/eye.png";
+import olhoFechado from "../assets/hidden.png";
 
 export function Cadastro() {
 
@@ -12,6 +15,7 @@ export function Cadastro() {
   const [senhaHash, setSenhaHash] = useState("");
   const navigate = useNavigate();
   const [novoUsuario, setNovoUsuario] = useState({ nome: "", email: "", senha: "", role: "", account: "" });
+  const [mostrarSenha, setMostrarSenha] = useState(false);
 
 
 
@@ -116,12 +120,27 @@ export function Cadastro() {
             />
 
 
-      <div className="caixaLogin max-sm:w-2/3 sm:w-1/2 lg:w-2/5 h-3/5 flex flex-col justify-center items-center bg-white bg-opacity-20 rounded-3xl shadow-lg backdrop-blur-sm pt-32">
+      <div className="caixaLogin max-sm:w-2/3 sm:w-1/2 lg:w-1/4 h-3/5 flex flex-col justify-center items-center bg-white bg-opacity-20 rounded-3xl shadow-lg backdrop-blur-sm pt-32">
         <img
           src="../../usuario.png"
           alt="Ícone de usuário"
           className="max-sm:w-32 sm:w-32 lg:w-32 absolute top-2 "
         />
+        <div className="relative w-3/4 mt-5">
+          <input
+            type="text"
+            placeholder="Nome de usuário"
+            required
+            value={novoUsuario.nome}
+            onChange={(e) => setNovoUsuario({ ...novoUsuario, nome: e.target.value })}
+            className="w-full py-2 pl-10 pr-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-azul_claro"
+          />
+          <img
+            src="../../usuarioGmail.png"
+            alt="Ícone de email"
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
+          />
+        </div>
 
         <div className="relative w-3/4 mt-5">
           <input
@@ -142,35 +161,34 @@ export function Cadastro() {
 
         <div className="relative w-3/4 mt-5">
           <input
-            type="password"
+            type={mostrarSenha ? 'text' : 'password'}
             placeholder="Senha"
             required
-            value={novoUsuario.senha}
-            onChange={(e) => setNovoUsuario({ ...novoUsuario, senha: e.target.value })}
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
             className="w-full py-2 pl-10 pr-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-azul_claro"
           />
+
           <img
             src="../../cadeado.png"
             alt="Ícone de senha"
             className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
           />
+
+          <button
+            type="button"
+            onClick={() => setMostrarSenha(!mostrarSenha)}
+            className="absolute right-3 top-1/2 transform -translate-y-1/2"
+          >
+            <img
+              src={mostrarSenha ? olhoAberto : olhoFechado}
+              alt="Mostrar ou ocultar senha"
+              className="w-5 h-5"
+            />
+          </button>
         </div>
-        <div className="relative w-3/4 mt-5">
-          <input
-            type="text"
-            placeholder="Nome de usuário"
-            required
-            value={novoUsuario.nome}
-            onChange={(e) => setNovoUsuario({ ...novoUsuario, nome: e.target.value })}
-            className="w-full py-2 pl-10 pr-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-azul_claro"
-          />
-          <img
-            src="../../cadeado.png"
-            alt="Ícone de senha"
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
-          />
-        </div>
-        <div className="relative w-3/4 mt-5">
+        
+        <div className="relative w-3/4 mt-4">
           <input
             type="text"
             placeholder="Cargo"
@@ -180,7 +198,7 @@ export function Cadastro() {
             className="w-full py-2 pl-10 pr-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-azul_claro"
           />
           <img
-            src="../../cadeado.png"
+            src= {cracha}
             alt="Ícone de senha"
             className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
           />
@@ -188,7 +206,7 @@ export function Cadastro() {
 
         <div className="relative w-3/4 mt-5 flex justify-center items-center m-5">
           <select name="selectRole" id="selectRole" className="bg-transparent bg-roxo rounded-md" value={novoUsuario.account} onChange={(e) => setNovoUsuario({ ...novoUsuario, account: e.target.value })}>
-            <option value="" disabled selected hidden>Selecione Função</option>
+            <option value="" disabled selected hidden>Atua como: </option>
             <option value={opcoesRole[1]}>Administrador</option>
             <option value={opcoesRole[2]}>Usuário</option>
           </select> 
