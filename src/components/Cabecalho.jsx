@@ -18,9 +18,9 @@ export function Cabecalho() {
                     Relatório
                 </NavLink> */}
 
-                <NavLink to="/Configuracao" className={estiloBotao}>
+                {/* <NavLink to="/Configuracao" className={estiloBotao}>
                     Configurações
-                </NavLink>
+                </NavLink> */}
             </nav>
         </div>
     )

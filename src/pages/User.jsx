@@ -52,14 +52,14 @@ export function User() {
 
   const relacao = negocioDoUsuario.find((negocio) => negocio.userId === usuarioEncontrado.id);
   const negocio = negocios.find((negocio) => negocio.id === relacao?.businessId);  
-  adicionarInstituicao(negocio?.nome || "Não vinculado");
+  adicionarInstituicao(negocio?.nome || "Fundação Educere");
   const date = new Date().toLocaleString("pt-BR", {
     timeZone: "America/Sao_Paulo"
   });
   const infoUsuario = {
     nome: usuarioEncontrado.nome,
     email: usuarioEncontrado.email,
-    instituicao: negocio?.nome || "Não vinculado",
+    instituicao: negocio?.nome || "Fundação Educere",
     cargo: usuarioEncontrado.role,
     tipoConta: usuarioEncontrado.conta,
     ultimoLogin: date, 

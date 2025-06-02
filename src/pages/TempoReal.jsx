@@ -70,7 +70,7 @@ export function TempoReal() {
   const negocio = negocios.find(
     (negocio) => negocio.id === relacao?.businessId
   );
-  adicionarInstituicao(negocio?.nome || "Não vinculado");
+  adicionarInstituicao(negocio?.nome || "Fundação Educere");
   adicionarCargo(usuarioEncontrado.account || "Não trabalha");
 
 
