@@ -43,7 +43,7 @@ export function Cabecalho() {
                     Técnico
                 </NavLink>
 
-                <NavLink to="/Relatorio" className={estiloBotao}>
+                <NavLink to="/Relatorios" className={estiloBotao}>
                     Relatório
                 </NavLink>
 
