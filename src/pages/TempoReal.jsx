@@ -19,6 +19,12 @@ export function TempoReal() {
   const [negocios, setNegocios] = useState([]);
   const [negocioDoUsuario, setNegocioDoUsuario] = useState([]);
   const [mostrarTensoes, setMostrarTensoes] = useState(false);
+  const [mostrarTensao, setMostrarTensao] = useState(true);
+  const [mostrarCorrente, setMostrarCorrente] = useState(true);
+  const [mostrarPotencia, setMostrarPotencia] = useState(true);
+  const [mostrarConsumo, setMostrarConsumo] = useState(true);
+  const [mostrarGeracao, setMostrarGeracao] = useState(true);
+
 
   useEffect(() => {
     if (data && data.length > 0) {
@@ -58,6 +64,12 @@ export function TempoReal() {
     setMostrarTensoes(!mostrarTensoes);
   };
 
+  const toggleTensao = () => setMostrarTensao(!mostrarTensao);
+  const toggleCorrente = () => setMostrarCorrente(!mostrarCorrente);
+  const togglePotencia = () => setMostrarPotencia(!mostrarPotencia);
+  const toggleConsumo = () => setMostrarConsumo(!mostrarConsumo);
+  const toggleGeracao = () => setMostrarGeracao(!mostrarGeracao);
+
   if (!usuarioEncontrado) {
     return (
       <Pagina>
@@ -78,64 +90,46 @@ export function TempoReal() {
   adicionarCargo(usuarioEncontrado.account || "Não trabalha");
 
 
-  // const estiloContainerGrafico =
-  //   "bg-fundo_azul_escuro_elegante w-1/3 h-48 m-1 rounded-md flex justify-center ";
-  // const estiloContainerGrafico2 =
-  //   "bg-fundo_azul_escuro_elegante w-1/3 h-36 m-1 rounded-md p-4";
-  // const estiloContainerGrafico3 =
-  //   "bg-fundo_azul_escuro_elegante w-1/2 h-[50vh] m-1 rounded-md flex justify-center items-center";
-  // const estiloTitulo =
-  //   "bg-fundo_azul_escuro_elegante h-16 flex justify-center items-center text-2xl m-1 rounded-md font-bold border-b-2";
-  // const estiloTituloContainerConsumo =
-  //   "text-3xl text-fonte_elegante_amarelo font-bold";
-  // const estiloInformacoesContainerConsumo =
-  //   "flex justify-center items-end h-20 text-7xl font-thin text-fonte_elegante_amarelo";
-  // const estiloTituloContainerGeracao =
-  //   "text-3xl text-fonte_elegante_amarelo font-bold";
-  // const estiloInformacoesContainerGeracao =
-  //   "flex justify-center items-end h-20 text-7xl font-thin text-fonte_elegante_amarelo";
-  // const estiloTituloContainerCorrente =
-  //   "text-3xl text-fonte_elegante_amarelo font-bold";
-  // const estiloInformacoesContainerCorrente =
-  //   "flex justify-center items-end h-20 text-7xl font-thin text-fonte_elegante_amarelo";
-  // const estiloTituloContainerPotencia = "text-3xl text-amber-500 font-bold";
-  // const estiloInformacoesContainerPotencia =
-  //   "flex justify-center items-end h-20 text-7xl font-thin text-amber-500";
+
   const estiloContainerGrafico =
-  "bg-fundo_azul_escuro_elegante w-full sm:w-1/2 md:w-1/3 h-48 m-1 rounded-md flex justify-center";
+    "bg-fundo_azul_escuro_elegante w-full sm:w-1/2 lg:w-1/3 h-48 p-4 m-2 rounded-2xl shadow-md flex justify-center items-center";
 
-const estiloContainerGrafico2 =
-  "bg-fundo_azul_escuro_elegante w-full sm:w-1/2 md:w-1/3 h-36 m-1 rounded-md p-4";
+  const estiloContainerGrafico2 =
+  "bg-fundo_azul_escuro_elegante w-full sm:w-2/3 md:w-1/3 h-36 p-4 m-2 rounded-2xl shadow-md flex flex-col justify-between items-center";
 
-const estiloContainerGrafico3 =
-  "bg-fundo_azul_escuro_elegante w-full sm:w-2/3 md:w-1/2 h-[50vh] m-1 rounded-md flex justify-center items-center";
+  const estiloContainerGrafico3 =
+    "bg-fundo_azul_escuro_elegante w-full sm:w-2/3 lg:w-1/2 h-[50vh] m-2 p-4 rounded-2xl shadow-md flex justify-center items-center";
 
-const estiloTitulo =
-  "bg-fundo_azul_escuro_elegante h-16 flex justify-center items-center text-2xl m-1 rounded-md font-bold border-b-2";
+  const estiloTitulo =
+    "bg-fundo_azul_escuro_elegante h-16 w-full flex justify-center items-center text-2xl font-bold border-b-2 border-amber-400 rounded-2xl m-2 text-fonte_elegante_amarelo shadow-sm";
 
-const estiloTituloContainerConsumo =
-  "text-3xl text-fonte_elegante_amarelo font-bold";
+  const estiloTituloContainerConsumo =
+    "text-2xl sm:text-3xl text-fonte_elegante_amarelo font-semibold text-center";
 
-const estiloInformacoesContainerConsumo =
-  "flex justify-center items-end h-20 text-7xl font-thin text-fonte_elegante_amarelo";
+  const estiloInformacoesContainerConsumo =
+    "flex justify-center items-end h-20 text-5xl sm:text-6xl font-light text-fonte_elegante_amarelo text-center";
 
-const estiloTituloContainerGeracao =
-  "text-3xl text-fonte_elegante_amarelo font-bold";
+  const estiloTituloContainerGeracao =
+    "text-2xl sm:text-3xl text-fonte_elegante_amarelo font-semibold text-center";
 
-const estiloInformacoesContainerGeracao =
-  "flex justify-center items-end h-20 text-7xl font-thin text-fonte_elegante_amarelo";
+  const estiloInformacoesContainerGeracao =
+    "flex justify-center items-end h-20 text-5xl sm:text-6xl font-light text-fonte_elegante_amarelo text-center";
 
-const estiloTituloContainerCorrente =
-  "text-3xl text-fonte_elegante_amarelo font-bold";
+  const estiloTituloContainerCorrente =
+    "text-2xl sm:text-3xl text-fonte_elegante_amarelo font-semibold text-center";
 
-const estiloInformacoesContainerCorrente =
-  "flex justify-center items-end h-20 text-7xl font-thin text-fonte_elegante_amarelo";
+  const estiloInformacoesContainerCorrente =
+    "flex justify-center items-end h-20 text-5xl sm:text-6xl font-light text-fonte_elegante_amarelo text-center";
 
-const estiloTituloContainerPotencia =
-  "text-3xl text-amber-500 font-bold";
+  const estiloTituloContainerPotencia =
+    "text-2xl sm:text-3xl text-amber-400 font-semibold text-center";
 
-const estiloInformacoesContainerPotencia =
-  "flex justify-center items-end h-20 text-7xl font-thin text-amber-500";
+  const estiloInformacoesContainerPotencia =
+    "flex justify-center items-end h-20 text-5xl sm:text-6xl font-light text-amber-400 text-center";
+  
+  const estiloContainerWrapper = 
+    "flex flex-col md:flex-row flex-wrap justify-center items-center";
+
 
   const potenciaAtiva = data.filter((item) => item.__tabela === "ACTIVEPOWER");
   const corrente = data.filter((item) => item.__tabela === "CURRENT");
@@ -178,165 +172,186 @@ const estiloInformacoesContainerPotencia =
       <Cabecalho />
       <div className="w-full h-full flex flex-col bg-fundo_azul_claro_elegante">
         <header className={estiloTitulo} onClick={toggleTensoes}>
-          <h1 className=" text-fonte_elegante_amarelo text-xl">Tensão [V]</h1>
+          <h1 className="text-fonte_elegante_amarelo text-xl">Tensão [V]</h1>
         </header>
 
         {mostrarTensoes && (
-          <div className="flex flex-row justify-around">
-          <div className={estiloContainerGrafico2}>
-            <h1 className={estiloTituloContainerCorrente}>Fase A</h1>
-            <div className={estiloInformacoesContainerCorrente}>
-              {phaseATensao || "0.0"}V
-              {console.log("todos os dados", data)}
+          <div className="flex flex-col sm:flex-row sm:flex-wrap sm:justify-around items-center">
+            <div className={estiloContainerGrafico2}>
+              <h1 className={estiloTituloContainerCorrente}>Fase A</h1>
+              <div className={estiloInformacoesContainerCorrente}>
+                {phaseATensao || "0.0"}V
+              </div>
+            </div>
+
+            <div className={estiloContainerGrafico2}>
+              <h1 className={estiloTituloContainerCorrente}>Fase B</h1>
+              <div className={estiloInformacoesContainerCorrente}>
+                {phaseBTensao || "0.0"}V
+              </div>
+            </div>
+
+            <div className={estiloContainerGrafico2}>
+              <h1 className={estiloTituloContainerCorrente}>Fase C</h1>
+              <div className={estiloInformacoesContainerCorrente}>
+                {phaseCTensao || "0.0"}V
+              </div>
             </div>
           </div>
-          <div className={estiloContainerGrafico2}>
-            <h1 className={estiloTituloContainerCorrente}>Fase B</h1>
-            <div className={estiloInformacoesContainerCorrente}>
-              {phaseBTensao || "0.0"}V
-            </div>
-          </div>
-          <div className={estiloContainerGrafico2}>
-            <h1 className={estiloTituloContainerCorrente}>Fase C</h1>
-            <div className={estiloInformacoesContainerCorrente}>
-              {phaseCTensao || "0.0"}V
-            </div>
-          </div>
-        </div>
         )}
-      {/* {mostrarTensoes && (
-        <div className="flex flex-col md:flex-row justify-center items-center gap-4 mt-4">
-          <div className="bg-gray-100 p-4 rounded shadow-md w-60 text-center">
-            <h1 className="text-lg font-semibold">Fase A</h1>
-            <div>{phaseATensao || "0.0"}V</div>
-          </div>
-          <div className="bg-gray-100 p-4 rounded shadow-md w-60 text-center">
-            <h1 className="text-lg font-semibold">Fase B</h1>
-            <div>{phaseBTensao || "0.0"}V</div>
-          </div>
-          <div className="bg-gray-100 p-4 rounded shadow-md w-60 text-center">
-            <h1 className="text-lg font-semibold">Fase C</h1>
-            <div>{phaseCTensao || "0.0"}V</div>
-          </div>
-        </div>
-      )} */}
+      
 
-
-        <header className={estiloTitulo}>
-          <h1 className="text-fonte_elegante_amarelo ">Corrente [A]</h1>
+        <header className={estiloTitulo} onClick={toggleTensao}>
+          <h1 className="text-fonte_elegante_amarelo text-xl">Tensão [V]</h1>
         </header>
-        <div className="flex flex-row justify-around">
-          <div className={estiloContainerGrafico2}>
-            <h1 className={estiloTituloContainerCorrente}>Fase A</h1>
-            <div className={estiloInformacoesContainerCorrente}>
-              {phaseACorrente || "0.0"}A
+        {mostrarTensao && (
+          <div className={estiloContainerWrapper}>
+            <div className={estiloContainerGrafico2}>
+              <h1 className={estiloTituloContainerCorrente}>Fase A</h1>
+              <div className={estiloInformacoesContainerCorrente}>
+                {phaseATensao || "0.0"}V
+              </div>
+            </div>
+            <div className={estiloContainerGrafico2}>
+              <h1 className={estiloTituloContainerCorrente}>Fase B</h1>
+              <div className={estiloInformacoesContainerCorrente}>
+                {phaseBTensao || "0.0"}V
+              </div>
+            </div>
+            <div className={estiloContainerGrafico2}>
+              <h1 className={estiloTituloContainerCorrente}>Fase C</h1>
+              <div className={estiloInformacoesContainerCorrente}>
+                {phaseCTensao || "0.0"}V
+              </div>
             </div>
           </div>
-          <div className={estiloContainerGrafico2}>
-            <h1 className={estiloTituloContainerCorrente}>Fase B</h1>
-            <div className={estiloInformacoesContainerCorrente}>
-              {phaseBCorrente || "0.0"}A
-            </div>
-          </div>
-          <div className={estiloContainerGrafico2}>
-            <h1 className={estiloTituloContainerCorrente}>Fase C</h1>
-            <div className={estiloInformacoesContainerCorrente}>
-              {phaseCCorrente || "0.0"}A
-            </div>
-          </div>
-        </div>
+        )}
 
-        <header className={estiloTitulo}>
-          <h1 className="text-fonte_elegante_amarelo ">Potência Ativa [W]</h1>
+        {/* Corrente */}
+        <header className={estiloTitulo} onClick={toggleCorrente}>
+          <h1 className="text-fonte_elegante_amarelo">Corrente [A]</h1>
         </header>
-        <div className="flex flex-row justify-around">
-          <div className={estiloContainerGrafico2}>
-            <h1 className={estiloTituloContainerPotencia}>Fase A</h1>
-            <div className={estiloInformacoesContainerPotencia}>
-              {phaseA || "0.00"}W
+        {mostrarCorrente && (
+          <div className={estiloContainerWrapper}>
+            <div className={estiloContainerGrafico2}>
+              <h1 className={estiloTituloContainerCorrente}>Fase A</h1>
+              <div className={estiloInformacoesContainerCorrente}>
+                {phaseACorrente || "0.0"}A
+              </div>
+            </div>
+            <div className={estiloContainerGrafico2}>
+              <h1 className={estiloTituloContainerCorrente}>Fase B</h1>
+              <div className={estiloInformacoesContainerCorrente}>
+                {phaseBCorrente || "0.0"}A
+              </div>
+            </div>
+            <div className={estiloContainerGrafico2}>
+              <h1 className={estiloTituloContainerCorrente}>Fase C</h1>
+              <div className={estiloInformacoesContainerCorrente}>
+                {phaseCCorrente || "0.0"}A
+              </div>
             </div>
           </div>
-          <div className={estiloContainerGrafico2}>
-            <h1 className={estiloTituloContainerPotencia}>Fase B</h1>
-            <div className={estiloInformacoesContainerPotencia}>
-              {phaseB || "0.00"}W
-            </div>
-          </div>
-          <div className={estiloContainerGrafico2}>
-            <h1 className={estiloTituloContainerPotencia}>Fase C</h1>
-            <div className={estiloInformacoesContainerPotencia}>
-              {phaseC || "0.00"}W
-            </div>
-          </div>
-          <div className={estiloContainerGrafico2}>
-            <h1 className={estiloTituloContainerPotencia}>Total</h1>
-            <div className={estiloInformacoesContainerPotencia}>
-              {(parseFloat(phaseA) + parseFloat(phaseB) + parseFloat(phaseC)).toFixed(2) || "0.00"}W
-            </div>
-          </div>
-        </div>
+        )}
 
-        <header className={estiloTitulo}>
-          <h1 className="text-fonte_elegante_amarelo ">Consumo [kWh]</h1>
+        {/* Potência Ativa */}
+        <header className={estiloTitulo} onClick={togglePotencia}>
+          <h1 className="text-fonte_elegante_amarelo">Potência Ativa [W]</h1>
         </header>
-        <div className="flex flex-row justify-around">
-          <div className={estiloContainerGrafico2}>
-            <h1 className={estiloTituloContainerConsumo}>Hoje</h1>
-            <div className={estiloInformacoesContainerConsumo}>
-              {hojeConsumo || "0.00"}kWh
+        {mostrarPotencia && (
+          <div className={estiloContainerWrapper}>
+            <div className={estiloContainerGrafico2}>
+              <h1 className={estiloTituloContainerPotencia}>Fase A</h1>
+              <div className={estiloInformacoesContainerPotencia}>
+                {phaseA || "0.00"}W
+              </div>
+            </div>
+            <div className={estiloContainerGrafico2}>
+              <h1 className={estiloTituloContainerPotencia}>Fase B</h1>
+              <div className={estiloInformacoesContainerPotencia}>
+                {phaseB || "0.00"}W
+              </div>
+            </div>
+            <div className={estiloContainerGrafico2}>
+              <h1 className={estiloTituloContainerPotencia}>Fase C</h1>
+              <div className={estiloInformacoesContainerPotencia}>
+                {phaseC || "0.00"}W
+              </div>
+            </div>
+            <div className={estiloContainerGrafico2}>
+              <h1 className={estiloTituloContainerPotencia}>Total</h1>
+              <div className={estiloInformacoesContainerPotencia}>
+                {(parseFloat(phaseA) + parseFloat(phaseB) + parseFloat(phaseC)).toFixed(2) || "0.00"}W
+              </div>
             </div>
           </div>
-          <div className={estiloContainerGrafico2}>
-            <h1 className={estiloTituloContainerConsumo}>Semana Atual</h1>
-            <div className={estiloInformacoesContainerConsumo}>
-              {semanaConsumo || "0.00"}kWh
-            </div>
-          </div>
-          <div className={estiloContainerGrafico2}>
-            <h1 className={estiloTituloContainerConsumo}>Mês Atual</h1>
-            <div className={estiloInformacoesContainerConsumo}>
-              {mesAtualConsumo || "0.00"}kWh
-            </div>
-          </div>
-          <div className={estiloContainerGrafico2}>
-            <h1 className={estiloTituloContainerConsumo}>Mês Anterior</h1>
-            <div className={estiloInformacoesContainerConsumo}>
-              {mesPassadoConsumo || "0.00"}kWh
-            </div>
-          </div>
-        </div>
+        )}
 
-        <header className={estiloTitulo}>
-          <h1 className="drop-shadow-xl text-fonte_elegante_amarelo ">
-            Geração [kWh]
-          </h1>
+        {/* Consumo */}
+        <header className={estiloTitulo} onClick={toggleConsumo}>
+          <h1 className="text-fonte_elegante_amarelo">Consumo [kWh]</h1>
         </header>
-        <div className="flex flex-row justify-around">
-          <div className={estiloContainerGrafico2}>
-            <h1 className={estiloTituloContainerGeracao}>Hoje</h1>
-            <div className={estiloInformacoesContainerGeracao}>
-              {hojeGeracao || "0.00"}kWh
+        {mostrarConsumo && (
+          <div className={estiloContainerWrapper}>
+            <div className={estiloContainerGrafico2}>
+              <h1 className={estiloTituloContainerConsumo}>Hoje</h1>
+              <div className={estiloInformacoesContainerConsumo}>
+                {hojeConsumo || "0.00"}kWh
+              </div>
+            </div>
+            <div className={estiloContainerGrafico2}>
+              <h1 className={estiloTituloContainerConsumo}>Semana Atual</h1>
+              <div className={estiloInformacoesContainerConsumo}>
+                {semanaConsumo || "0.00"}kWh
+              </div>
+            </div>
+            <div className={estiloContainerGrafico2}>
+              <h1 className={estiloTituloContainerConsumo}>Mês Atual</h1>
+              <div className={estiloInformacoesContainerConsumo}>
+                {mesAtualConsumo || "0.00"}kWh
+              </div>
+            </div>
+            <div className={estiloContainerGrafico2}>
+              <h1 className={estiloTituloContainerConsumo}>Mês Anterior</h1>
+              <div className={estiloInformacoesContainerConsumo}>
+                {mesPassadoConsumo || "0.00"}kWh
+              </div>
             </div>
           </div>
-          <div className={estiloContainerGrafico2}>
-            <h1 className={estiloTituloContainerGeracao}>Semana Atual</h1>
-            <div className={estiloInformacoesContainerGeracao}>
-              {semanaGeracao || "0.00"}kWh
+        )}
+
+        {/* Geração */}
+        <header className={estiloTitulo} onClick={toggleGeracao}>
+          <h1 className="text-fonte_elegante_amarelo">Geração [kWh]</h1>
+        </header>
+        {mostrarGeracao && (
+          <div className={estiloContainerWrapper}>
+            <div className={estiloContainerGrafico2}>
+              <h1 className={estiloTituloContainerGeracao}>Hoje</h1>
+              <div className={estiloInformacoesContainerGeracao}>
+                {hojeGeracao || "0.00"}kWh
+              </div>
+            </div>
+            <div className={estiloContainerGrafico2}>
+              <h1 className={estiloTituloContainerGeracao}>Semana Atual</h1>
+              <div className={estiloInformacoesContainerGeracao}>
+                {semanaGeracao || "0.00"}kWh
+              </div>
+            </div>
+            <div className={estiloContainerGrafico2}>
+              <h1 className={estiloTituloContainerGeracao}>Mês Atual</h1>
+              <div className={estiloInformacoesContainerGeracao}>
+                {mesAtualGeracao || "0.00"}kWh
+              </div>
+            </div>
+            <div className={estiloContainerGrafico2}>
+              <h1 className={estiloTituloContainerGeracao}>Mês Anterior</h1>
+              <div className={estiloInformacoesContainerGeracao}>
+                {mesPassadoGeracao || "0.00"}kWh
+              </div>
             </div>
           </div>
-          <div className={estiloContainerGrafico2}>
-            <h1 className={estiloTituloContainerGeracao}>Mês Atual</h1>
-            <div className={estiloInformacoesContainerGeracao}>
-              {mesAtualGeracao || "0.00"}kWh
-            </div>
-          </div>
-          <div className={estiloContainerGrafico2}>
-            <h1 className={estiloTituloContainerGeracao}>Mês Anterior</h1>
-            <div className={estiloInformacoesContainerGeracao}>
-              {mesPassadoGeracao || "0.00"}kWh
-            </div>
-          </div>
-        </div>
+        )}
 
         <div className="flex flex-row justify-around">
           <div className={estiloContainerGrafico3}>
