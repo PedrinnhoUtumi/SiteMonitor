@@ -135,7 +135,7 @@ export function TempoReal() {
   const corrente = data.filter((item) => item.__tabela === "CURRENT");
   const consumo = data.filter((item) => item.__tabela === "CONSUMPTION");
   const tensao = data.filter((item) => item.__tabela === "VOLTAGE");
-  const geracao = data.filter((item) => item.__tabela === "GENERATED");
+  const geracao = data.filter((item) => item.__tabela === "GENERATION");
 
   const ultimaLeituraPotenciaAtiva =
     potenciaAtiva[potenciaAtiva.length - 1] || {};
@@ -171,35 +171,6 @@ export function TempoReal() {
     <Pagina>
       <Cabecalho />
       <div className="w-full h-full flex flex-col bg-fundo_azul_claro_elegante">
-        <header className={estiloTitulo} onClick={toggleTensoes}>
-          <h1 className="text-fonte_elegante_amarelo text-xl">Tensão [V]</h1>
-        </header>
-
-        {mostrarTensoes && (
-          <div className="flex flex-col sm:flex-row sm:flex-wrap sm:justify-around items-center">
-            <div className={estiloContainerGrafico2}>
-              <h1 className={estiloTituloContainerCorrente}>Fase A</h1>
-              <div className={estiloInformacoesContainerCorrente}>
-                {phaseATensao || "0.0"}V
-              </div>
-            </div>
-
-            <div className={estiloContainerGrafico2}>
-              <h1 className={estiloTituloContainerCorrente}>Fase B</h1>
-              <div className={estiloInformacoesContainerCorrente}>
-                {phaseBTensao || "0.0"}V
-              </div>
-            </div>
-
-            <div className={estiloContainerGrafico2}>
-              <h1 className={estiloTituloContainerCorrente}>Fase C</h1>
-              <div className={estiloInformacoesContainerCorrente}>
-                {phaseCTensao || "0.0"}V
-              </div>
-            </div>
-          </div>
-        )}
-      
 
         <header className={estiloTitulo} onClick={toggleTensao}>
           <h1 className="text-fonte_elegante_amarelo text-xl">Tensão [V]</h1>

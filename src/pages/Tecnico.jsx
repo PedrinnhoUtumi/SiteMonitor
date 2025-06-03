@@ -21,7 +21,7 @@ export function Tecnico() {
     const corrente = data.filter(item => item.__tabela === "CURRENT")
     const consumo = data.filter(item => item.__tabela === "CONSUMPTION")
     const tensao = data.filter(item => item.__tabela === "VOLTAGE")
-    const geracao = data.filter(item => item.__tabela === "GENERATED")
+    const geracao = data.filter(item => item.__tabela === "GENERATION")
     
 
     const ultimaLeituraPotenciaAtiva = potenciaAtiva[potenciaAtiva.length - 1] || {}

@@ -1,11 +1,17 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import { DataContext } from "../context/DataContext";
+import { Menu } from "../assets/menu-hamburguer.png"
 
 export function Pagina(props) {
   const { data, name, instituicao, cargo } = useContext(DataContext);
   const myUser = data.filter(item => item.__tabela === "MYUSER")
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsMenuOpen(prev => !prev);
+  };
+  
 
   const estiloBotao = "text-white flex flex-row justify-center items-center";
 
@@ -53,7 +59,15 @@ export function Pagina(props) {
           <h1>Monitor de Energia Educere</h1>
         </div>
 
-        <div className="flex flex-row items-center mr-15 p-9">
+        <div className=" navbar flex flex-row items-center mr-15 p-9">
+
+          <button
+            className="text-white text-2xl md:hidden focus:outline-none"
+            onClick={toggleMenu}
+          >
+            
+          </button>
+
           <div>
             <select
               value={estado}
@@ -68,8 +82,8 @@ export function Pagina(props) {
             </select>
           </div>
           
-          
-          
+
+
           {cargo === "Administrador" && (
             <div className="mx-4">
               <NavLink to="/Cadastro" className={estiloBotao}>
@@ -78,9 +92,13 @@ export function Pagina(props) {
             </div> 
           )}
 
+
+
           <div className="mx-4">
             <h2>{instituicao}</h2>
           </div>
+
+
 
           <nav className="mx-4">
             <NavLink to="/User" className={estiloBotao}>
@@ -96,4 +114,3 @@ export function Pagina(props) {
     </div>
   );
 }
-
