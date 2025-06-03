@@ -83,7 +83,7 @@ export function Cadastro() {
       };
       console.log(novoUsuario)
 
-      const response = await fetch(`https://servermagvia.onrender.com/api/MYUSER`, {
+      const response = await fetch(`https://127.0.0.1:3000/api/MYUSER`, {
           method: "POST",
           headers: {
               "Content-Type": "application/json",

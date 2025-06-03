@@ -24,6 +24,13 @@ export function TempoReal() {
   const [mostrarPotencia, setMostrarPotencia] = useState(true);
   const [mostrarConsumo, setMostrarConsumo] = useState(true);
   const [mostrarGeracao, setMostrarGeracao] = useState(true);
+  const [larguraTela, setLarguraTela] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setLarguraTela(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
 
   useEffect(() => {
@@ -90,18 +97,14 @@ export function TempoReal() {
   adicionarCargo(usuarioEncontrado.account || "Não trabalha");
 
 
-
-  const estiloContainerGrafico =
-    "bg-fundo_azul_escuro_elegante w-full sm:w-1/2 lg:w-1/3 h-48 p-4 m-2 rounded-2xl shadow-md flex justify-center items-center";
-
   const estiloContainerGrafico2 =
-  "bg-fundo_azul_escuro_elegante w-full sm:w-2/3 md:w-1/3 h-36 p-4 m-2 rounded-2xl shadow-md flex flex-col justify-between items-center";
+  "bg-fundo_azul_escuro_elegante w-screen sm:w-2/3 md:w-1/3 h-36 p-4 m-2 rounded-2xl shadow-md flex flex-col justify-between items-center";
 
   const estiloContainerGrafico3 =
     "bg-fundo_azul_escuro_elegante w-full sm:w-2/3 lg:w-1/2 h-[50vh] m-2 p-4 rounded-2xl shadow-md flex justify-center items-center";
 
   const estiloTitulo =
-    "bg-fundo_azul_escuro_elegante h-16 w-full flex justify-center items-center text-2xl font-bold border-b-2 border-amber-400 rounded-2xl m-2 text-fonte_elegante_amarelo shadow-sm";
+    "bg-fundo_azul_escuro_elegante h-16 w-sceen flex justify-center items-center text-2xl font-bold border-b-2 border-amber-400 rounded-2xl m-2 text-fonte_elegante_amarelo shadow-sm";
 
   const estiloTituloContainerConsumo =
     "text-2xl sm:text-3xl text-fonte_elegante_amarelo font-semibold text-center";
@@ -128,7 +131,7 @@ export function TempoReal() {
     "flex justify-center items-end h-20 text-5xl sm:text-6xl font-light text-amber-400 text-center";
   
   const estiloContainerWrapper = 
-    "flex flex-col md:flex-row flex-wrap justify-center items-center";
+    "flex flex-col md:flex-row flex-wrap justify-center items-center ";
 
 
   const potenciaAtiva = data.filter((item) => item.__tabela === "ACTIVEPOWER");
@@ -167,9 +170,10 @@ export function TempoReal() {
   const semanaGeracao = ultimaLeituraGeracao.WEEK || 0.0;
   const mesAtualGeracao = ultimaLeituraGeracao.MONTHNOW || 0.0;
   const mesPassadoGeracao = ultimaLeituraGeracao.LASTMONTH || 0.0;
+
   return (
     <Pagina>
-      <Cabecalho />
+      {larguraTela>=600 && <Cabecalho/>}
       <div className="w-full h-full flex flex-col bg-fundo_azul_claro_elegante">
 
         <header className={estiloTitulo} onClick={toggleTensao}>

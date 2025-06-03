@@ -1,10 +1,15 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import { DataContext } from "../context/DataContext";
+import menuIcon from '/src/assets/menu-hamburguer.png';
 
 export function Pagina(props) {
   const { data, name, instituicao, cargo } = useContext(DataContext);
   const myUser = data.filter(item => item.__tabela === "MYUSER")
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => setIsMenuOpen(prev => !prev);
+
 
   const estiloBotao = "text-white flex flex-row justify-center items-center";
 
@@ -46,14 +51,33 @@ export function Pagina(props) {
   console.log("cargo", cargo)
 
   return (
-    <div className="flex flex-col flex-1">
+    <nav className="flex flex-col flex-1">
       <header className="flex flex-row justify-between items-center px-5 h-16 border-b bg-fundo_azul_escuro_elegante text-branco">
         <div className="ml-4">
           <h1>Monitor de Energia Educere</h1>
         </div>
+        <button onClick={toggleMenu} className="md:hidden focus:outline-none">
+          <img src={menuIcon} alt="Abrir menu" className="h-auto w-8" />
+        </button>
 
-        <div className=" navbar flex flex-row items-center mr-15 p-9">
+        <div className={`flex-col md:flex-row md:flex gap-4 absolute md:static bg-fundo_azul_escuro_elegante md:bg-transparent p-4 md:p-0 rounded-lg top-16 right-1 z-50  ${isMenuOpen ? 'flex' : 'hidden'}`}>
+          <NavLink to="/TempoReal" className={estiloBotao}>Tempo Real</NavLink>
+          <NavLink to="/Tecnico" className={estiloBotao}>Técnico</NavLink>
+          {cargo === "Administrador" && (
+            <div>
+              <NavLink to="/Cadastro" className={estiloBotao}>
+                Cadastrar
+              </NavLink>
+            </div> 
+          )}
+          <NavLink to="/User" className={estiloBotao}>{name}</NavLink>
+        </div>
 
+      </header>
+      {/* <header className="flex flex-row justify-between items-center px-5 h-16 border-b bg-fundo_azul_escuro_elegante text-branco">
+        <div className="ml-4">
+          <h1>Monitor de Energia Educere</h1>
+        </div>
 
           
           <div>
@@ -88,11 +112,11 @@ export function Pagina(props) {
             </NavLink>
           </nav>
         </div>
-      </header>
+      </header> */}
 
       <main className="flex flex-col items-start flex-1 text-base text-branco bg-azul_bebe">
         {props.children}
       </main>
-    </div>
+    </nav>
   );
 }
