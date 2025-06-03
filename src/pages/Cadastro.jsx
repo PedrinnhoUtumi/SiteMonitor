@@ -164,8 +164,8 @@ export function Cadastro() {
             type={mostrarSenha ? 'text' : 'password'}
             placeholder="Senha"
             required
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
+            value={novoUsuario.senha}
+            onChange={(e) => setNovoUsuario({ ...novoUsuario, senha: e.target.value })}
             className="w-full py-2 pl-10 pr-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-azul_claro"
           />
 
