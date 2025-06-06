@@ -98,7 +98,7 @@ export function TempoReal() {
 
 
   const estiloContainerGrafico2 =
-  "bg-fundo_azul_escuro_elegante w-screen sm:w-2/3 md:w-1/3 h-36 p-4 m-2 rounded-2xl shadow-md flex flex-col justify-between items-center";
+  "bg-fundo_azul_escuro_elegante w-screen max-sm:w-[95vw] sm:w-2/3 md:w-1/3 h-36 p-4 m-2 rounded-2xl shadow-md flex flex-col justify-between items-center";
 
   const estiloContainerGrafico3 =
     "bg-fundo_azul_escuro_elegante w-full sm:w-2/3 lg:w-1/2 h-[50vh] m-2 p-4 rounded-2xl shadow-md flex justify-center items-center";
