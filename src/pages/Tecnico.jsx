@@ -78,7 +78,7 @@ export function Tecnico() {
                                 </text>
 
                                 <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis domain={[0, 5]} tick={{fill: 'white'}} label={{value:"pages", offset:-2, position:"insideBottom" }}/>
+                                <XAxis domain={[0, 5]} tick={{fill: 'white'}} label={{value:"Quantidade de Informações", offset:-2, position:"insideBottom" }}/>
                                 <YAxis
                                     domain={([dataMin, dataMax]) => {
                                         const range = dataMax - dataMin;
@@ -88,7 +88,7 @@ export function Tecnico() {
                                     tick={{ fill: 'white' }}
                                     tickFormatter={(value) => Math.floor(value)}
                                     label={{
-                                        value: 'isso ai',
+                                        value: 'Watts (W)',
                                         angle: -90,
                                         position: 'insideLeft',
                                         style: { textAnchor: 'middle' }
@@ -110,8 +110,8 @@ export function Tecnico() {
                                     Corrente
                                 </text>
                                 <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis domain={[0, 10]} tick={{fill: 'white'}} label={{value:"pages", offset:-2, position:"insideBottom" }} />
-                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value:"isso ai", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}}/>
+                                <XAxis domain={[0, 10]} tick={{fill: 'white'}} label={{value:"Quantidade de Informações", offset:-2, position:"insideBottom" }} />
+                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value:"Ampere (A)", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}}/>
                                 <Line type="bump" dataKey="PHASEA" stroke="#f5af33" dot={false} strokeWidth={2} />
                                 <Line type="bump" dataKey="PHASEB" stroke="#ffaa00" dot={false} strokeWidth={2} />
                                 <Line type="bump" dataKey="PHASEC" stroke="#ffcc00" dot={false} strokeWidth={2} />
@@ -127,8 +127,8 @@ export function Tecnico() {
                                     Tensão
                                 </text>
                                 <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis domain={[0, 5]} tick={{fill: 'white'}} label={{value:"pages", offset:-2, position:"insideBottom" }}/>
-                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}}label={{value:"isso ai", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}} />
+                                <XAxis domain={[0, 5]} tick={{fill: 'white'}} label={{value:"Quantidade de Informações", offset:-2, position:"insideBottom" }}/>
+                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}}label={{value:"Volts (V)", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}} />
                                 <Line type="bump" dataKey="PHASEA" stroke="#f5af33" dot={false} strokeWidth={2} />
                                 <Line type="bump" dataKey="PHASEB" stroke="#ffaa00" dot={false} strokeWidth={2} />
                                 <Line type="bump" dataKey="PHASEC" stroke="#ffcc00" dot={false} strokeWidth={2} />
@@ -146,8 +146,8 @@ export function Tecnico() {
                                     Geração
                                 </text>
                                 <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis domain={[0, 5]} tick={{fill: 'white'}} label={{value:"pages", offset:-2, position:"insideBottom" }}/>
-                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value: 'isso ai', angle: -90,position: 'insideLeft',style: { textAnchor: 'middle' } }}/>
+                                <XAxis domain={[0, 5]} tick={{fill: 'white'}} label={{value:"Quantidade de Informações", offset:-2, position:"insideBottom" }}/>
+                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value: 'Kilowatts/Hora (kWh)', angle: -90,position: 'insideLeft',style: { textAnchor: 'middle' } }}/>
                                 <Tooltip />
                                 <Legend wrapperStyle={{ color: 'white' }} verticalAlign="top"  height={44} />
                                 <Line type="bump" dataKey="TODAY" stroke="#f5af33" dot={false} strokeWidth={2} />
@@ -164,8 +164,8 @@ export function Tecnico() {
                                     Consumo
                                 </text>
                                 <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis domain={[0, 5]} tick={{fill: 'white'}} label={{value:"pages", offset:-2, position:"insideBottom" }}/>
-                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value:"isso ai", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}} />
+                                <XAxis domain={[0, 5]} tick={{fill: 'white'}} label={{value:"Quantidade de Informações", offset:-2, position:"insideBottom" }}/>
+                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value:"Kilowatts/Hora (kWh)", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}} />
                                 <Tooltip />
                                 <Legend wrapperStyle={{color: 'white'}} verticalAlign="top"  height={44} />
                                 <Line type="bump" dataKey="TODAY" stroke="#f5af33" dot={false} strokeWidth={2} />

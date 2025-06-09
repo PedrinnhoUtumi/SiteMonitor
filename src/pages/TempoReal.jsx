@@ -328,7 +328,7 @@ export function TempoReal() {
                       Potência Ativa
                   </text>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis domain={[0, 10]} tick={{fill: 'white'}} label={{value:"pages", offset:-2, position:"insideBottom" }} />
+                  <XAxis domain={[0, 10]} tick={{fill: 'white'}} label={{value:"Quantidade de Informações", offset:-2, position:"insideBottom" }} />
                   <YAxis
                     domain={([dataMin, dataMax]) => {
                         const range = dataMax - dataMin;
@@ -338,7 +338,7 @@ export function TempoReal() {
                     tick={{ fill: 'white' }}
                     tickFormatter={(value) => Math.floor(value)}
                     label={{
-                        value: 'isso ai',
+                        value: 'Watts (W)',
                         angle: -90,
                         position: 'insideLeft',
                         style: { textAnchor: 'middle' }
@@ -359,7 +359,7 @@ export function TempoReal() {
                       Corrente
                   </text>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis domain={[0, 10]} tick={{fill: 'white'}} label={{value:"pages", offset:-2, position:"insideBottom" }} />
+                  <XAxis domain={[0, 10]} tick={{fill: 'white'}} label={{value:"Quantidade de Informações", offset:-2, position:"insideBottom" }} />
                   <YAxis
                     domain={([dataMin, dataMax]) => {
                         const range = dataMax - dataMin;
@@ -369,7 +369,7 @@ export function TempoReal() {
                     tick={{ fill: 'white' }}
                     tickFormatter={(value) => Math.floor(value)}
                     label={{
-                        value: 'isso ai',
+                        value: 'Ampere (A)',
                         angle: -90,
                         position: 'insideLeft',
                         style: { textAnchor: 'middle' }
