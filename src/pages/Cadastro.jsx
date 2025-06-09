@@ -3,9 +3,11 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../context/DataContext";
 import logoEducere from '../assets/educere-removebg-preview.png';
-import cracha from "../assets/cracha.png";
+import cracha from "../assets/envelope.png";
 import olhoAberto from "../assets/eye.png";
 import olhoFechado from "../assets/hidden.png";
+import emailIcon from '../assets/email.png'
+import senhaNew from '../assets/padlock.png'
 
 export function Cadastro() {
 
@@ -152,7 +154,7 @@ export function Cadastro() {
             className="w-full py-2 pl-10 pr-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-azul_claro"
           />
           <img
-            src="../../usuarioGmail.png"
+            src={emailIcon}
             alt="Ícone de email"
             className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
           />
@@ -170,7 +172,7 @@ export function Cadastro() {
           />
 
           <img
-            src="../../cadeado.png"
+            src={senhaNew}
             alt="Ícone de senha"
             className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
           />

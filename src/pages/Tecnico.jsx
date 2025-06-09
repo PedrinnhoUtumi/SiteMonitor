@@ -11,12 +11,19 @@ import axios from "axios"
 export function Tecnico() {
     const { data, adicionarDados, name, adicionarNomes } = useContext(DataContext)
     
-    const estiloContainerGrafico = "bg-fundo_azul_escuro_elegante w-[35vw] h-[60vh] m-1 p-4 rounded-md border-b"
-    const estiloContainerGrafico3 = "bg-fundo_azul_escuro_elegante w-[50vw] h-[65vh] m-1 p-4 rounded-md border-b"
+    const estiloContainerGrafico = "bg-fundo_azul_escuro_elegante w-[90vw] lg:w-[35vw] h-auto lg:h-[60vh] m-1 p-4 rounded-md border-b"
+    const estiloContainerGrafico3 = "bg-fundo_azul_escuro_elegante w-[90vw] lg:w-[50vw] h-auto lg:h-[65vh] m-1 p-4 rounded-md border-b mb-5"
     const estiloContainerGrafico2 = "bg-fundo_azul_escuro_elegante w-[50vw] h-[25vh] m-1 p-2 rounded-md flex flex-row"
     const [dados, setDados] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [larguraTela, setLarguraTela] = useState(window.innerWidth);
+    
+    useEffect(() => {
+        const handleResize = () => setLarguraTela(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const potenciaAtiva = data.filter(item => item.__tabela === "ACTIVEPOWER")
     const corrente = data.filter(item => item.__tabela === "CURRENT")
@@ -59,9 +66,9 @@ export function Tecnico() {
 
     return (
         <Pagina>
-            <Cabecalho />
-            <div className="w-full h-full flex flex-col bg-fundo_azul_claro_elegante">
-                <div className="flex flex-row justify-around">
+            {larguraTela>=600 && <Cabecalho/>}
+            <div className="w-full h-full flex flex-col bg-fundo_azul_claro_elegante ">
+                <div className="flex flex-col lg:flex-row justify-around items-center gap-6 mb-6 mt-5">
                     <div className={estiloContainerGrafico}>
 
                         <ResponsiveContainer width="90%" height={380}>
@@ -131,7 +138,7 @@ export function Tecnico() {
                         </ResponsiveContainer>
                     </div>
                 </div>
-                <div className="flex flex-row justify-around">
+                <div className="flex flex-col lg:flex-row justify-around items-center ">
                     <div className={estiloContainerGrafico3}>                        
                         <ResponsiveContainer width="90%" height={380}>
                             <LineChart data={geracao} margin={{ top: 24, right: 30, left: 40, bottom: 20 }}>

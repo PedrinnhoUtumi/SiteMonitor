@@ -1,15 +1,7 @@
 import { Pagina } from "../components/Pagina";
 import { Cabecalho } from "../components/Cabecalho";
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Legend,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+
 import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../context/DataContext";
 
@@ -101,10 +93,10 @@ export function TempoReal() {
   "bg-fundo_azul_escuro_elegante w-screen max-sm:w-[95vw] sm:w-2/3 md:w-1/3 h-36 p-4 m-2 rounded-2xl shadow-md flex flex-col justify-between items-center";
 
   const estiloContainerGrafico3 =
-    "bg-fundo_azul_escuro_elegante w-full sm:w-2/3 lg:w-1/2 h-[50vh] m-2 p-4 rounded-2xl shadow-md flex justify-center items-center";
+    "bg-fundo_azul_escuro_elegante w-full sm:w-2/3 lg:w-1/2 h-[60vh] m-2 p-4 rounded-2xl shadow-md flex justify-center items-center";
 
   const estiloTitulo =
-    "bg-fundo_azul_escuro_elegante h-16 w-sceen flex justify-center items-center text-2xl font-bold border-b-2 border-amber-400 rounded-2xl m-2 text-fonte_elegante_amarelo shadow-sm";
+    "bg-fundo_azul_escuro_elegante h-16 w-sceen flex justify-center items-center text-2xl font-bold border-b-2 border-amber-400 rounded-2xl m-2 text-fonte_elegante_amarelo shadow-sm cursor-pointer";
 
   const estiloTituloContainerConsumo =
     "text-2xl sm:text-3xl text-fonte_elegante_amarelo font-semibold text-center";
@@ -328,48 +320,67 @@ export function TempoReal() {
           </div>
         )}
 
-        <div className="flex flex-row justify-around">
+        <div className="flex flex-col m-2 lg:flex-row justify-around items-center gap-6">
           <div className={estiloContainerGrafico3}>
-            <ResponsiveContainer width="90%" height={300}>
-              <BarChart data={potenciaAtiva}>
-                <CartesianGrid />
-                <XAxis dataKey="PotenciaAtiva" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="PHASEA" fill="#f5af33" />
-                <Bar dataKey="PHASEB" fill="#ffaa00" />
-                <Bar dataKey="PHASEC" fill="#ffcc00" />
-              </BarChart>
-            </ResponsiveContainer>
-            {/* <ResponsiveContainer width="90%" height={380}>
+            <ResponsiveContainer width="90%" height={380}>
               <LineChart data={potenciaAtiva} margin={{ top: 24, right: 30, left: 40, bottom: 20 }}>
                   <text x="50%" y={10} textAnchor="middle" dominantBaseline="central" style={{ fill: 'white', fontSize: 18 }}>
                       Potência Ativa
                   </text>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis domain={[0, 10]} tick={{fill: 'white'}} label={{value:"pages", offset:-2, position:"insideBottom" }} />
-                  <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value:"isso ai", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}}/>
+                  <YAxis
+                    domain={([dataMin, dataMax]) => {
+                        const range = dataMax - dataMin;
+                        const margin = Math.ceil(range * 0.15); 
+                        return [0, dataMax + margin];
+                    }}
+                    tick={{ fill: 'white' }}
+                    tickFormatter={(value) => Math.floor(value)}
+                    label={{
+                        value: 'isso ai',
+                        angle: -90,
+                        position: 'insideLeft',
+                        style: { textAnchor: 'middle' }
+                    }}
+                  />
                   <Line type="bump" dataKey="PHASEA" stroke="#f5af33" dot={false} strokeWidth={2} />
                   <Line type="bump" dataKey="PHASEB" stroke="#ffaa00" dot={false} strokeWidth={2} />
                   <Line type="bump" dataKey="PHASEC" stroke="#ffcc00" dot={false} strokeWidth={2} />
                   <Tooltip />
                   <Legend wrapperStyle={{ color: 'white' }} verticalAlign="top"  height={44} />
               </LineChart>
-          </ResponsiveContainer> */}
+            </ResponsiveContainer>
           </div>
           <div className={estiloContainerGrafico3}>
-            <ResponsiveContainer width="90%" height={300}>
-              <BarChart data={corrente}>
-                <CartesianGrid />
-                <XAxis dataKey="Corrente" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="PHASEA" fill="#f5af33" />
-                <Bar dataKey="PHASEB" fill="#ffaa00" />
-                <Bar dataKey="PHASEC" fill="#ffcc00" />
-              </BarChart>
+            <ResponsiveContainer width="90%" height={380}>
+              <LineChart data={corrente} margin={{ top: 24, right: 30, left: 40, bottom: 20 }}>
+                  <text x="50%" y={10} textAnchor="middle" dominantBaseline="central" style={{ fill: 'white', fontSize: 18 }}>
+                      Corrente
+                  </text>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis domain={[0, 10]} tick={{fill: 'white'}} label={{value:"pages", offset:-2, position:"insideBottom" }} />
+                  <YAxis
+                    domain={([dataMin, dataMax]) => {
+                        const range = dataMax - dataMin;
+                        const margin = Math.ceil(range * 0.15); 
+                        return [0, dataMax + margin];
+                    }}
+                    tick={{ fill: 'white' }}
+                    tickFormatter={(value) => Math.floor(value)}
+                    label={{
+                        value: 'isso ai',
+                        angle: -90,
+                        position: 'insideLeft',
+                        style: { textAnchor: 'middle' }
+                    }}
+                  />
+                  <Line type="bump" dataKey="PHASEA" stroke="#f5af33" dot={false} strokeWidth={2} />
+                  <Line type="bump" dataKey="PHASEB" stroke="#ffaa00" dot={false} strokeWidth={2} />
+                  <Line type="bump" dataKey="PHASEC" stroke="#ffcc00" dot={false} strokeWidth={2} />
+                  <Tooltip />
+                  <Legend wrapperStyle={{ color: 'white' }} verticalAlign="top"  height={44} />
+              </LineChart>
             </ResponsiveContainer>
           </div>
         </div>
