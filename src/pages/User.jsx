@@ -93,18 +93,6 @@ export function User() {
           <Box label="Cargo" value={infoUsuario.cargo} />
           <Box label="Tipo de Conta" value={infoUsuario.tipoConta} />
         </div>
-
-        <div className="mt-8 flex gap-4">
-          <button className="bg-fundo_azul_escuro_elegante text-white px-4 py-2 rounded hover:bg-fonte_elegante_amarelo hover:text-white font-semibold">
-            Editar Perfil
-          </button>
-          <button
-            className="bg-fundo_azul_escuro_elegante text-white px-4 py-2 rounded hover:bg-azul_bebe hover:text-black font-semibold"
-            onClick={handleLogout}
-          >
-            Sair
-          </button>
-        </div>
       </div>
     </Pagina>
   );
