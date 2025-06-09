@@ -141,11 +141,11 @@ export function TempoReal() {
   const geracao = data.filter((item) => item.__tabela === "GENERATION");
 
   const ultimaLeituraPotenciaAtiva =
-    potenciaAtiva[potenciaAtiva.length - 1] || {};
-  const ultimaLeituraCorrente = corrente[corrente.length - 1] || {};
-  const ultimaLeituraTensao = tensao[tensao.length - 1] || {};
-  const ultimaLeituraGeracao = geracao[geracao.length - 1] || {};
-  const ultimaLeituraConsumo = consumo[consumo.length - 1] || {};
+    potenciaAtiva[0] || {};
+  const ultimaLeituraCorrente = corrente[0] || {};
+  const ultimaLeituraTensao = tensao[0] || {};
+  const ultimaLeituraGeracao = geracao[0] || {};
+  const ultimaLeituraConsumo = consumo[0] || {};
 
   const phaseA = ultimaLeituraPotenciaAtiva.PHASEA || 0.0;
   const phaseB = ultimaLeituraPotenciaAtiva.PHASEB || 0.0;
