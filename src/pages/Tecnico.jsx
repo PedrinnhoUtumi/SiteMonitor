@@ -12,7 +12,7 @@ export function Tecnico() {
     const { data, adicionarDados, name, adicionarNomes } = useContext(DataContext)
     
     const estiloContainerGrafico = "bg-fundo_azul_escuro_elegante w-[35vw] h-[60vh] m-1 p-4 rounded-md border-b"
-    const estiloContainerGrafico3 = "bg-fundo_azul_escuro_elegante w-[50vw] h-[60vh] m-1 p-4 rounded-md border-b"
+    const estiloContainerGrafico3 = "bg-fundo_azul_escuro_elegante w-[50vw] h-[65vh] m-1 p-4 rounded-md border-b"
     const estiloContainerGrafico2 = "bg-fundo_azul_escuro_elegante w-[50vw] h-[25vh] m-1 p-2 rounded-md flex flex-row"
     const [dados, setDados] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -72,7 +72,22 @@ export function Tecnico() {
 
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis domain={[0, 5]} tick={{fill: 'white'}} label={{value:"pages", offset:-2, position:"insideBottom" }}/>
-                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value:"isso ai", angle:-90 , position:'insideLeft'}} />
+                                <YAxis
+                                    domain={([dataMin, dataMax]) => {
+                                        const range = dataMax - dataMin;
+                                        const margin = Math.ceil(range * 0.15); 
+                                        return [0, dataMax + margin];
+                                    }}
+                                    tick={{ fill: 'white' }}
+                                    tickFormatter={(value) => Math.floor(value)}
+                                    label={{
+                                        value: 'isso ai',
+                                        angle: -90,
+                                        position: 'insideLeft',
+                                        style: { textAnchor: 'middle' }
+                                    }}
+                                    />
+
                                 <Line type="bump" dataKey="PHASEA" stroke="#f5af33" dot={false} strokeWidth={2} />
                                 <Line type="bump" dataKey="PHASEB" stroke="#ffaa00" dot={false} strokeWidth={2} />
                                 <Line type="bump" dataKey="PHASEC" stroke="#ffcc00" dot={false} strokeWidth={2} />
@@ -89,7 +104,7 @@ export function Tecnico() {
                                 </text>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis domain={[0, 10]} tick={{fill: 'white'}} label={{value:"pages", offset:-2, position:"insideBottom" }} />
-                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value:"isso ai", angle:-90 , position:'insideLeft'}}/>
+                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value:"isso ai", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}}/>
                                 <Line type="bump" dataKey="PHASEA" stroke="#f5af33" dot={false} strokeWidth={2} />
                                 <Line type="bump" dataKey="PHASEB" stroke="#ffaa00" dot={false} strokeWidth={2} />
                                 <Line type="bump" dataKey="PHASEC" stroke="#ffcc00" dot={false} strokeWidth={2} />
@@ -106,7 +121,7 @@ export function Tecnico() {
                                 </text>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis domain={[0, 5]} tick={{fill: 'white'}} label={{value:"pages", offset:-2, position:"insideBottom" }}/>
-                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}}label={{value:"isso ai", angle:-90 , position:'insideLeft'}} />
+                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}}label={{value:"isso ai", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}} />
                                 <Line type="bump" dataKey="PHASEA" stroke="#f5af33" dot={false} strokeWidth={2} />
                                 <Line type="bump" dataKey="PHASEB" stroke="#ffaa00" dot={false} strokeWidth={2} />
                                 <Line type="bump" dataKey="PHASEC" stroke="#ffcc00" dot={false} strokeWidth={2} />
@@ -118,16 +133,16 @@ export function Tecnico() {
                 </div>
                 <div className="flex flex-row justify-around">
                     <div className={estiloContainerGrafico3}>                        
-                        <ResponsiveContainer width="100%" height={380}>
+                        <ResponsiveContainer width="90%" height={380}>
                             <LineChart data={geracao} margin={{ top: 24, right: 30, left: 40, bottom: 20 }}>
                                 <text x="50%" y={10} textAnchor="middle" dominantBaseline="central" style={{ fill: 'white', fontSize: 18 }}>
                                     Geração
                                 </text>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis domain={[0, 5]} tick={{fill: 'white'}} label={{value:"pages", offset:-2, position:"insideBottom" }}/>
-                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value:"isso ai", angle:-90 , position:'insideLeft'}}/>
+                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value: 'isso ai', angle: -90,position: 'insideLeft',style: { textAnchor: 'middle' } }}/>
                                 <Tooltip />
-                                <Legend wrapperStyle={{ color: 'white' }} verticalAlign="bottom"  height={44} />
+                                <Legend wrapperStyle={{ color: 'white' }} verticalAlign="top"  height={44} />
                                 <Line type="bump" dataKey="TODAY" stroke="#f5af33" dot={false} strokeWidth={2} />
                                 <Line type="bump" dataKey="WEEK" stroke="#ffaa00" dot={false} strokeWidth={2} />
                                 <Line type="bump" dataKey="MONTHNOW" stroke="#ffcc00" dot={false} strokeWidth={2} />
@@ -143,9 +158,9 @@ export function Tecnico() {
                                 </text>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis domain={[0, 5]} tick={{fill: 'white'}} label={{value:"pages", offset:-2, position:"insideBottom" }}/>
-                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value:"isso ai", angle:-90 , position:'insideLeft'}} />
+                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value:"isso ai", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}} />
                                 <Tooltip />
-                                <Legend wrapperStyle={{color: 'white'}} verticalAlign="bottom"  height={44} />
+                                <Legend wrapperStyle={{color: 'white'}} verticalAlign="top"  height={44} />
                                 <Line type="bump" dataKey="TODAY" stroke="#f5af33" dot={false} strokeWidth={2} />
                                 <Line type="bump" dataKey="WEEK" stroke="#ffaa00" dot={false} strokeWidth={2} />
                                 <Line type="bump" dataKey="MONTHNOW" stroke="#ffcc00" dot={false} strokeWidth={2} />

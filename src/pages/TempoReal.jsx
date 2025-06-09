@@ -342,6 +342,21 @@ export function TempoReal() {
                 <Bar dataKey="PHASEC" fill="#ffcc00" />
               </BarChart>
             </ResponsiveContainer>
+            {/* <ResponsiveContainer width="90%" height={380}>
+              <LineChart data={potenciaAtiva} margin={{ top: 24, right: 30, left: 40, bottom: 20 }}>
+                  <text x="50%" y={10} textAnchor="middle" dominantBaseline="central" style={{ fill: 'white', fontSize: 18 }}>
+                      Potência Ativa
+                  </text>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis domain={[0, 10]} tick={{fill: 'white'}} label={{value:"pages", offset:-2, position:"insideBottom" }} />
+                  <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value:"isso ai", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}}/>
+                  <Line type="bump" dataKey="PHASEA" stroke="#f5af33" dot={false} strokeWidth={2} />
+                  <Line type="bump" dataKey="PHASEB" stroke="#ffaa00" dot={false} strokeWidth={2} />
+                  <Line type="bump" dataKey="PHASEC" stroke="#ffcc00" dot={false} strokeWidth={2} />
+                  <Tooltip />
+                  <Legend wrapperStyle={{ color: 'white' }} verticalAlign="top"  height={44} />
+              </LineChart>
+          </ResponsiveContainer> */}
           </div>
           <div className={estiloContainerGrafico3}>
             <ResponsiveContainer width="90%" height={300}>
