@@ -367,7 +367,7 @@ export function TempoReal() {
                         return [0, dataMax + margin];
                     }}
                     tick={{ fill: 'white' }}
-                    tickFormatter={(value) => Math.floor(value)}
+                    tickFormatter={(value) => value.toFixed(1)}
                     label={{
                         value: 'Ampere (A)',
                         angle: -90,

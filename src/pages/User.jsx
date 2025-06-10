@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { Pagina } from "../components/Pagina";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import { DataContext } from "../context/DataContext";
+
 
 export function User() {
   const navigate = useNavigate();
@@ -80,6 +81,7 @@ export function User() {
   // function isAdm(infoUsuario){
   //   if (infoUsuario.tipoConta === "adm")
   // }
+  
 
   return (
     <Pagina>
@@ -93,6 +95,11 @@ export function User() {
           <Box label="Cargo" value={infoUsuario.cargo} />
           <Box label="Tipo de Conta" value={infoUsuario.tipoConta} />
         </div>
+        <nav className="m-5">
+          <button onClick={handleLogout} className="bg-fundo_azul_escuro_elegante p-3 rounded-md  hover:bg-fonte_elegante_amarelo hover:text-white text-fonte_elegante_amarelo transition-colors duration-300">
+            vamo logooo
+          </button>
+        </nav>
       </div>
     </Pagina>
   );
