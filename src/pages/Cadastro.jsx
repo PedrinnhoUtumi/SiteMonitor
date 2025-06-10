@@ -24,9 +24,7 @@ export function Cadastro() {
   
   const verificarLogin = async () => {
     const usuarioEncontrado = usuario.find((user) => user.email === email);
-    console.log("Email digitado:", email);
     if (usuarioEncontrado) {
-      console.log("Usuário encontrado:", usuarioEncontrado);
       
       const isCorrect = await bcrypt.compare(senha, usuarioEncontrado.senha);
   
@@ -83,9 +81,8 @@ export function Cadastro() {
         ...novoUsuario,
         senha: hash,
       };
-      console.log(novoUsuario)
 
-      const response = await fetch(`https://127.0.0.1:3000/api/MYUSER`, {
+      const response = await fetch(`http://127.0.0.1:3000/api/MYUSER`, {
           method: "POST",
           headers: {
               "Content-Type": "application/json",
@@ -99,14 +96,15 @@ export function Cadastro() {
 
 
       const dados = await response.json()
-      console.log(dados)
 
 
       setNovoUsuario({ nome: "", email: "", senha: "", role: "", account: "" })
       } catch (error) {
-      console.error(error)
+      console.log("skdslkdj", error)
     }
   }
+
+  console.clear();
 
   return (
     <form method="POST" className="bg-gradient-to-r from-fundo_azul_claro_elegante to-azul_escuro h-screen flex items-center justify-center">

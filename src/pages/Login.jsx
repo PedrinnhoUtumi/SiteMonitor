@@ -29,15 +29,12 @@ export function Login() {
     }));
 
     setUsuario(listaUsuarios);
-    console.log("Lista de usuários:", listaUsuarios);
     
   }, [data]);
   
   const verificarLogin = async () => {
     const usuarioEncontrado = usuario.find((user) => user.email === email);
-    console.log("Email digitado:", email);
     if (usuarioEncontrado) {
-      console.log("Usuário encontrado:", usuarioEncontrado);
       
       // Comparar a senha digitada com a hash armazenada no banco
       const isCorrect = await bcrypt.compare(senha, usuarioEncontrado.senha);
@@ -64,19 +61,6 @@ export function Login() {
     }
   };
   
-
-  // function temMaiusculas(texto) {
-  //   return /[A-Z]/.test(texto);
-  // }
-
-  // function temNumeros(texto) {
-  //   return /[0-9]/.test(texto);
-  // }
-
-  // function temEspacos(texto) {
-  //   return texto.includes(" ");
-  // }
-
   return (
     <div className="bg-gradient-to-r from-fundo_azul_claro_elegante to-azul_escuro h-screen flex items-center justify-center">
       <img

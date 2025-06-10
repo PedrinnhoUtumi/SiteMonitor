@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Pagina } from "../components/Pagina";
 import { useNavigate, NavLink } from "react-router-dom";
 import { DataContext } from "../context/DataContext";
-
+import { Cabecalho } from "../components/Cabecalho";
 
 export function User() {
   const navigate = useNavigate();
@@ -10,6 +10,13 @@ export function User() {
   const [usuario, setUsuario] = useState([]);
   const [negocios, setNegocios] = useState([]);
   const [negocioDoUsuario, setNegocioDoUsuario] = useState([]);
+  const [larguraTela, setLarguraTela] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setLarguraTela(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (data && data.length > 0) {
@@ -74,19 +81,18 @@ export function User() {
   );
 
   function handleLogout() {
+    // localStorage.clear();
+    // sessionStorage.clear();
+    // navigate("/", { replace: true });
     localStorage.clear();
     sessionStorage.clear();
-    navigate("/", { replace: true });
+    window.location.href = "/";
   }
-  // function isAdm(infoUsuario){
-  //   if (infoUsuario.tipoConta === "adm")
-  // }
-  
 
   return (
     <Pagina>
-      <div className="flex flex-col items-center justify-start w-full p-4 bg-fundo_azul_claro_elegante min-h-screen text-white">
-        <h1 className="text-2xl font-bold text-fonte_elegante_amarelo mb-4">Perfil do Usuário</h1>
+      {larguraTela>=600 && <Cabecalho/>}
+      <div className="flex flex-col items-center justify-start w-full p-4 bg-fundo_azul_claro_elegante min-h-screen text-white border-t ">
 
         <div className="flex flex-wrap justify-center w-full max-w-5xl">
           <Box label="Nome" value={infoUsuario.nome} />
@@ -96,8 +102,8 @@ export function User() {
           <Box label="Tipo de Conta" value={infoUsuario.tipoConta} />
         </div>
         <nav className="m-5">
-          <button onClick={handleLogout} className="bg-fundo_azul_escuro_elegante p-3 rounded-md  hover:bg-fonte_elegante_amarelo hover:text-white text-fonte_elegante_amarelo transition-colors duration-300">
-            vamo logooo
+          <button onClick={handleLogout} className="bg-fundo_azul_escuro_elegante p-3 pl-8 pr-8 rounded-md w-full  hover:bg-fonte_elegante_amarelo hover:text-white text-fonte_elegante_amarelo transition-colors duration-300">
+            Sair
           </button>
         </nav>
       </div>
