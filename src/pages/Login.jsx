@@ -71,7 +71,7 @@ export function Login() {
                   max-sm:translate-y-0" 
                   
       />
-      <div className="caixaLogin max-sm:w-2/3 sm:w-1/2 lg:w-1/4 h-3/6 flex flex-col justify-end items-center bg-white bg-opacity-20 rounded-3xl shadow-lg backdrop-blur-sm pb-16" >
+      <div className="caixaLogin max-sm:w-2/3 sm:w-1/2 lg:w-1/4 h-3/5 flex flex-col justify-end items-center bg-white bg-opacity-20 rounded-3xl shadow-lg backdrop-blur-sm pb-16" >
         <img
           src="../../usuario.png"
           alt="Ícone de usuário"
