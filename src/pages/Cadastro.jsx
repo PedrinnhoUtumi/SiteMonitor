@@ -18,55 +18,52 @@ export function Cadastro() {
   const navigate = useNavigate();
   const [novoUsuario, setNovoUsuario] = useState({ nome: "", email: "", senha: "", role: "", account: "" });
   const [mostrarSenha, setMostrarSenha] = useState(false);
-
-
-
-  
-  const verificarLogin = async () => {
-    const usuarioEncontrado = usuario.find((user) => user.email === email);
-    if (usuarioEncontrado) {
-      
-      const isCorrect = await bcrypt.compare(senha, usuarioEncontrado.senha);
-  
-      if (isCorrect) {  
-        const dadosUsuario = {
-          email: usuarioEncontrado.email,
-          nome: usuarioEncontrado.nome,
-          id: usuarioEncontrado.id,
-          role: usuarioEncontrado.role,
-          loginAt: new Date().toISOString(),
-        };
-  
-        adicionarNomes(usuarioEncontrado.nome);
-        localStorage.setItem("usuario", JSON.stringify(dadosUsuario));
-        localStorage.setItem("usuario_logado", "true");
-  
-        navigate("/TempoReal", { replace: true });
-      } else {
-        alert("Senha incorreta!");
-      }
-    } else {
-      alert("Usuário ou senha inválidos!");
-    }
-  };
+  const myUser = data.filter((item) => item.__tabela === "MYUSER");
   
 
-  function temMaiusculas(texto) {
-    return /[A-Z]/.test(texto);
-  }
+  
 
-  function temNumeros(texto) {
-    return /[0-9]/.test(texto);
-  }
+  // function temMaiusculas(texto) {
+  //   return /[A-Z]/.test(texto);
+  // }
 
-  function temEspacos(texto) {
-    return texto.includes(" ");
-  }
+  // function temNumeros(texto) {
+  //   return /[0-9]/.test(texto);
+  // }
+
+  // function temEspacos(texto) {
+  //   return texto.includes(" ");
+  // }
+
   const opcoesRole = {
     1: "Administrador",
     2: "Usuário",
   };
   
+  useEffect(() => {
+    const listaUsuarios = myUser.map((usuario) => ({
+      id: usuario.ID,
+      senha: usuario.SENHA,
+      nome: usuario.NAME,
+      email: usuario.EMAIL,
+      role: usuario.ROLE,
+      account: usuario.ACCOUNT,
+    }));
+
+    setUsuario(listaUsuarios);
+    
+  }, [data]);
+  const verificarUsuarioCadastrado = async () => {
+    const usuarioEncontrado = usuario.find((user) => user.email === novoUsuario.email);
+    console.log("usuarioEncontrado", usuarioEncontrado);
+    
+    if (usuarioEncontrado) {
+      return true
+    }
+    return false
+  };
+
+
   async function criarUsuario(e) {
     e.preventDefault();
     try {
@@ -74,7 +71,15 @@ export function Cadastro() {
         alert("Preencha todos os campos!")
         return
       }
+
+      const usuarioExistente = await verificarUsuarioCadastrado();
+      console.log("usuarioExistente", usuarioExistente);
       
+      if (usuarioExistente) {
+        alert("Usuário já cadastrado!");
+        return;
+      }
+
       const salt = await bcrypt.genSalt(10);
       const hash = await bcrypt.hash(novoUsuario.senha, salt);
       const usuarioParaEnviar = {
@@ -97,14 +102,11 @@ export function Cadastro() {
 
       const dados = await response.json()
 
-
       setNovoUsuario({ nome: "", email: "", senha: "", role: "", account: "" })
       } catch (error) {
       console.log("skdslkdj", error)
     }
   }
-
-  console.clear();
 
   return (
     <form method="POST" className="bg-gradient-to-r from-fundo_azul_claro_elegante to-azul_escuro h-screen flex items-center justify-center">
