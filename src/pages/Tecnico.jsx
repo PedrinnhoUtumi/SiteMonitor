@@ -30,13 +30,29 @@ export function Tecnico() {
     const consumo = data.filter(item => item.__tabela === "CONSUMPTION")
     const tensao = data.filter(item => item.__tabela === "VOLTAGE")
     const geracao = data.filter(item => item.__tabela === "GENERATION")
+    const powerFactor = data.filter(item => item.__tabela === "POWERFACTOR")
+    const frequency = data.filter(item => item.__tabela === "FREQUENCY")
+    const reactivePower = data.filter(item => item.__tabela === "REACTIVEPOWER")
+    const equipmentTemp = data.filter(item => item.__tabela === "EQUIPMENTTEMPERATURE")
+    const apparentPower = data.filter(item => item.__tabela === "APPARENTPOWER")
+    const angleBetweenVoltages = data.filter(item => item.__tabela === "ANGLEBETWEENVOLTAGES")
+    const angleVoltageCurrent = data.filter(item => item.__tabela === "ANGLEVOLTAGECURRENT")
+
+
     
 
-    const ultimaLeituraPotenciaAtiva = potenciaAtiva[potenciaAtiva.length - 1] || {}
-    const ultimaLeituraCorrente = corrente[corrente.length - 1] || {}
-    const ultimaLeituraTensao = tensao[tensao.length - 1] || {}
-    const ultimaLeituraGeracao = geracao[geracao.length - 1] || {}
-    const ultimaLeituraConsumo = consumo[consumo.length - 1] || {}
+    const ultimaLeituraPotenciaAtiva = potenciaAtiva[0] || {}
+    const ultimaLeituraCorrente = corrente[0] || {}
+    const ultimaLeituraTensao = tensao[0] || {}
+    const ultimaLeituraGeracao = geracao[0] || {}
+    const ultimaLeituraConsumo = consumo[0] || {}
+    const ultimaLeituraPowerFactor = powerFactor[0] || {}
+    const ultimaLeituraFrequency = frequency[0] || {}
+    const ultimaLeituraReactivePower = reactivePower[0] || {}
+    const ultimaLeituraEquipmentTemp = equipmentTemp[0] || {}
+    const ultimaLeituraApparentPower = apparentPower[0] || {}
+    const ultimaLeituraAngleBetweenVoltages = angleBetweenVoltages[0] || {}
+    const ultimaLeituraAngleVoltageCurrent = angleVoltageCurrent[0] || {}
 
     function exportCSV() {
         function convertToCSV(data) {
@@ -132,6 +148,142 @@ export function Tecnico() {
                                 <Line type="bump" dataKey="PHASEA" stroke="#f5af33" dot={false} strokeWidth={2} />
                                 <Line type="bump" dataKey="PHASEB" stroke="#ffaa00" dot={false} strokeWidth={2} />
                                 <Line type="bump" dataKey="PHASEC" stroke="#ffcc00" dot={false} strokeWidth={2} />
+                                <Tooltip />
+                                <Legend wrapperStyle={{ color: 'white' }} verticalAlign="top"  height={44} />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
+                </div>
+                <div className="flex flex-col lg:flex-row justify-around items-center gap-6 mb-6 mt-5">
+                    <div className={estiloContainerGrafico}>
+
+                        <ResponsiveContainer width="90%" height={380}>
+                            <LineChart data={powerFactor} margin={{ top: 24, right: 30, left: 40, bottom: 20 }}>
+                                <text x="50%" y={10} textAnchor="middle" dominantBaseline="central" style={{ fill: 'white', fontSize: 18 }}>
+                                    Fator de Potência
+                                </text>
+
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis domain={[0, 5]} tick={{fill: 'white'}} label={{value:"Quantidade de Informações", offset:-2, position:"insideBottom" }}/>
+                                <YAxis
+                                    domain={([dataMin, dataMax]) => {
+                                        const range = dataMax - dataMin;
+                                        const margin = Math.ceil(range * 0.15); 
+                                        return [0, dataMax + margin];
+                                    }}
+                                    tick={{ fill: 'white' }}
+                                    tickFormatter={(value) => value.toFixed(1)}
+                                    label={{
+                                        value: 'Watts (W)',
+                                        angle: -90,
+                                        position: 'insideLeft',
+                                        style: { textAnchor: 'middle' }
+                                    }}
+                                    />
+
+                                <Line type="bump" dataKey="PHASEA" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="PHASEB" stroke="#ffaa00" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="PHASEC" stroke="#ffcc00" dot={false} strokeWidth={2} />
+                                <Tooltip />
+                                <Legend wrapperStyle={{ color: 'white', marginBottom: 16}} verticalAlign="top"  height={44} />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
+                    <div className={estiloContainerGrafico}>
+                        <ResponsiveContainer width="90%" height={380}>
+                            <LineChart data={apparentPower} margin={{ top: 24, right: 30, left: 40, bottom: 20 }}>
+                                <text x="50%" y={10} textAnchor="middle" dominantBaseline="central" style={{ fill: 'white', fontSize: 18 }}>
+                                    Potência Aparente
+                                </text>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis domain={[0, 10]} tick={{fill: 'white'}} label={{value:"Quantidade de Informações", offset:-2, position:"insideBottom" }} />
+                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value:"Watts (W)", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}}/>
+                                <Line type="bump" dataKey="PHASEA" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="PHASEB" stroke="#ffaa00" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="PHASEC" stroke="#ffcc00" dot={false} strokeWidth={2} />
+                                <Tooltip />
+                                <Legend wrapperStyle={{ color: 'white' }} verticalAlign="top"  height={44} />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
+                    <div className={estiloContainerGrafico}>
+                        <ResponsiveContainer width="90%" height={380}>
+                            <LineChart data={equipmentTemp} margin={{ top: 24, right: 30, left: 40, bottom: 20 }}>
+                                <text x="50%" y={10} textAnchor="middle" dominantBaseline="central" style={{ fill: 'white', fontSize: 18 }}>
+                                    Temperatura do Equipamento
+                                </text>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis domain={[0, 5]} tick={{fill: 'white'}} label={{value:"Quantidade de Informações", offset:-2, position:"insideBottom" }}/>
+                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}}label={{value:"Celsius (C°)", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}} />
+                                <Line type="bump" dataKey="TPSD" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Tooltip />
+                                <Legend wrapperStyle={{ color: 'white' }} verticalAlign="top"  height={44} />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
+                </div>
+                <div className="flex flex-col lg:flex-row justify-around items-center gap-6 mb-6 mt-5">
+                    <div className={estiloContainerGrafico}>
+
+                        <ResponsiveContainer width="90%" height={380}>
+                            <LineChart data={angleBetweenVoltages} margin={{ top: 24, right: 30, left: 40, bottom: 20 }}>
+                                <text x="50%" y={10} textAnchor="middle" dominantBaseline="central" style={{ fill: 'white', fontSize: 18 }}>
+                                    Ângulo entre Tensões
+                                </text>
+
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis domain={[0, 5]} tick={{fill: 'white'}} label={{value:"Quantidade de Informações", offset:-2, position:"insideBottom" }}/>
+                                <YAxis
+                                    domain={([dataMin, dataMax]) => {
+                                        const range = dataMax - dataMin;
+                                        const margin = Math.ceil(range * 0.15); 
+                                        return [0, dataMax + margin];
+                                    }}
+                                    tick={{ fill: 'white' }}
+                                    tickFormatter={(value) => value.toFixed(1)}
+                                    label={{
+                                        value: 'Graus (°)',
+                                        angle: -90,
+                                        position: 'insideLeft',
+                                        style: { textAnchor: 'middle' }
+                                    }}
+                                    />
+
+                                <Line type="bump" dataKey="YUAUB" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="YUAUC" stroke="#ffaa00" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="YUBUC" stroke="#ffcc00" dot={false} strokeWidth={2} />
+                                <Tooltip />
+                                <Legend wrapperStyle={{ color: 'white', marginBottom: 16}} verticalAlign="top"  height={44} />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
+                    <div className={estiloContainerGrafico}>
+                        <ResponsiveContainer width="90%" height={380}>
+                            <LineChart data={angleVoltageCurrent} margin={{ top: 24, right: 30, left: 40, bottom: 20 }}>
+                                <text x="50%" y={10} textAnchor="middle" dominantBaseline="central" style={{ fill: 'white', fontSize: 18 }}>
+                                    Ângulo entre Tensão e Corrente
+                                </text>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis domain={[0, 10]} tick={{fill: 'white'}} label={{value:"Quantidade de Informações", offset:-2, position:"insideBottom" }} />
+                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value:"Graus (°)", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}}/>
+                                <Line type="bump" dataKey="PHASEA" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="PHASEB" stroke="#ffaa00" dot={false} strokeWidth={2} />
+                                <Line type="bump" dataKey="PHASEC" stroke="#ffcc00" dot={false} strokeWidth={2} />
+                                <Tooltip />
+                                <Legend wrapperStyle={{ color: 'white' }} verticalAlign="top"  height={44} />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
+                    <div className={estiloContainerGrafico}>
+                        <ResponsiveContainer width="90%" height={380}>
+                            <LineChart data={frequency} margin={{ top: 24, right: 30, left: 40, bottom: 20 }}>
+                                <text x="50%" y={10} textAnchor="middle" dominantBaseline="central" style={{ fill: 'white', fontSize: 18 }}>
+                                    Frequência
+                                </text>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis domain={[0, 5]} tick={{fill: 'white'}} label={{value:"Quantidade de Informações", offset:-2, position:"insideBottom" }}/>
+                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}}label={{value:"Hertz (Hz)", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}} />
+                                <Line type="bump" dataKey="FREQ" stroke="#f5af33" dot={false} strokeWidth={2} />
                                 <Tooltip />
                                 <Legend wrapperStyle={{ color: 'white' }} verticalAlign="top"  height={44} />
                             </LineChart>
