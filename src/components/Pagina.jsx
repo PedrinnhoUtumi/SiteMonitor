@@ -1,5 +1,9 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate, NavLink, useLocation } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { format } from "date-fns";
+
 import { DataContext } from "../context/DataContext";
 import menuIcon from "/src/assets/menu-hamburguer.png";
 import logoSite from "../assets/metab&p.png";
@@ -8,6 +12,9 @@ export function Pagina(props) {
   const { data, name, instituicao, cargo } = useContext(DataContext);
   const myUser = data.filter((item) => item.__tabela === "MYUSER");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [showDatePicker, setShowDatePicker] = useState(false);
+
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
@@ -82,47 +89,31 @@ export function Pagina(props) {
           <NavLink to="/User" className={estiloBotao}>
             {name}
           </NavLink>
+
+          <div className="relative mt-2">
+            <button
+              onClick={() => setShowDatePicker(!showDatePicker)}
+              className="bg-azul_claro px-3 py-1 rounded text-black"
+            >
+              Selecionar Data
+            </button>
+            {showDatePicker && (
+              <div className="absolute z-50 mt-2 shadow-lg">
+                <DatePicker
+                  selected={selectedDate}
+                  onChange={(date) => {
+                    const dataFormatada = format(date, 'yyyy-MM-dd');
+                    setSelectedDate(date);
+                    setShowDatePicker(false);
+                  }}
+                  inline
+                />
+              </div>
+            )}
+          </div>
+
         </div>
       </header>
-      {/* <header className="flex flex-row justify-between items-center px-5 h-16 border-b bg-fundo_azul_escuro_elegante text-branco">
-        <div className="ml-4">
-          <h1>Monitor de Energia Educere</h1>
-        </div>
-
-          
-          <div>
-            <select
-              value={estado}
-              onChange={handleChange}
-              className="rounded-md p-1 bg-fundo_azul_escuro_elegante text-branco mr-5"
-            >
-              {Object.entries(opcoes).map(([key, label]) => (
-                <option key={key} value={key}>
-                  {label}
-                </option>
-              ))}
-            </select>
-          </div>
-          
-          {cargo === "Administrador" && (
-            <div className="mx-4">
-              <NavLink to="/Cadastro" className={estiloBotao}>
-                Cadastrar
-              </NavLink>
-            </div> 
-          )}
-
-          <div className="mx-4">
-            <h2>{instituicao}</h2>
-          </div>
-
-          <nav className="mx-4">
-            <NavLink to="/User" className={estiloBotao}>
-              {name}
-            </NavLink>
-          </nav>
-        </div>
-      </header> */}
 
       <main className="flex flex-col items-start flex-1 text-base text-branco bg-azul_bebe">
         {props.children}
