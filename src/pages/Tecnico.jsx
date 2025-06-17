@@ -174,7 +174,7 @@ export function Tecnico() {
                                     tick={{ fill: 'white' }}
                                     tickFormatter={(value) => value.toFixed(1)}
                                     label={{
-                                        value: 'Watts (W)',
+                                        value: 'Sem unidade',
                                         angle: -90,
                                         position: 'insideLeft',
                                         style: { textAnchor: 'middle' }
@@ -197,7 +197,7 @@ export function Tecnico() {
                                 </text>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis domain={[0, 10]} tick={{fill: 'white'}} label={{value:"Quantidade de Informações", offset:-2, position:"insideBottom" }} />
-                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value:"Watts (W)", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}}/>
+                                <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value:"Volt-Ampere (VA)", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}}/>
                                 <Line type="bump" dataKey="PHASEA" stroke="#f5af33" dot={false} strokeWidth={2} />
                                 <Line type="bump" dataKey="PHASEB" stroke="#ffaa00" dot={false} strokeWidth={2} />
                                 <Line type="bump" dataKey="PHASEC" stroke="#ffcc00" dot={false} strokeWidth={2} />

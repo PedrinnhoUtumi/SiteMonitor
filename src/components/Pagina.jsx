@@ -3,6 +3,7 @@ import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
+import axios from "axios";
 
 import { DataContext } from "../context/DataContext";
 import menuIcon from "/src/assets/menu-hamburguer.png";
@@ -56,6 +57,25 @@ export function Pagina(props) {
     setEndDateTime(null);
   };
 
+  async function enviarDatas() {
+    if (!startDateTime || !endDateTime) return;
+
+    const inicio = format(startDateTime, "yyyy-MM-dd HH:mm:ss");
+    const fim = format(endDateTime, "yyyy-MM-dd HH:mm:ss");
+
+    const body = {
+      start: inicio,
+      end: fim,
+    };
+
+    try {
+      const response = await axios.post("http://localhost:3000/api/t", body);
+      console.log("Resposta:", response.data);
+    } catch (err) {
+      console.error("Erro:", err);
+    }
+}
+
   return (
     <div className="relative flex flex-col flex-1">
       <header className="flex flex-row justify-between items-center px-5 h-16 border-b bg-fundo_azul_escuro_elegante text-branco">
@@ -99,7 +119,7 @@ export function Pagina(props) {
               dateFormat="dd/MM/yyyy HH:mm"
               inline
             />
-            <div className="mt-4 text-right">
+            <div className="mta-4 text-right">
               <button onClick={() => setShowPicker(false)} className="bg-red-500 text-white px-4 py-1 rounded">
                 Cancelar
               </button>
