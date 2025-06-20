@@ -6,7 +6,7 @@ import { Cabecalho } from "../components/Cabecalho";
 
 export function User() {
   const navigate = useNavigate();
-  const { data, email, instituicao, adicionarInstituicao } = useContext(DataContext);
+  const { data, email, instituicao, adicionarInstituicao, inicio } = useContext(DataContext);
   const [usuario, setUsuario] = useState([]);
   const [negocios, setNegocios] = useState([]);
   const [negocioDoUsuario, setNegocioDoUsuario] = useState([]);

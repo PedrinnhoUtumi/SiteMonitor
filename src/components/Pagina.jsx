@@ -10,12 +10,13 @@ import menuIcon from "/src/assets/menu-hamburguer.png";
 import logoSite from "../assets/metab&p.png";
 
 export function Pagina(props) {
-  const { data, name, instituicao, cargo } = useContext(DataContext);
+  const { data, name, instituicao, cargo, inicio, adicionarInicio, fim, adicionarFim } = useContext(DataContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [startDateTime, setStartDateTime] = useState(null);
   const [endDateTime, setEndDateTime] = useState(null);
   const [showPicker, setShowPicker] = useState(false);
-  const [pickerMode, setPickerMode] = useState("start"); // "start" ou "end"
+  const [pickerMode, setPickerMode] = useState("start"); 
+  
 
   const toggleMenu = () => setIsMenuOpen(prev => !prev);
   const estiloBotao = "text-white flex flex-row justify-center items-center";
@@ -42,39 +43,21 @@ export function Pagina(props) {
   const openPicker = mode => {
     setPickerMode(mode);
     setShowPicker(true);
+
   };
 
   // Seleção de data/hora
   const handleSelect = date => {
-    if (pickerMode === "start") setStartDateTime(date);
-    else setEndDateTime(date);
+    if (pickerMode === "start") adicionarInicio(date);
+    else adicionarFim(date);
     setShowPicker(false);
   };
 
   // Limpar para indeterminado
   const setIndeterminado = () => {
-    setStartDateTime(null);
-    setEndDateTime(null);
+    adicionarInicio(null);
+    adicionarFim(null);
   };
-
-  async function enviarDatas() {
-    if (!startDateTime || !endDateTime) return;
-
-    const inicio = format(startDateTime, "yyyy-MM-dd HH:mm:ss");
-    const fim = format(endDateTime, "yyyy-MM-dd HH:mm:ss");
-
-    const body = {
-      start: inicio,
-      end: fim,
-    };
-
-    try {
-      const response = await axios.post("http://localhost:3000/api/t", body);
-      console.log("Resposta:", response.data);
-    } catch (err) {
-      console.error("Erro:", err);
-    }
-}
 
   return (
     <div className="relative flex flex-col flex-1">
@@ -92,10 +75,10 @@ export function Pagina(props) {
           <NavLink to="/User" className={estiloBotao}>{name}</NavLink>
           {/* Botões de data/hora e indeterminado */}
           <button onClick={() => openPicker("start")} className="bg-azul_claro px-3 py-1 rounded text-black">
-            {startDateTime ? format(startDateTime, "dd/MM/yyyy HH:mm") : "Início"}
+            {inicio ? format(inicio, "yyyy-MM-dd HH:mm:ss") : "Início"}
           </button>
           <button onClick={() => openPicker("end")} className="bg-azul_claro px-3 py-1 rounded text-black">
-            {endDateTime ? format(endDateTime, "dd/MM/yyyy HH:mm") : "Fim"}
+            {fim ? format(fim, "yyyy-MM-dd HH:mm:ss") : "Fim"}
           </button>
           <button onClick={setIndeterminado} className="bg-azul_claro px-3 py-1 rounded text-black">
             Indeterminado
@@ -111,12 +94,12 @@ export function Pagina(props) {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <DatePicker
-              selected={pickerMode === "start" ? startDateTime : endDateTime}
+              selected={pickerMode === "start" ? inicio : fim}
               onChange={handleSelect}
               showTimeSelect
               timeFormat="HH:mm"
               timeIntervals={15}
-              dateFormat="dd/MM/yyyy HH:mm"
+              dateFormat="yyyy-MM-dd HH:mm:ss"
               inline
             />
             <div className="mta-4 text-right">

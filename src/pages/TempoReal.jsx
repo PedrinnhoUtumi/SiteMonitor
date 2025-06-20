@@ -163,7 +163,7 @@ export function TempoReal() {
   const mesAtualGeracao = ultimaLeituraGeracao.MONTHNOW || 0.0;
   const mesPassadoGeracao = ultimaLeituraGeracao.LASTMONTH || 0.0;
 
-  console.clear();
+  // console.clear();
 
   return (
     <Pagina>

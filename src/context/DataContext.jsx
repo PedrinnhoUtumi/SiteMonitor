@@ -8,6 +8,8 @@ export function DataProvider({ children }) {
   const [email, setEmail] = useState("");
   const [instituicao, setInstituicao] = useState([]);
   const [cargo, setCargo] = useState("");
+  const [inicio, setInicio] = useState(null);
+  const [fim, setFim] = useState(null);
 
   function adicionarDados(novosDados) {
     setData((prev) => {
@@ -38,17 +40,25 @@ export function DataProvider({ children }) {
     setCargo(novoCargo);
   };
 
+  const adicionarInicio = (novoInicio) => {
+    setInicio(novoInicio);
+  }
+
+  const adicionarFim = (novoFim) => {
+    setFim(novoFim);
+  }
+
   useEffect(() => {
-    const fetchMachbase = async () => {
+    const fetchMachbase = async (url) => {
       try {
-        const response = await fetch("http://127.0.0.1:3000/api");
+        const response = await fetch(url);
         if (!response.ok) {
           throw new Error("Erro ao buscar os dados do servidor");
         }
 
         const json = await response.json();
         const { insercao, semInsercao } = json;
-
+        const dados = []
         const processarTabelas = (tabelas) => {
           if (!tabelas || typeof tabelas !== "object") return;
 
@@ -66,19 +76,52 @@ export function DataProvider({ children }) {
               return obj;
             });
 
-            adicionarDados(dadosFormatados);
+            dados.push(...dadosFormatados);
+            
           });
         };
-
+        
         processarTabelas(insercao);
         processarTabelas(semInsercao);
+        setData(dados)
       } catch (err) {
         console.error("❌ Erro na requisição:", err.message);
       }
     };
+    console.log(data);
+    function formatarDataMachbase(date) {
+      const ano = date.getFullYear();
+      const mes = String(date.getMonth() + 1).padStart(2, '0');
+      const dia = String(date.getDate()).padStart(2, '0');
+      const horas = String(date.getHours()).padStart(2, '0');
+      const minutos = String(date.getMinutes()).padStart(2, '0');
+      const segundos = String(date.getSeconds()).padStart(2, '0');
+      return `${ano}-${mes}-${dia} ${horas}:${minutos}:${segundos}`;
+    }
+    if (!inicio || !fim) {
+        function getDia() {
+          const agora = new Date();
 
-    fetchMachbase();
-  }, []);
+          const horaBrasilia = new Date(agora.getTime() - 60000);
+
+          const ano = horaBrasilia.getFullYear();
+          const mes = String(horaBrasilia.getMonth() + 1).padStart(2, '0');
+          const dia = String(horaBrasilia.getDate()).padStart(2, '0');
+
+          return `${ano}-${mes}-${dia}`;
+        }
+      const hoje = getDia();
+      const inicioPadrao = `${hoje} 00:00:00`;
+      const fimPadrao = `${hoje} 23:59:59`;
+      fetchMachbase(`http://127.0.0.1:3000/api/${encodeURIComponent(inicioPadrao)}/${encodeURIComponent(fimPadrao)}`);
+    } else {
+      const inicioFormatado = formatarDataMachbase(new Date(inicio));
+      const fimFormatado = formatarDataMachbase(new Date(fim));
+      console.log(inicioFormatado, fimFormatado);
+      
+      fetchMachbase(`http://127.0.0.1:3000/api/${encodeURIComponent(inicioFormatado)}/${encodeURIComponent(fimFormatado)}`);
+    }
+  }, [inicio, fim]);
 
   const exportar = {
     data,
@@ -91,6 +134,10 @@ export function DataProvider({ children }) {
     adicionarInstituicao,
     cargo,
     adicionarCargo,
+    inicio,
+    adicionarInicio,
+    fim,
+    adicionarFim,
   };
 
   return (
