@@ -47,47 +47,47 @@ export function DataProvider({ children }) {
   const adicionarFim = (novoFim) => {
     setFim(novoFim);
   }
+  const fetchMachbase = async (url) => {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error("Erro ao buscar os dados do servidor");
+    }
+
+    const json = await response.json();
+    const { insercao, semInsercao } = json;
+    const dados = []
+    const processarTabelas = (tabelas) => {
+      if (!tabelas || typeof tabelas !== "object") return;
+
+      Object.entries(tabelas).forEach(([nomeTabela, conteudo]) => {
+        const columns = conteudo?.data?.columns;
+        const rows = conteudo?.data?.rows;
+
+        if (!columns || !rows) return;
+
+        const dadosFormatados = rows.map((linha) => {
+          const obj = { __tabela: nomeTabela };
+          columns.forEach((coluna, index) => {
+            obj[coluna] = linha[index];
+          });
+          return obj;
+        });
+
+        dados.push(...dadosFormatados);
+        
+      });
+    };
+    
+    processarTabelas(insercao);
+    processarTabelas(semInsercao);
+    setData(dados)
+  } catch (err) {
+    console.error("❌ Erro na requisição:", err.message);
+  }
+};
 
   useEffect(() => {
-    const fetchMachbase = async (url) => {
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error("Erro ao buscar os dados do servidor");
-        }
-
-        const json = await response.json();
-        const { insercao, semInsercao } = json;
-        const dados = []
-        const processarTabelas = (tabelas) => {
-          if (!tabelas || typeof tabelas !== "object") return;
-
-          Object.entries(tabelas).forEach(([nomeTabela, conteudo]) => {
-            const columns = conteudo?.data?.columns;
-            const rows = conteudo?.data?.rows;
-
-            if (!columns || !rows) return;
-
-            const dadosFormatados = rows.map((linha) => {
-              const obj = { __tabela: nomeTabela };
-              columns.forEach((coluna, index) => {
-                obj[coluna] = linha[index];
-              });
-              return obj;
-            });
-
-            dados.push(...dadosFormatados);
-            
-          });
-        };
-        
-        processarTabelas(insercao);
-        processarTabelas(semInsercao);
-        setData(dados)
-      } catch (err) {
-        console.error("❌ Erro na requisição:", err.message);
-      }
-    };
     console.log(data);
     function formatarDataMachbase(date) {
       const ano = date.getFullYear();
@@ -99,27 +99,27 @@ export function DataProvider({ children }) {
       return `${ano}-${mes}-${dia} ${horas}:${minutos}:${segundos}`;
     }
     if (!inicio || !fim) {
-        function getDia() {
-          const agora = new Date();
+      function getDia() {
+        const agora = new Date();
 
-          const horaBrasilia = new Date(agora.getTime() - 60000);
+        const horaBrasilia = new Date(agora.getTime() - 60000);
 
-          const ano = horaBrasilia.getFullYear();
-          const mes = String(horaBrasilia.getMonth() + 1).padStart(2, '0');
-          const dia = String(horaBrasilia.getDate()).padStart(2, '0');
+        const ano = horaBrasilia.getFullYear();
+        const mes = String(horaBrasilia.getMonth() + 1).padStart(2, '0');
+        const dia = String(horaBrasilia.getDate()).padStart(2, '0');
 
-          return `${ano}-${mes}-${dia}`;
-        }
+        return `${ano}-${mes}-${dia}`;
+      }
       const hoje = getDia();
       const inicioPadrao = `${hoje} 00:00:00`;
       const fimPadrao = `${hoje} 23:59:59`;
-      fetchMachbase(`http://127.0.0.1:3000/api/${encodeURIComponent(inicioPadrao)}/${encodeURIComponent(fimPadrao)}`);
+      fetchMachbase(`http://127.0.0.1:3000/api?inicio=${encodeURIComponent(inicioPadrao)}&fim=${encodeURIComponent(fimPadrao)}`);
     } else {
       const inicioFormatado = formatarDataMachbase(new Date(inicio));
       const fimFormatado = formatarDataMachbase(new Date(fim));
       console.log(inicioFormatado, fimFormatado);
       
-      fetchMachbase(`http://127.0.0.1:3000/api/${encodeURIComponent(inicioFormatado)}/${encodeURIComponent(fimFormatado)}`);
+      fetchMachbase(`http://127.0.0.1:3000/api?inicio=${encodeURIComponent(inicioFormatado)}&fim=${encodeURIComponent(fimFormatado)}`);
     }
   }, [inicio, fim]);
 
@@ -138,6 +138,7 @@ export function DataProvider({ children }) {
     adicionarInicio,
     fim,
     adicionarFim,
+    fetchMachbase,
   };
 
   return (
