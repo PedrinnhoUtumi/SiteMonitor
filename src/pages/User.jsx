@@ -119,7 +119,7 @@ export function User() {
         account: alteraUsuario.account,
       };
 
-      await axios.put(`http://localhost:3000/api/MYUSER/${id}`, usuarioAlterado, {
+      await axios.put(`http://192.168.3.250:3000/api/MYUSER/${id}`, usuarioAlterado, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -139,7 +139,7 @@ export function User() {
       const hoje = getDia();
       const inicioPadrao = `${hoje} 00:00:00`;
       const fimPadrao = `${hoje} 23:59:59`;
-      fetchMachbase(`http://127.0.0.1:3000/api?inicio=${encodeURIComponent(inicioPadrao)}&fim=${encodeURIComponent(fimPadrao)}`);
+      fetchMachbase(`http://192.168.3.250:3000/api?inicio=${encodeURIComponent(inicioPadrao)}&fim=${encodeURIComponent(fimPadrao)}`);
 
       setModoEdicao(false);
     } catch (error) {

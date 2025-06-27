@@ -73,7 +73,6 @@ export function Pagina(props) {
           <NavLink to="/Tecnico" className={estiloBotao}>Técnico</NavLink>
           {cargo === "Administrador" && <NavLink to="/Cadastro" className={estiloBotao}>Cadastrar</NavLink>}
           <NavLink to="/User" className={estiloBotao}>{name}</NavLink>
-          {/* Botões de data/hora e indeterminado */}
           <button onClick={() => openPicker("start")} className="bg-azul_claro px-3 py-1 rounded text-black">
             {inicio ? format(inicio, "yyyy-MM-dd HH:mm:ss") : "Início"}
           </button>
@@ -84,32 +83,32 @@ export function Pagina(props) {
             Indeterminado
           </button>
         </div>
+        {showPicker && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <DatePicker
+                selected={pickerMode === "start" ? inicio : fim}
+                onChange={handleSelect}
+                showTimeSelect
+                timeFormat="HH:mm"
+                timeIntervals={15}
+                dateFormat="yyyy-MM-dd HH:mm:ss"
+                inline
+              />
+              <div className="mta-4 text-right">
+                <button onClick={() => setShowPicker(false)} className="bg-red-500 text-white px-4 py-1 rounded">
+                  Cancelar
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </header>
 
       <main className="flex flex-col items-start flex-1 text-base text-branco bg-azul_bebe">
         {props.children}
       </main>
 
-      {showPicker && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <DatePicker
-              selected={pickerMode === "start" ? inicio : fim}
-              onChange={handleSelect}
-              showTimeSelect
-              timeFormat="HH:mm"
-              timeIntervals={15}
-              dateFormat="yyyy-MM-dd HH:mm:ss"
-              inline
-            />
-            <div className="mta-4 text-right">
-              <button onClick={() => setShowPicker(false)} className="bg-red-500 text-white px-4 py-1 rounded">
-                Cancelar
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

@@ -87,7 +87,7 @@ export function Cadastro() {
         senha: hash,
       };
 
-      const response = await fetch(`http://127.0.0.1:3000/api/MYUSER`, {
+      const response = await fetch(`http://192.168.3.250:3000/api/MYUSER`, {
           method: "POST",
           headers: {
               "Content-Type": "application/json",
