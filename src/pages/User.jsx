@@ -139,7 +139,8 @@ export function User() {
       const hoje = getDia();
       const inicioPadrao = `${hoje} 00:00:00`;
       const fimPadrao = `${hoje} 23:59:59`;
-      fetchMachbase(`http://192.168.3.250:3000/api?inicio=${encodeURIComponent(inicioPadrao)}&fim=${encodeURIComponent(fimPadrao)}`);
+      fetchMachbase(`http://localhost:3000/api?inicio=${encodeURIComponent(inicioPadrao)}&fim=${encodeURIComponent(fimPadrao)}`);
+      // fetchMachbase(`http://192.168.3.250:3000/api?inicio=${encodeURIComponent(inicioPadrao)}&fim=${encodeURIComponent(fimPadrao)}`);
 
       setModoEdicao(false);
     } catch (error) {

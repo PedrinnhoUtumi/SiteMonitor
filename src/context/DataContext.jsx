@@ -116,7 +116,8 @@ export function DataProvider({ children }) {
     const fimFormatado = formatarDataMachbase(new Date(fim));
     console.log(inicioFormatado, fimFormatado);
     
-    fetchMachbase(`http://192.168.3.250:3000/api?inicio=${encodeURIComponent(inicioFormatado)}&fim=${encodeURIComponent(fimFormatado)}`);
+    fetchMachbase(`http://localhost:3000/api?inicio=${encodeURIComponent(inicioFormatado)}&fim=${encodeURIComponent(fimFormatado)}`);
+    // fetchMachbase(`http://192.168.3.250:3000/api?inicio=${encodeURIComponent(inicioFormatado)}&fim=${encodeURIComponent(fimFormatado)}`);
   }, [inicio, fim]);
 
   const exportar = {
