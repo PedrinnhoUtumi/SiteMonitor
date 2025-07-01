@@ -111,13 +111,15 @@ export function DataProvider({ children }) {
       const segundos = String(date.getSeconds()).padStart(2, '0');
       return `${ano}-${mes}-${dia} ${horas}:${minutos}:${segundos}`;
     }
-    if (!inicio || !fim) return;
+    if (!(inicio instanceof Date) || isNaN(inicio) || !(fim instanceof Date) || isNaN(fim)) {
+      return;
+    }
     const inicioFormatado = formatarDataMachbase(new Date(inicio));
     const fimFormatado = formatarDataMachbase(new Date(fim));
     console.log(inicioFormatado, fimFormatado);
     
-    fetchMachbase(`http://localhost:3000/api?inicio=${encodeURIComponent(inicioFormatado)}&fim=${encodeURIComponent(fimFormatado)}`);
-    // fetchMachbase(`http://192.168.3.250:3000/api?inicio=${encodeURIComponent(inicioFormatado)}&fim=${encodeURIComponent(fimFormatado)}`);
+    // fetchMachbase(`http://localhost:3000/api?inicio=${inicioFormatado}&fim=${fimFormatado}`);
+    fetchMachbase(`http://192.168.3.250:3000/a0pi?inicio=${inicioFormatado}&fim=${fimFormatado}`);
   }, [inicio, fim]);
 
   const exportar = {
