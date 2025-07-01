@@ -119,7 +119,7 @@ export function DataProvider({ children }) {
     console.log(inicioFormatado, fimFormatado);
     
     // fetchMachbase(`http://localhost:3000/api?inicio=${inicioFormatado}&fim=${fimFormatado}`);
-    fetchMachbase(`http://192.168.3.250:3000/a0pi?inicio=${inicioFormatado}&fim=${fimFormatado}`);
+    fetchMachbase(`http://192.168.3.250:3000/api?inicio=${inicioFormatado}&fim=${fimFormatado}`);
   }, [inicio, fim]);
 
   const exportar = {
