@@ -16,6 +16,10 @@ function getDia() {
 const hoje = getDia();
 
 export function DataProvider({ children }) {
+  const [pagina, setPagina] = useState(1); // Página inicial
+  const [carregando, setCarregando] = useState(false); // Para controlar o carregamento
+  const [acabou, setAcabou] = useState(false); // Para saber quando todos os dados foram carregados
+
   const [data, setData] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -25,6 +29,9 @@ export function DataProvider({ children }) {
   const [fim, setFim] = useState(new Date(`${hoje} 23:59:59`));
 
   function adicionarDados(novosDados) {
+    if (data.length > 0) {
+      setData([]); 
+    }
     setData((prev) => {
       const existentes = new Set(prev.map((item) => JSON.stringify(item)));
       const novosUnicos = novosDados.filter(
@@ -61,44 +68,44 @@ export function DataProvider({ children }) {
     setFim(novoFim);
   }
   const fetchMachbase = async (url) => {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error("Erro ao buscar os dados do servidor");
-    }
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error("Erro ao buscar os dados do servidor");
+      }
 
-    const json = await response.json();
-    const { insercao, semInsercao } = json;
-    const dados = []
-    const processarTabelas = (tabelas) => {
-      if (!tabelas || typeof tabelas !== "object") return;
+      const json = await response.json();
+      const { insercao, semInsercao } = json;
+      const dados = []
+      const processarTabelas = (tabelas) => {
+        if (!tabelas || typeof tabelas !== "object") return;
 
-      Object.entries(tabelas).forEach(([nomeTabela, conteudo]) => {
-        const columns = conteudo?.data?.columns;
-        const rows = conteudo?.data?.rows;
+        Object.entries(tabelas).forEach(([nomeTabela, conteudo]) => {
+          const columns = conteudo?.data?.columns;
+          const rows = conteudo?.data?.rows;
 
-        if (!columns || !rows) return;
+          if (!columns || !rows) return;
 
-        const dadosFormatados = rows.map((linha) => {
-          const obj = { __tabela: nomeTabela };
-          columns.forEach((coluna, index) => {
-            obj[coluna] = linha[index];
+          const dadosFormatados = rows.map((linha) => {
+            const obj = { __tabela: nomeTabela };
+            columns.forEach((coluna, index) => {
+              obj[coluna] = linha[index];
+            });
+            return obj;
           });
-          return obj;
-        });
 
-        dados.push(...dadosFormatados);
-        
-      });
-    };
-    
-    processarTabelas(insercao);
-    processarTabelas(semInsercao);
-    setData(dados)
-  } catch (err) {
-    console.error("❌ Erro na requisição:", err.message);
-  }
-};
+          dados.push(...dadosFormatados);
+          
+        });
+      };
+      
+      processarTabelas(insercao);
+      processarTabelas(semInsercao);
+      setData(dados)
+    } catch (err) {
+      console.error("❌ Erro na requisição:", err.message);
+    }
+  };
 
   useEffect(() => {
     console.log(data);

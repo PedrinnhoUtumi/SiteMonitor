@@ -18,11 +18,17 @@ export function Tecnico() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [larguraTela, setLarguraTela] = useState(window.innerWidth);
+    const [carregando, setCarregando] = useState(true);  
+
     
     useEffect(() => {
         const handleResize = () => setLarguraTela(window.innerWidth);
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    useEffect(() => {
+        
     }, []);
 
     const potenciaAtiva = data.filter(item => item.__tabela === "ACTIVEPOWER")

@@ -17,6 +17,8 @@ export function TempoReal() {
   const [mostrarConsumo, setMostrarConsumo] = useState(true);
   const [mostrarGeracao, setMostrarGeracao] = useState(true);
   const [larguraTela, setLarguraTela] = useState(window.innerWidth);
+  const [carregando, setCarregando] = useState(true);  // Estado de carregamento
+
 
   useEffect(() => {
     const handleResize = () => setLarguraTela(window.innerWidth);
@@ -55,6 +57,7 @@ export function TempoReal() {
       setUsuario(listaUsuarios);
       setNegocios(listaNegocios);
       setNegocioDoUsuario(listaRelacao);
+      setCarregando(false);
     }
   }, [data]);
 
@@ -69,11 +72,11 @@ export function TempoReal() {
   const toggleConsumo = () => setMostrarConsumo(!mostrarConsumo);
   const toggleGeracao = () => setMostrarGeracao(!mostrarGeracao);
 
-  if (!usuarioEncontrado) {
+  if (carregando) {
     return (
       <Pagina>
         <div className="text-white p-10 text-center">
-          Carregando perfil do usuário...
+          Carregando dados...
         </div>
       </Pagina>
     );
@@ -132,8 +135,7 @@ export function TempoReal() {
   const tensao = data.filter((item) => item.__tabela === "VOLTAGE");
   const geracao = data.filter((item) => item.__tabela === "GENERATION");
 
-  const ultimaLeituraPotenciaAtiva =
-    potenciaAtiva[0] || {};
+  const ultimaLeituraPotenciaAtiva = potenciaAtiva[0] || {};
   const ultimaLeituraCorrente = corrente[0] || {};
   const ultimaLeituraTensao = tensao[0] || {};
   const ultimaLeituraGeracao = geracao[0] || {};
