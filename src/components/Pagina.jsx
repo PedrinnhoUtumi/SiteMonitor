@@ -3,24 +3,35 @@ import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
-import axios from "axios";
-
 import { DataContext } from "../context/DataContext";
 import menuIcon from "/src/assets/menu-hamburguer.png";
 import logoSite from "../assets/metab&p.png";
 
 export function Pagina(props) {
+  // Acessando o contexto DataContext
   const { data, name, instituicao, cargo, inicio, adicionarInicio, fim, adicionarFim } = useContext(DataContext);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [startDateTime, setStartDateTime] = useState(null);
-  const [endDateTime, setEndDateTime] = useState(null);
-  const [showPicker, setShowPicker] = useState(false);
-  const [pickerMode, setPickerMode] = useState("start"); 
   
+  // Estado para o menu e data/hora
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showPicker, setShowPicker] = useState(false);
+  const [pickerMode, setPickerMode] = useState("start");
 
-  const toggleMenu = () => setIsMenuOpen(prev => !prev);
+  // Log inicial para depuração
+  console.log("Renderizando componente Pagina");
+  console.log("Estado Inicial: isMenuOpen", isMenuOpen);
+
+  // Função de toggle do menu
+  const toggleMenu = () => {
+    setIsMenuOpen(prev => {
+      console.log('Toggle menu, estado anterior:', prev);
+      return !prev;
+    });
+  };
+
+  // Variáveis de estilo para os botões
   const estiloBotao = "text-white flex flex-row justify-center items-center";
 
+  // Roteamento da navegação
   const rotaParaValor = { "/TempoReal": 1, "/Tecnico": 2, "/User": 3 };
   const valorParaRota = { 1: "/TempoReal", 2: "/Tecnico", 3: "/User" };
 
@@ -29,38 +40,51 @@ export function Pagina(props) {
   const [estado, setEstado] = useState(rotaParaValor[location.pathname] || 1);
 
   useEffect(() => {
+    console.log('useEffect - mudança de rota: ', location.pathname);
     const novo = rotaParaValor[location.pathname];
-    if (novo !== undefined && novo !== estado) setEstado(novo);
+    if (novo !== undefined && novo !== estado) {
+      setEstado(novo);
+    }
   }, [location.pathname]);
 
+  // Função de manipulação da mudança de rota
   function handleChange(event) {
     const v = Number(event.target.value);
+    console.log('Mudando para rota:', v, 'Nova rota:', valorParaRota[v]);
     setEstado(v);
     navigate(valorParaRota[v]);
   }
 
-  // Abre o modal para iniciar ou terminar
+  // Função para abrir o DatePicker
   const openPicker = mode => {
+    console.log(`Abrindo picker para: ${mode}`);
     setPickerMode(mode);
     setShowPicker(true);
-
   };
 
-  // Seleção de data/hora
+  // Função de seleção da data
   const handleSelect = date => {
-    if (pickerMode === "start") adicionarInicio(date);
-    else adicionarFim(date);
+    console.log('Data selecionada: ', date);
+    if (pickerMode === "start") {
+      console.log('Adicionando data de início');
+      adicionarInicio(date);  // Atualiza a data de início
+    } else {
+      console.log('Adicionando data de fim');
+      adicionarFim(date);  // Atualiza a data de fim
+    }
     setShowPicker(false);
   };
 
-  // Limpar para indeterminado
+  // Função para marcar como "indeterminado"
   const setIndeterminado = () => {
+    console.log('Marcando como indeterminado');
     adicionarInicio(null);
     adicionarFim(null);
   };
 
   return (
     <div className="relative flex flex-col flex-1">
+      {/* Header */}
       <header className="flex flex-row justify-between items-center px-5 h-16 border-b bg-fundo_azul_escuro_elegante text-branco">
         <div className="flex items-center w-72">
           <img src={logoSite} alt="Logo METAB&P" className="h-50" />
@@ -73,6 +97,8 @@ export function Pagina(props) {
           <NavLink to="/Tecnico" className={estiloBotao}>Técnico</NavLink>
           {cargo === "Administrador" && <NavLink to="/Cadastro" className={estiloBotao}>Cadastrar</NavLink>}
           <NavLink to="/User" className={estiloBotao}>{name}</NavLink>
+
+          {/* Botões de data/hora */}
           <button onClick={() => openPicker("start")} className="bg-azul_claro px-3 py-1 rounded text-black">
             {inicio ? format(inicio, "yyyy-MM-dd HH:mm:ss") : "Início"}
           </button>
@@ -83,6 +109,8 @@ export function Pagina(props) {
             Indeterminado
           </button>
         </div>
+
+        {/* DatePicker Modal */}
         {showPicker && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
             <div className="bg-white p-6 rounded-lg shadow-lg">
@@ -105,10 +133,11 @@ export function Pagina(props) {
         )}
       </header>
 
+      {/* Main Content */}
       <main className="flex flex-col items-start flex-1 text-base text-branco bg-azul_bebe">
+        {console.log('Renderizando children da página')}
         {props.children}
       </main>
-
     </div>
   );
 }
