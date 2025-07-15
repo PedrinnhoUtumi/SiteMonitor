@@ -22,7 +22,7 @@ export function Pagina(props) {
 
   // Função de toggle do menu
   const toggleMenu = () => {
-    setIsMenuOpen(prev => {
+    setIsMenuOpen(prev => { 
       console.log('Toggle menu, estado anterior:', prev);
       return !prev;
     });

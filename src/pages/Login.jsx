@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../context/DataContext";
 import logoEducere from '../assets/educere-removebg-preview.png';
@@ -31,7 +31,7 @@ export function Login() {
 
     setUsuario(listaUsuarios);
     
-  }, [data]);
+  }, []);
   
   const verificarLogin = async () => {
     const usuarioEncontrado = usuario.find((user) => user.email === email);
