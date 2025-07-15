@@ -3,7 +3,7 @@ import { Cabecalho } from '../components/Cabecalho'
 import { IconDownload } from "@tabler/icons-react"
 // import axios from 'axios'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState, useMemo } from "react"
 import { DataContext } from "../context/DataContext"
 import axios from "axios"
 // import { useEffect, useState } from "react"
@@ -14,11 +14,11 @@ export function Tecnico() {
     const estiloContainerGrafico = "bg-fundo_azul_escuro_elegante w-[90vw] lg:w-[35vw] h-auto lg:h-[60vh] m-1 p-4 rounded-md border-b"
     const estiloContainerGrafico3 = "bg-fundo_azul_escuro_elegante w-[90vw] lg:w-[50vw] h-auto lg:h-[65vh] m-1 p-4 rounded-md border-b mb-5"
     const estiloContainerGrafico2 = "bg-fundo_azul_escuro_elegante w-[50vw] h-[25vh] m-1 p-2 rounded-md flex flex-row"
-    const [dados, setDados] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    // const [dados, setDados] = useState(null);
+    // const [loading, setLoading] = useState(true);
+    // const [error, setError] = useState(null);
     const [larguraTela, setLarguraTela] = useState(window.innerWidth);
-    const [carregando, setCarregando] = useState(true);  
+    // const [carregando, setCarregando] = useState(true);  
 
     
     useEffect(() => {
@@ -27,40 +27,36 @@ export function Tecnico() {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    useEffect(() => {
-        
-    }, []);
-
-    const potenciaAtiva = data.filter(item => item.__tabela === "ACTIVEPOWER")
-    const corrente = data.filter(item => item.__tabela === "CURRENT")
-    const consumo = data.filter(item => item.__tabela === "CONSUMPTION")
-    const tensao = data.filter(item => item.__tabela === "VOLTAGE")
-    const geracao = data.filter(item => item.__tabela === "GENERATION")
-    const powerFactor = data.filter(item => item.__tabela === "POWERFACTOR")
-    const frequency = data.filter(item => item.__tabela === "FREQUENCY")
-    const reactivePower = data.filter(item => item.__tabela === "REACTIVEPOWER")
-    const equipmentTemp = data.filter(item => item.__tabela === "EQUIPMENTTEMPERATURE")
-    const apparentPower = data.filter(item => item.__tabela === "APPARENTPOWER")
-    const angleBetweenVoltages = data.filter(item => item.__tabela === "ANGLEBETWEENVOLTAGES")
-    const angleVoltageCurrent = data.filter(item => item.__tabela === "ANGLEVOLTAGECURRENT")
-    const potenciaReativa = data.filter(item => item.__tabela === "REACTIVEPOWER")
+    const potenciaAtiva = useMemo(() => data.filter(item => item.__tabela === "ACTIVEPOWER"), [data]);
+    const corrente = useMemo(() => data.filter(item => item.__tabela === "CURRENT"), [data]);
+    const consumo = useMemo(() => data.filter(item => item.__tabela === "CONSUMPTION"), [data]);
+    const tensao = useMemo(() => data.filter(item => item.__tabela === "VOLTAGE"), [data]);
+    const geracao = useMemo(() => data.filter(item => item.__tabela === "GENERATION"), [data]);
+    const powerFactor = useMemo(() => data.filter(item => item.__tabela === "POWERFACTOR"), [data]);
+    const frequency = useMemo(() => data.filter(item => item.__tabela === "FREQUENCY"), [data]);
+    const reactivePower = useMemo(() => data.filter(item => item.__tabela === "REACTIVEPOWER"), [data]);
+    const equipmentTemp = useMemo(() => data.filter(item => item.__tabela === "EQUIPMENTTEMPERATURE"), [data]);
+    const apparentPower = useMemo(() => data.filter(item => item.__tabela === "APPARENTPOWER"), [data]);
+    const angleBetweenVoltages = useMemo(() => data.filter(item => item.__tabela === "ANGLEBETWEENVOLTAGES"), [data]);
+    const angleVoltageCurrent = useMemo(() => data.filter(item => item.__tabela === "ANGLEVOLTAGECURRENT"), [data]);
+    const potenciaReativa = useMemo(() => data.filter(item => item.__tabela === "REACTIVEPOWER"), [data]);
 
 // potencia reativa
     
 
-    const ultimaLeituraPotenciaAtiva = potenciaAtiva[0] || {}
-    const ultimaLeituraCorrente = corrente[0] || {}
-    const ultimaLeituraTensao = tensao[0] || {}
-    const ultimaLeituraGeracao = geracao[0] || {}
-    const ultimaLeituraConsumo = consumo[0] || {}
-    const ultimaLeituraPowerFactor = powerFactor[0] || {}
-    const ultimaLeituraFrequency = frequency[0] || {}
-    const ultimaLeituraReactivePower = reactivePower[0] || {}
-    const ultimaLeituraEquipmentTemp = equipmentTemp[0] || {}
-    const ultimaLeituraApparentPower = apparentPower[0] || {}
-    const ultimaLeituraAngleBetweenVoltages = angleBetweenVoltages[0] || {}
-    const ultimaLeituraAngleVoltageCurrent = angleVoltageCurrent[0] || {}
-    const ultimaLeituraPotenciaReativa = potenciaReativa[0] || {}
+    // const ultimaLeituraPotenciaAtiva = potenciaAtiva[0] || {}
+    // const ultimaLeituraCorrente = corrente[0] || {}
+    // const ultimaLeituraTensao = tensao[0] || {}
+    // const ultimaLeituraGeracao = geracao[0] || {}
+    // const ultimaLeituraConsumo = consumo[0] || {}
+    // const ultimaLeituraPowerFactor = powerFactor[0] || {}
+    // const ultimaLeituraFrequency = frequency[0] || {}
+    // const ultimaLeituraReactivePower = reactivePower[0] || {}
+    // const ultimaLeituraEquipmentTemp = equipmentTemp[0] || {}
+    // const ultimaLeituraApparentPower = apparentPower[0] || {}
+    // const ultimaLeituraAngleBetweenVoltages = angleBetweenVoltages[0] || {}
+    // const ultimaLeituraAngleVoltageCurrent = angleVoltageCurrent[0] || {}
+    // const ultimaLeituraPotenciaReativa = potenciaReativa[0] || {}
 
     function exportCSV() {
         function convertToCSV(data) {
@@ -119,9 +115,9 @@ export function Tecnico() {
                                     }}
                                     />
 
-                                <Line type="bump" dataKey="PHASEA" name="Fase A" stroke="#f5af33" dot={false} strokeWidth={2} />
-                                <Line type="bump" dataKey="PHASEB" name="Fase B" stroke="#ffaa00" dot={false} strokeWidth={2} />
-                                <Line type="bump" dataKey="PHASEC" name="Fase C" stroke="#ffcc00" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="PHASEA" name="Fase A" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="PHASEB" name="Fase B" stroke="#ffaa00" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="PHASEC" name="Fase C" stroke="#ffcc00" dot={false} strokeWidth={2} />
                                 <Tooltip />
                                 <Legend wrapperStyle={{ color: 'white', marginBottom: 16}} verticalAlign="top"  height={44} />
                             </LineChart>
@@ -136,9 +132,9 @@ export function Tecnico() {
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis domain={[0, 10]} tick={{fill: 'white'}} label={{value:"Quantidade de Informações", offset:-2, position:"insideBottom" }} />
                                 <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value:"Ampere (A)", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}}/>
-                                <Line type="bump" dataKey="PHASEA" name="Fase A" stroke="#f5af33" dot={false} strokeWidth={2} />
-                                <Line type="bump" dataKey="PHASEB" name="Fase B" stroke="#ffaa00" dot={false} strokeWidth={2} />
-                                <Line type="bump" dataKey="PHASEC" name="Fase C" stroke="#ffcc00" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="PHASEA" name="Fase A" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="PHASEB" name="Fase B" stroke="#ffaa00" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="PHASEC" name="Fase C" stroke="#ffcc00" dot={false} strokeWidth={2} />
                                 <Tooltip />
                                 <Legend wrapperStyle={{ color: 'white' }} verticalAlign="top"  height={44} />
                             </LineChart>
@@ -153,9 +149,9 @@ export function Tecnico() {
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis domain={[0, 5]} tick={{fill: 'white'}} label={{value:"Quantidade de Informações", offset:-2, position:"insideBottom" }}/>
                                 <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}}label={{value:"Volts (V)", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}} />
-                                <Line type="bump" dataKey="PHASEA" name="Fase A" stroke="#f5af33" dot={false} strokeWidth={2} />
-                                <Line type="bump" dataKey="PHASEB" name="Fase B" stroke="#ffaa00" dot={false} strokeWidth={2} />
-                                <Line type="bump" dataKey="PHASEC" name="Fase C" stroke="#ffcc00" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="PHASEA" name="Fase A" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="PHASEB" name="Fase B" stroke="#ffaa00" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="PHASEC" name="Fase C" stroke="#ffcc00" dot={false} strokeWidth={2} />
                                 <Tooltip />
                                 <Legend wrapperStyle={{ color: 'white' }} verticalAlign="top"  height={44} />
                             </LineChart>
@@ -189,9 +185,9 @@ export function Tecnico() {
                                     }}
                                     />
 
-                                <Line type="bump" dataKey="PHASEA" name="Fase A" stroke="#f5af33" dot={false} strokeWidth={2} />
-                                <Line type="bump" dataKey="PHASEB" name="Fase B" stroke="#ffaa00" dot={false} strokeWidth={2} />
-                                <Line type="bump" dataKey="PHASEC" name="Fase C" stroke="#ffcc00" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="PHASEA" name="Fase A" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="PHASEB" name="Fase B" stroke="#ffaa00" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="PHASEC" name="Fase C" stroke="#ffcc00" dot={false} strokeWidth={2} />
                                 <Tooltip />
                                 <Legend wrapperStyle={{ color: 'white', marginBottom: 16}} verticalAlign="top"  height={44} />
                             </LineChart>
@@ -206,9 +202,9 @@ export function Tecnico() {
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis domain={[0, 10]} tick={{fill: 'white'}} label={{value:"Quantidade de Informações", offset:-2, position:"insideBottom" }} />
                                 <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value:"Volt-Ampere (VA)", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}}/>
-                                <Line type="bump" dataKey="PHASEA" name="Fase A" stroke="#f5af33" dot={false} strokeWidth={2} />
-                                <Line type="bump" dataKey="PHASEB" name="Fase B" stroke="#ffaa00" dot={false} strokeWidth={2} />
-                                <Line type="bump" dataKey="PHASEC" name="Fase C" stroke="#ffcc00" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="PHASEA" name="Fase A" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="PHASEB" name="Fase B" stroke="#ffaa00" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="PHASEC" name="Fase C" stroke="#ffcc00" dot={false} strokeWidth={2} />
                                 <Tooltip />
                                 <Legend wrapperStyle={{ color: 'white' }} verticalAlign="top"  height={44} />
                             </LineChart>
@@ -223,7 +219,7 @@ export function Tecnico() {
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis domain={[0, 5]} tick={{fill: 'white'}} label={{value:"Quantidade de Informações", offset:-2, position:"insideBottom" }}/>
                                 <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}}label={{value:"Celsius (C°)", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}} />
-                                <Line type="bump" dataKey="TPSD" name="Temperatura" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="TPSD" name="Temperatura" stroke="#f5af33" dot={false} strokeWidth={2} />
                                 <Tooltip />
                                 <Legend wrapperStyle={{ color: 'white' }} verticalAlign="top"  height={44} />
                             </LineChart>
@@ -257,9 +253,9 @@ export function Tecnico() {
                                     }}
                                     />
 
-                                <Line type="bump" dataKey="YUAUB" name="Fase A e Fase B" stroke="#f5af33" dot={false} strokeWidth={2} />
-                                <Line type="bump" dataKey="YUAUC" name="Fase A e Fase C" stroke="#ffaa00" dot={false} strokeWidth={2} />
-                                <Line type="bump" dataKey="YUBUC" name="Fase B e Fase C" stroke="#ffcc00" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="YUAUB" name="Fase A e Fase B" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="YUAUC" name="Fase A e Fase C" stroke="#ffaa00" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="YUBUC" name="Fase B e Fase C" stroke="#ffcc00" dot={false} strokeWidth={2} />
                                 <Tooltip />
                                 <Legend wrapperStyle={{ color: 'white', marginBottom: 16}} verticalAlign="top"  height={44} />
                             </LineChart>
@@ -274,9 +270,9 @@ export function Tecnico() {
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis domain={[0, 10]} tick={{fill: 'white'}} label={{value:"Quantidade de Informações", offset:-2, position:"insideBottom" }} />
                                 <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value:"Graus (°)", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}}/>
-                                <Line type="bump" dataKey="PHASEA" name="Fase A" stroke="#f5af33" dot={false} strokeWidth={2} />
-                                <Line type="bump" dataKey="PHASEB" name="Fase B" stroke="#ffaa00" dot={false} strokeWidth={2} />
-                                <Line type="bump" dataKey="PHASEC" name="Fase C" stroke="#ffcc00" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="PHASEA" name="Fase A" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="PHASEB" name="Fase B" stroke="#ffaa00" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="PHASEC" name="Fase C" stroke="#ffcc00" dot={false} strokeWidth={2} />
                                 <Tooltip />
                                 <Legend wrapperStyle={{ color: 'white' }} verticalAlign="top"  height={44} />
                             </LineChart>
@@ -291,7 +287,7 @@ export function Tecnico() {
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis domain={[0, 5]} tick={{fill: 'white'}} label={{value:"Quantidade de Informações", offset:-2, position:"insideBottom" }}/>
                                 <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}}label={{value:"Hertz (Hz)", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}} />
-                                <Line type="bump" dataKey="FREQ" name="Frequência" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="FREQ" name="Frequência" stroke="#f5af33" dot={false} strokeWidth={2} />
                                 <Tooltip />
                                 <Legend wrapperStyle={{ color: 'white' }} verticalAlign="top"  height={44} />
                             </LineChart>
@@ -310,10 +306,10 @@ export function Tecnico() {
                                 <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value: 'Kilowatts/Hora (kWh)', angle: -90,position: 'insideLeft',style: { textAnchor: 'middle' } }}/>
                                 <Tooltip />
                                 <Legend wrapperStyle={{ color: 'white' }} verticalAlign="top"  height={44} />
-                                <Line type="bump" dataKey="TODAY" name="Hoje" stroke="#f5af33" dot={false} strokeWidth={2} />
-                                <Line type="bump" dataKey="WEEK" name="Semana Atual" stroke="#ffaa00" dot={false} strokeWidth={2} />
-                                <Line type="bump" dataKey="MONTHNOW" name="Mês Atual" stroke="#ffcc00" dot={false} strokeWidth={2} />
-                                <Line type="bump" dataKey="LASTMONTH" name="Mês Anterior" stroke="#ffdd00" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="TODAY" name="Hoje" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="WEEK" name="Semana Atual" stroke="#ffaa00" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="MONTHNOW" name="Mês Atual" stroke="#ffcc00" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="LASTMONTH" name="Mês Anterior" stroke="#ffdd00" dot={false} strokeWidth={2} />
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
@@ -328,10 +324,10 @@ export function Tecnico() {
                                 <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value:"Kilowatts/Hora (kWh)", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}} />
                                 <Tooltip />
                                 <Legend wrapperStyle={{color: 'white'}} verticalAlign="top"  height={44} />
-                                <Line type="bump" dataKey="TODAY" name="Hoje" stroke="#f5af33" dot={false} strokeWidth={2} />
-                                <Line type="bump" dataKey="WEEK" name="Semana Atual" stroke="#ffaa00" dot={false} strokeWidth={2} />
-                                <Line type="bump" dataKey="MONTHNOW" name="Mês Atual" stroke="#ffcc00" dot={false} strokeWidth={2} />
-                                <Line type="bump" dataKey="LASTMONTH" name="Mês Anterior" stroke="#ffdd00" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="TODAY" name="Hoje" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="WEEK" name="Semana Atual" stroke="#ffaa00" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="MONTHNOW" name="Mês Atual" stroke="#ffcc00" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="LASTMONTH" name="Mês Anterior" stroke="#ffdd00" dot={false} strokeWidth={2} />
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
@@ -346,10 +342,10 @@ export function Tecnico() {
                                 <YAxis domain={([dataMin, dataMax]) => [Math.floor(dataMin - 1), Math.ceil(dataMax + 1)]} tick={{fill: 'white'}} label={{value:"Volt-Ampere reativo (VAr)", angle:-90 , position:'insideLeft',style: { textAnchor: 'middle' }}} />
                                 <Tooltip />
                                 <Legend wrapperStyle={{color: 'white'}} verticalAlign="top"  height={44} />
-                                <Line type="bump" dataKey="PHASEA" name="Fase A" stroke="#f5af33" dot={false} strokeWidth={2} />
-                                <Line type="bump" dataKey="PHASEB" name="Fase B" stroke="#ffaa00" dot={false} strokeWidth={2} />
-                                <Line type="bump" dataKey="PHASEC" name="Fase C" stroke="#ffcc00" dot={false} strokeWidth={2} />
-                                <Line type="bump" dataKey="PHASET" name="Fase Total" stroke="#ffdd00" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="PHASEA" name="Fase A" stroke="#f5af33" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="PHASEB" name="Fase B" stroke="#ffaa00" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="PHASEC" name="Fase C" stroke="#ffcc00" dot={false} strokeWidth={2} />
+                                <Line type="linear" dataKey="PHASET" name="Fase Total" stroke="#ffdd00" dot={false} strokeWidth={2} />
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
