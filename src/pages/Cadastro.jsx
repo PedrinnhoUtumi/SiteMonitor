@@ -9,7 +9,7 @@ import olhoFechado from "../assets/hidden.png";
 import emailIcon from '../assets/email.png'
 import senhaNew from '../assets/padlock.png'
 
-export function Cadastro() {
+export default function Cadastro() {
 
   const { data, adicionarDados, name, adicionarNomes, email, adicionarEmail } = useContext(DataContext); 
   const [usuario, setUsuario] = useState([]);

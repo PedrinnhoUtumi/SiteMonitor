@@ -5,7 +5,7 @@ import { DataContext } from "../context/DataContext";
 import { Cabecalho } from "../components/Cabecalho";
 import axios from "axios";
 
-export function User() {
+export default function User() {
   const navigate = useNavigate();
   const { data, email, instituicao, adicionarInstituicao, inicio, fetchMachbase } = useContext(DataContext);
   const [modoEdicao, setModoEdicao] = useState(false);

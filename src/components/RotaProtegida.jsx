@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-export function RotaProtegida() {
+export default function RotaProtegida() {
   const usuarioLogado = localStorage.getItem("usuario");
 
   // Verifica se realmente tem informação

@@ -5,7 +5,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../context/DataContext";
 
-export function TempoReal() {
+export default function TempoReal() {
   const {
     data,
     adicionarDados,

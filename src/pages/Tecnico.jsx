@@ -6,7 +6,7 @@ import { useContext, useEffect, useState, useMemo } from "react"
 import { DataContext } from "../context/DataContext"
 import axios from "axios"
 
-export function Tecnico() {
+export default function Tecnico() {
     const { data, adicionarDados, name, adicionarNomes } = useContext(DataContext)
     
     const estiloContainerGrafico = "bg-fundo_azul_escuro_elegante w-full md:w-1/2 lg:w-1/4 h-auto m-1 p-4 rounded-md border-b";

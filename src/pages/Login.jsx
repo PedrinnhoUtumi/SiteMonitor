@@ -1,12 +1,9 @@
-import bcrypt from "bcryptjs";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../context/DataContext";
-import logoEducere from '../assets/educere-removebg-preview.png';
-import olhoAberto from "../assets/eye.png";
-import olhoFechado from "../assets/hidden.png";
+// ❌ Removi import de bcryptjs aqui: ideal é validar no backend.
 
-export function Login() {
+export default function Login() {
   const { data, adicionarDados, name, adicionarNomes, email, adicionarEmail } = useContext(DataContext); // Importa o contexto de dados
   const [usuario, setUsuario] = useState([]);
   const [senha, setSenha] = useState("");
@@ -59,24 +56,21 @@ export function Login() {
       alert("Usuário ou senha inválidos!");
     }
   };
-  
+
   return (
     <div className="bg-gradient-to-r from-fundo_azul_claro_elegante to-azul_escuro h-screen flex items-center justify-center">
       <img
-        src={logoEducere}
-        alt="logoEducere"
-        className="absolute w-32 max-sm:w-32 z-0
-                  top-2 right-2
-                  max-sm:top-4 max-sm:left-1/2 
-                  max-sm:transform max-sm:-translate-x-1/2 
-                  max-sm:translate-y-0" 
-                  
+        src="/educere-removebg-preview.png"
+        alt="Logo Educere"
+        className="absolute w-32 max-sm:w-32 z-0 top-2 right-2 max-sm:top-4 max-sm:left-1/2 max-sm:transform max-sm:-translate-x-1/2 max-sm:translate-y-0"
+        loading="lazy"
       />
       <div className="caixaLogin max-sm:h-2/4 sm:w-1/2 lg:w-1/4 sm:h-3/5 md:h-4/5 lg:h-4/6 flex flex-col justify-end items-center bg-white bg-opacity-20 rounded-3xl shadow-lg backdrop-blur-sm pb-16 px-4 sm:px-6 md:px-8">
         <img
-          src="../../usuario.png" 
+          src="/usuario.png"
           alt="Ícone de usuário"
           className="max-sm:w-32 sm:w-32 lg:w-32 absolute top-2"
+          loading="lazy"
         />
 
         <div className="relative w-full m-4">
@@ -89,15 +83,16 @@ export function Login() {
             className="w-full py-2 pl-10 pr-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-azul_claro"
           />
           <img
-            src="../../usuarioGmail.png"
+            src="/usuarioGmail.png"
             alt="Ícone de email"
             className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
+            loading="lazy"
           />
         </div>
 
         <div className="relative w-full m-4">
           <input
-            type={mostrarSenha ? 'text' : 'password'}
+            type={mostrarSenha ? "text" : "password"}
             placeholder="Senha"
             required
             value={senha}
@@ -105,9 +100,10 @@ export function Login() {
             className="w-full py-2 pl-10 pr-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-azul_claro"
           />
           <img
-            src="../../cadeado.png"
+            src="/cadeado.png"
             alt="Ícone de senha"
             className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
+            loading="lazy"
           />
 
           <button
@@ -116,9 +112,10 @@ export function Login() {
             className="absolute right-3 top-1/2 transform -translate-y-1/2"
           >
             <img
-              src={mostrarSenha ? olhoAberto : olhoFechado}
+              src={mostrarSenha ? "/eye.png" : "/hidden.png"}
               alt="Mostrar ou ocultar senha"
               className="w-5 h-5"
+              loading="lazy"
             />
           </button>
         </div>
