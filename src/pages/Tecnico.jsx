@@ -1,6 +1,6 @@
 import { Pagina } from "../components/Pagina"
 import { Cabecalho } from '../components/Cabecalho'
-import { IconDownload } from "@tabler/icons-react"
+import { Download } from "lucide-react"
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 import { useContext, useEffect, useState, useMemo } from "react"
 import { DataContext } from "../context/DataContext"
@@ -267,7 +267,7 @@ export function Tecnico() {
             
                 <div className="flex flex-row justify-around">
                     <div className={estiloContainerGrafico2}>
-                        <button className="bg-azul_mais_escuro flex items-center justify-center w-48 h-10 rounded-md" onClick={exportCSV}><IconDownload className="mr-1" /> Exportar CSV</button>
+                        <button className="bg-azul_mais_escuro flex items-center justify-center w-48 h-10 rounded-md" onClick={exportCSV}><Download className="mr-1" /> Exportar CSV</button>
                     </div>
                     <div className={estiloContainerGrafico2}></div>
                 </div>

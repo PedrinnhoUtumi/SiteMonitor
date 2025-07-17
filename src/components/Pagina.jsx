@@ -4,8 +4,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
 import { DataContext } from "../context/DataContext";
-import menuIcon from "/src/assets/menu-hamburguer.png";
 import logoSite from "../assets/metab&p.png";
+import { Menu } from "lucide-react"; // Importando o ícone de download
 
 export function Pagina(props) {
   // Acessando o contexto DataContext
@@ -90,7 +90,7 @@ export function Pagina(props) {
           <img src={logoSite} alt="Logo METAB&P" className="h-50" />
         </div>
         <button onClick={toggleMenu} className="md:hidden focus:outline-none">
-          <img src={menuIcon} alt="Abrir menu" className="h-auto w-8" />
+          <Menu className="h-auto w-8" />
         </button>
         <div className={`flex-col md:flex-row md:flex gap-4 absolute md:static bg-fundo_azul_escuro_elegante md:bg-transparent p-4 md:p-0 rounded-lg top-16 right-1 z-50 ${isMenuOpen ? "flex" : "hidden"}`}>
           <NavLink to="/TempoReal" className={estiloBotao}>Tempo Real</NavLink>
