@@ -12,24 +12,6 @@ export default function Login() {
   const [mostrarSenha, setMostrarSenha] = useState(false);
   console.log("Dados do contexto:", data);
   
-  let nomeUsuario;
-
-  // const myUser = data.filter((item) => item.__tabela === "MYUSER");
-
-  // useEffect(() => {
-  //   const listaUsuarios = myUser.map((usuario) => ({
-  //     id: usuario.ID,
-  //     senha: usuario.SENHA,
-  //     nome: usuario.NAME,
-  //     email: usuario.EMAIL,
-  //     role: usuario.ROLE,
-  //     account: usuario.ACCOUNT,
-  //   }));
-
-  //   setUsuario(listaUsuarios);
-    
-  // }, [data]);
-  
   const verificarLogin = async () => {
   try {
     const response = await fetch("http://localhost:3000/api/login", {
