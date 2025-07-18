@@ -1,3 +1,4 @@
+
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../context/DataContext";
@@ -7,53 +8,60 @@ export default function Login() {
   const { data, adicionarDados, name, adicionarNomes, email, adicionarEmail } = useContext(DataContext); // Importa o contexto de dados
   const [usuario, setUsuario] = useState([]);
   const [senha, setSenha] = useState("");
-  const [senhaHash, setSenhaHash] = useState("");
   const navigate = useNavigate();
   const [mostrarSenha, setMostrarSenha] = useState(false);
   console.log("Dados do contexto:", data);
   
   let nomeUsuario;
 
-  const myUser = data.filter((item) => item.__tabela === "MYUSER");
+  // const myUser = data.filter((item) => item.__tabela === "MYUSER");
 
-  useEffect(() => {
-    const listaUsuarios = myUser.map((usuario) => ({
-      id: usuario.ID,
-      senha: usuario.SENHA,
-      nome: usuario.NAME,
-      email: usuario.EMAIL,
-      role: usuario.ROLE,
-      account: usuario.ACCOUNT,
-    }));
+  // useEffect(() => {
+  //   const listaUsuarios = myUser.map((usuario) => ({
+  //     id: usuario.ID,
+  //     senha: usuario.SENHA,
+  //     nome: usuario.NAME,
+  //     email: usuario.EMAIL,
+  //     role: usuario.ROLE,
+  //     account: usuario.ACCOUNT,
+  //   }));
 
-    setUsuario(listaUsuarios);
+  //   setUsuario(listaUsuarios);
     
-  }, [data]);
+  // }, [data]);
   
   const verificarLogin = async () => {
-    const usuarioEncontrado = usuario.find((user) => user.email === email);
-    if (usuarioEncontrado) {
-      const isCorrect = await bcrypt.compare(senha, usuarioEncontrado.senha);
-  
-      if (isCorrect) {  
-        const dadosUsuario = {
-          email: usuarioEncontrado.email,
-          nome: usuarioEncontrado.nome,
-          id: usuarioEncontrado.id,
-          role: usuarioEncontrado.role,
-          account: usuarioEncontrado.account,
-        };
-  
-        adicionarNomes(usuarioEncontrado.nome);
-        localStorage.setItem("usuario", JSON.stringify(dadosUsuario));
-        localStorage.setItem("usuario_logado", "true");
-  
-        navigate("/TempoReal", { replace: true });
-      } else {
-        alert("Senha incorreta!");
-      }
-    } else {
-      alert("Usuário ou senha inválidos!");
+  try {
+    const response = await fetch("http://localhost:3000/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email, senha })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      alert(data.message);
+      return;
+    }
+    const usuarioEncontrado = {
+                                ID: data.usuario.ID,
+                                NAME: data.usuario.NAME,
+                                EMAIL: data.usuario.EMAIL,
+                                ROLE: data.usuario.ROLE,
+                                ACCOUNT: data.usuario.ACCOUNT
+                              };
+
+    adicionarNomes(usuarioEncontrado.NAME);
+    localStorage.setItem("usuario", JSON.stringify(usuarioEncontrado));
+    localStorage.setItem("usuario_logado", data.mensagem);
+    navigate("/TempoReal", { replace: true });
+
+    } catch (error) {
+      console.error("Erro ao logar:", error);
+      alert("Erro ao tentar login.");
     }
   };
 
