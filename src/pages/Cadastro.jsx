@@ -1,11 +1,10 @@
-import bcrypt from "bcryptjs";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../context/DataContext";
-import logoEducere from '../assets/educere-removebg-preview.png';
+import logoEducere from '/educere-removebg-preview.png';
 import cracha from "../assets/envelope.png";
-import olhoAberto from "../assets/eye.png";
-import olhoFechado from "../assets/hidden.png";
+import olhoAberto from "/eye.png";
+import olhoFechado from "/hidden.png";
 import emailIcon from '../assets/email.png'
 import senhaNew from '../assets/padlock.png'
 
@@ -20,21 +19,6 @@ export default function Cadastro() {
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const myUser = data.filter((item) => item.__tabela === "MYUSER");
   
-
-  
-
-  // function temMaiusculas(texto) {
-  //   return /[A-Z]/.test(texto);
-  // }
-
-  // function temNumeros(texto) {
-  //   return /[0-9]/.test(texto);
-  // }
-
-  // function temEspacos(texto) {
-  //   return texto.includes(" ");
-  // }
-
   const opcoesRole = {
     1: "Administrador",
     2: "Usuário",
@@ -80,14 +64,17 @@ export default function Cadastro() {
         return;
       }
 
-      const salt = await bcrypt.genSalt(10);
-      const hash = await bcrypt.hash(novoUsuario.senha, salt);
       const usuarioParaEnviar = {
-        ...novoUsuario,
-        senha: hash,
+        nome: novoUsuario.nome,
+        email: novoUsuario.email,
+        senha: novoUsuario.senha,
+        role: novoUsuario.role,
+        account: novoUsuario.account
       };
 
-      const response = await fetch(`http://192.168.3.250:3000/api/MYUSER`, {
+      console.log("usuarioParaEnviar", usuarioParaEnviar);
+
+      const response = await fetch(`http://192.168.3.83:3000/api/MYUSER`, {
           method: "POST",
           headers: {
               "Content-Type": "application/json",
@@ -104,7 +91,7 @@ export default function Cadastro() {
 
       setNovoUsuario({ nome: "", email: "", senha: "", role: "", account: "" })
       } catch (error) {
-      console.log("skdslkdj", error)
+      console.log("Erro ao criar usuário: ", error)
     }
   }
 
@@ -207,11 +194,22 @@ export default function Cadastro() {
         </div>
 
         <div className="relative w-3/4 mt-5 flex justify-center items-center m-5">
-          <select name="selectRole" id="selectRole" className="bg-transparent bg-roxo rounded-md" value={novoUsuario.account} onChange={(e) => setNovoUsuario({ ...novoUsuario, account: e.target.value })}>
-            <option value="" disabled selected hidden>Atua como: </option>
+          <select
+            name="selectRole"
+            id="selectRole"
+            className="bg-transparent bg-roxo rounded-md"
+            value={novoUsuario.account}
+            onChange={(e) =>
+              setNovoUsuario({ ...novoUsuario, account: e.target.value })
+            }
+          >
+            {/* Aqui apenas desabilitamos e escondemos a opção padrão */}
+            <option value="" disabled hidden>
+              Atua como:
+            </option>
             <option value={opcoesRole[1]}>Administrador</option>
             <option value={opcoesRole[2]}>Usuário</option>
-          </select> 
+          </select>
         </div>
 
         <button
