@@ -5,6 +5,8 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../context/DataContext";
 
+import LoadingPage from "../loadingPage.jsx";
+
 export default function TempoReal() {
   const {
     data,
@@ -90,9 +92,9 @@ export default function TempoReal() {
 
   if (carregando) {
     return (
-      <Pagina>
-        <div className="text-white p-10 text-center">Carregando dados...</div>
-      </Pagina>
+      <div className="flex items-center justify-center h-full bg-fundo_azul_escuro_elegante w-full">
+        <LoadingPage />
+      </div>
     );
   }
 
@@ -350,7 +352,60 @@ export default function TempoReal() {
                   <Line type="bump" dataKey="PHASEA" stroke="#f5af33" dot={false} strokeWidth={2} />
                   <Line type="bump" dataKey="PHASEB" stroke="#ffaa00" dot={false} strokeWidth={2} />
                   <Line type="bump" dataKey="PHASEC" stroke="#ffcc00" dot={false} strokeWidth={2} />
-                  <Tooltip />
+                   <Tooltip
+                      content={props => {
+                      const { active, payload, label } = props;
+
+                      if (!active || !payload || payload.length === 0) {
+                          return null;
+                      }
+
+                      const item = payload[0].payload;
+
+                      const dataBr = new Date(item.TIME)
+                          .toLocaleDateString('pt-BR');
+                      const horaBr = new Date(item.TIME)
+                          .toLocaleTimeString('pt-BR', {
+                          hour: '2-digit',
+                          minute: '2-digit'
+                          });
+
+                      return (
+                          <div style={{
+                          background: 'rgba(0,0,0,0.7)',
+                          color: '#fff',
+                          padding: 12,
+                          borderRadius: 4,
+                          }}>
+                          <div style={{ marginBottom: 8, fontWeight: 'bold' }}>
+                              {dataBr} {horaBr}
+                          </div>
+
+                          {payload.map(entry => (
+                              <div
+                              key={entry.name}
+                              style={{ display: 'flex', alignItems: 'center', marginBottom: 4 }}
+                              >
+                              <span style={{
+                                  display: 'inline-block',
+                                  width: 10,
+                                  height: 10,
+                                  background: entry.color,
+                                  marginRight: 8,
+                              }} />
+                              <span>
+                                  {entry.name}: {typeof entry.value === 'number'
+                                  ? entry.value.toFixed(2)
+                                  : entry.value
+                                  }
+                              </span>
+                              </div>
+                          ))}
+
+                          </div>
+                      );
+                      }}
+                  />
                   <Legend wrapperStyle={{ color: 'white' }} verticalAlign="top"  height={44} />
               </LineChart>
             </ResponsiveContainer>
@@ -381,7 +436,60 @@ export default function TempoReal() {
                   <Line type="bump" dataKey="PHASEA" stroke="#f5af33" dot={false} strokeWidth={2} />
                   <Line type="bump" dataKey="PHASEB" stroke="#ffaa00" dot={false} strokeWidth={2} />
                   <Line type="bump" dataKey="PHASEC" stroke="#ffcc00" dot={false} strokeWidth={2} />
-                  <Tooltip />
+                   <Tooltip
+                      content={props => {
+                      const { active, payload, label } = props;
+
+                      if (!active || !payload || payload.length === 0) {
+                          return null;
+                      }
+
+                      const item = payload[0].payload;
+
+                      const dataBr = new Date(item.TIME)
+                          .toLocaleDateString('pt-BR');
+                      const horaBr = new Date(item.TIME)
+                          .toLocaleTimeString('pt-BR', {
+                          hour: '2-digit',
+                          minute: '2-digit'
+                          });
+
+                      return (
+                          <div style={{
+                          background: 'rgba(0,0,0,0.7)',
+                          color: '#fff',
+                          padding: 12,
+                          borderRadius: 4,
+                          }}>
+                          <div style={{ marginBottom: 8, fontWeight: 'bold' }}>
+                              {dataBr} {horaBr}
+                          </div>
+
+                          {payload.map(entry => (
+                              <div
+                              key={entry.name}
+                              style={{ display: 'flex', alignItems: 'center', marginBottom: 4 }}
+                              >
+                              <span style={{
+                                  display: 'inline-block',
+                                  width: 10,
+                                  height: 10,
+                                  background: entry.color,
+                                  marginRight: 8,
+                              }} />
+                              <span>
+                                  {entry.name}: {typeof entry.value === 'number'
+                                  ? entry.value.toFixed(2)
+                                  : entry.value
+                                  }
+                              </span>
+                              </div>
+                          ))}
+
+                          </div>
+                      );
+                      }}
+                  />
                   <Legend wrapperStyle={{ color: 'white' }} verticalAlign="top"  height={44} />
               </LineChart>
             </ResponsiveContainer>

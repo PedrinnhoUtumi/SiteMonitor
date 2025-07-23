@@ -108,7 +108,7 @@ export function Pagina(props) {
           <button onClick={setIndeterminado} className="bg-azul_claro px-3 py-1 rounded text-black">
             Indeterminado
           </button>
-        </div>
+        </div>  
 
         {/* DatePicker Modal */}
         {showPicker && (

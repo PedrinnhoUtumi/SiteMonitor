@@ -4,6 +4,8 @@ import { useNavigate, NavLink } from "react-router-dom";
 import { DataContext } from "../context/DataContext";
 import { Cabecalho } from "../components/Cabecalho";
 import axios from "axios";
+import LoadingPage from "../loadingPage";
+
 
 export default function User() {
   const navigate = useNavigate();
@@ -62,11 +64,9 @@ export default function User() {
 
   if (!usuarioEncontrado) {
     return (
-      <Pagina>
-        <div className="text-white p-10 text-center">
-          Carregando perfil do usuário...
-        </div>
-      </Pagina>
+      <div className="flex items-center justify-center h-full bg-fundo_azul_escuro_elegante w-full">
+        <LoadingPage />
+      </div>
     );
   }
 
