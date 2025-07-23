@@ -122,8 +122,8 @@
       console.log(inicioFormatado, fimFormatado);
       
       // fetchMachbase(`http://localhost:3000/api?inicio=${inicioFormatado}&fim=${fimFormatado}`);
-      fetchMachbase(`http://192.168.3.83:3000/api?inicio=${inicioFormatado}&fim=${fimFormatado}`);
-      // fetchMachbase(`http://192.168.3.250:3000/api?inicio=${inicioFormatado}&fim=${fimFormatado}`);
+      // fetchMachbase(`http://192.168.3.83:3000/api?inicio=${inicioFormatado}&fim=${fimFormatado}`);
+      fetchMachbase(`http://192.168.3.250:3000/api?inicio=${inicioFormatado}&fim=${fimFormatado}`);
     }, [inicio, fim]);
 
     const exportar = {
@@ -148,4 +148,3 @@
       <DataContext.Provider value={exportar}>{children}</DataContext.Provider>
     );
   }
-  
