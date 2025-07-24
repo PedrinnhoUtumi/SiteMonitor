@@ -23,6 +23,8 @@ export function DataProvider({ children }) {
   const [cargo, setCargo] = useState("");
   const [inicio, setInicio] = useState(new Date(`${hoje} 00:00:00`));
   const [fim, setFim] = useState(new Date(`${hoje} 23:59:59`));
+  const [isDbOnline, setIsDbOnline] = useState(true); // 👈 flag do banco
+
 
   function adicionarDados(novosDados) {
     if (data.length > 0) {
@@ -63,7 +65,8 @@ export function DataProvider({ children }) {
   const adicionarFim = (novoFim) => {
     setFim(novoFim);
   }
-  const fetchMachbase = async (url) => {
+
+  const fetchMachbase = async (url, retryCount = 0) => {
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -72,8 +75,26 @@ export function DataProvider({ children }) {
 
       const json = await response.json();
       const { insercao, semInsercao } = json;
-      const dados = []
-      const processarTabelas = (tabelas) => {
+      const dados = [];
+
+      const tabelasObrigatorias = [
+        "ACTIVEPOWER",
+        "VOLTAGE",
+        "CURRENT",
+        "CONSUMPTION",
+        "GENERATION",
+        "ANGLEBETWEENVOLTAGES",
+        "ANGLEVOLTAGECURRENT",
+        "APPARENTPOWER",
+        "EQUIPMENTTEMPERATURE",
+        "FREQUENCY",
+        "POWERFACTOR",
+        "REACTIVEPOWER"
+      ];
+
+      const registrosPorTabela = {};
+
+      const processarTabelas = (tabelas, coletarQuantidade = false) => {
         if (!tabelas || typeof tabelas !== "object") return;
 
         Object.entries(tabelas).forEach(([nomeTabela, conteudo]) => {
@@ -81,6 +102,10 @@ export function DataProvider({ children }) {
           const rows = conteudo?.data?.rows;
 
           if (!columns || !rows) return;
+
+          if (coletarQuantidade && tabelasObrigatorias.includes(nomeTabela)) {
+            registrosPorTabela[nomeTabela] = rows.length;
+          }
 
           const dadosFormatados = rows.map((linha) => {
             const obj = { __tabela: nomeTabela };
@@ -91,17 +116,36 @@ export function DataProvider({ children }) {
           });
 
           dados.push(...dadosFormatados);
-          
         });
       };
-      
-      processarTabelas(insercao);
-      processarTabelas(semInsercao);
-      setData(dados)
+
+      // Processar insercao e semInsercao
+      processarTabelas(insercao, true);
+      processarTabelas(semInsercao, false);
+
+      // ✔️ Verificação: todas as tabelas obrigatórias têm pelo menos 1 linha
+      const todasComDados = tabelasObrigatorias.every(
+        (tabela) => registrosPorTabela[tabela] && registrosPorTabela[tabela] > 0
+      );
+
+      if (todasComDados) {
+        setData(dados);
+      } else {
+        console.warn("🔁 Nem todas as tabelas obrigatórias têm dados. Repetindo fetch...");
+        setTimeout(() => fetchMachbase(url, retryCount + 1), 1000);
+      }
+
     } catch (err) {
       console.error("❌ Erro na requisição:", err.message);
+      if (retryCount < 3) {
+        console.warn("🔁 Tentando novamente...");
+        setTimeout(() => fetchMachbase(url, retryCount + 1), 1000);
+      }
     }
   };
+
+
+
 
   useEffect(() => {
     function formatarDataMachbase(date) {
@@ -157,3 +201,4 @@ export function DataProvider({ children }) {
     <DataContext.Provider value={exportar}>{children}</DataContext.Provider>
   );
 }
+

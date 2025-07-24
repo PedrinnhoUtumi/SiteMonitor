@@ -25,18 +25,18 @@ export function Pagina(props) {
     return tempDate instanceof Date && isValid(tempDate);
 };
 
-  const handleDateChange = (datePart) => {
-    const newDate = new Date(tempDate);
-    newDate.setFullYear(datePart.getFullYear(), datePart.getMonth(), datePart.getDate());
-    setTempDate(newDate);
-  };
+  // const handleDateChange = (datePart) => {
+  //   const newDate = new Date(tempDate);
+  //   newDate.setFullYear(datePart.getFullYear(), datePart.getMonth(), datePart.getDate());
+  //   setTempDate(newDate);
+  // };
 
-  const handleTimeChange = (timeStr) => {
-    const [hours, minutes] = timeStr.split(":");
-    const newDate = new Date(tempDate);
-    newDate.setHours(parseInt(hours), parseInt(minutes));
-    setTempDate(newDate);
-  };
+  // const handleTimeChange = (timeStr) => {
+  //   const [hours, minutes] = timeStr.split(":");
+  //   const newDate = new Date(tempDate);
+  //   newDate.setHours(parseInt(hours), parseInt(minutes));
+  //   setTempDate(newDate);
+  // };
 
   const confirmarData = () => {
     if (!isTempDateComplete()) return;
