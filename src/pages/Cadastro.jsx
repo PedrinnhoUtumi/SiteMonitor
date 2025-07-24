@@ -70,7 +70,7 @@ export default function Cadastro() {
 
       console.log("usuarioParaEnviar", usuarioParaEnviar);
 
-      const response = await fetch(`http://192.168.10.250:3000/api/MYUSER`, {
+      const response = await fetch(`http://192.168.3.250:3000/api/MYUSER`, {
           method: "POST",
           headers: {
               "Content-Type": "application/json",
