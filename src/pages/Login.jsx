@@ -2,10 +2,12 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../context/DataContext";
-// ❌ Removi import de bcryptjs aqui: ideal é validar no backend.
+import {CircleUserRound, Lock, EyeClosed, Eye} from 'lucide-react'
+
+
 
 export default function Login() {
-  const { data, adicionarDados, name, adicionarNomes, email, adicionarEmail } = useContext(DataContext); // Importa o contexto de dados
+  const { data, adicionarDados, name, adicionarNomes, email, adicionarEmail } = useContext(DataContext); 
   const [usuario, setUsuario] = useState([]);
   const [senha, setSenha] = useState("");
   const navigate = useNavigate();
@@ -72,12 +74,7 @@ export default function Login() {
             onChange={(e) => adicionarEmail(e.target.value)}
             className="w-full py-2 pl-10 pr-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-azul_claro"
           />
-          <img
-            src="/usuarioGmail.png"
-            alt="Ícone de email"
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
-            loading="lazy"
-          />
+          <CircleUserRound className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-black"/>
         </div>
 
         <div className="relative w-full m-4">
@@ -89,24 +86,14 @@ export default function Login() {
             onChange={(e) => setSenha(e.target.value)}
             className="w-full py-2 pl-10 pr-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-azul_claro"
           />
-          <img
-            src="/cadeado.png"
-            alt="Ícone de senha"
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
-            loading="lazy"
-          />
+          <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-black"/>
 
           <button
             type="button"
             onClick={() => setMostrarSenha(!mostrarSenha)}
             className="absolute right-3 top-1/2 transform -translate-y-1/2"
           >
-            <img
-              src={mostrarSenha ? "/eye.png" : "/hidden.png"}
-              alt="Mostrar ou ocultar senha"
-              className="w-5 h-5"
-              loading="lazy"
-            />
+            {mostrarSenha ? <Eye className="w-5 h-5 text-black" /> : <EyeClosed className="w-5 h-5 text-black" />}
           </button>
         </div>
 

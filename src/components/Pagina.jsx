@@ -2,25 +2,56 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { format } from "date-fns";
+import { format, isValid } from "date-fns";
 import { DataContext } from "../context/DataContext";
 import logoSite from "../assets/metab&p.png";
-import { Menu } from "lucide-react"; // Importando o ícone de download
+import { Menu } from "lucide-react"; 
+
 
 export function Pagina(props) {
-  // Acessando o contexto DataContext
   const { data, name, instituicao, cargo, inicio, adicionarInicio, fim, adicionarFim } = useContext(DataContext);
   
-  // Estado para o menu e data/hora
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
   const [pickerMode, setPickerMode] = useState("start");
 
-  // Log inicial para depuração
+  const [tempDate, setTempDate] = useState(new Date());
+
+  useEffect(() => {
+    setTempDate(pickerMode === "start" ? inicio : fim || new Date());
+  }, [showPicker]);
+
+  const isTempDateComplete = () => {
+    return tempDate instanceof Date && isValid(tempDate);
+};
+
+  const handleDateChange = (datePart) => {
+    const newDate = new Date(tempDate);
+    newDate.setFullYear(datePart.getFullYear(), datePart.getMonth(), datePart.getDate());
+    setTempDate(newDate);
+  };
+
+  const handleTimeChange = (timeStr) => {
+    const [hours, minutes] = timeStr.split(":");
+    const newDate = new Date(tempDate);
+    newDate.setHours(parseInt(hours), parseInt(minutes));
+    setTempDate(newDate);
+  };
+
+  const confirmarData = () => {
+    if (!isTempDateComplete()) return;
+
+    if (pickerMode === "start") {
+      adicionarInicio(tempDate);  
+    } else {
+      adicionarFim(tempDate);
+    }
+    setShowPicker(false);
+  };
+
   console.log("Renderizando componente Pagina");
   console.log("Estado Inicial: isMenuOpen", isMenuOpen);
 
-  // Função de toggle do menu
   const toggleMenu = () => {
     setIsMenuOpen(prev => { 
       console.log('Toggle menu, estado anterior:', prev);
@@ -28,16 +59,16 @@ export function Pagina(props) {
     });
   };
 
-  // Variáveis de estilo para os botões
   const estiloBotao = "text-white flex flex-row justify-center items-center";
 
-  // Roteamento da navegação
   const rotaParaValor = { "/TempoReal": 1, "/Tecnico": 2, "/User": 3 };
   const valorParaRota = { 1: "/TempoReal", 2: "/Tecnico", 3: "/User" };
 
   const location = useLocation();
   const navigate = useNavigate();
   const [estado, setEstado] = useState(rotaParaValor[location.pathname] || 1);
+  const [selectedDate, setSelectedDate] = useState(null);
+
 
   useEffect(() => {
     console.log('useEffect - mudança de rota: ', location.pathname);
@@ -47,7 +78,6 @@ export function Pagina(props) {
     }
   }, [location.pathname]);
 
-  // Função de manipulação da mudança de rota
   function handleChange(event) {
     const v = Number(event.target.value);
     console.log('Mudando para rota:', v, 'Nova rota:', valorParaRota[v]);
@@ -55,27 +85,24 @@ export function Pagina(props) {
     navigate(valorParaRota[v]);
   }
 
-  // Função para abrir o DatePicker
   const openPicker = mode => {
     console.log(`Abrindo picker para: ${mode}`);
     setPickerMode(mode);
     setShowPicker(true);
   };
 
-  // Função de seleção da data
   const handleSelect = date => {
     console.log('Data selecionada: ', date);
     if (pickerMode === "start") {
       console.log('Adicionando data de início');
-      adicionarInicio(date);  // Atualiza a data de início
+      adicionarInicio(date);  
     } else {
       console.log('Adicionando data de fim');
-      adicionarFim(date);  // Atualiza a data de fim
+      adicionarFim(date);  
     }
     setShowPicker(false);
   };
 
-  // Função para marcar como "indeterminado"
   const setIndeterminado = () => {
     console.log('Marcando como indeterminado');
     adicionarInicio(null);
@@ -99,38 +126,81 @@ export function Pagina(props) {
           <NavLink to="/User" className={estiloBotao}>{name}</NavLink>
 
           {/* Botões de data/hora */}
-          <button onClick={() => openPicker("start")} className="bg-azul_claro px-3 py-1 rounded text-black">
+          <button onClick={() => openPicker("start")} className="bg-fundo_azul_escuro_elegante  pl-1 rounded text-white">
             {inicio ? format(inicio, "yyyy-MM-dd HH:mm:ss") : "Início"}
           </button>
-          <button onClick={() => openPicker("end")} className="bg-azul_claro px-3 py-1 rounded text-black">
+          <button onClick={() => openPicker("end")} className="bg-fundo_azul_escuro_elegante  pl-1 rounded text-white">
             {fim ? format(fim, "yyyy-MM-dd HH:mm:ss") : "Fim"}
           </button>
-          <button onClick={setIndeterminado} className="bg-azul_claro px-3 py-1 rounded text-black">
+          <button onClick={setIndeterminado} className="bg-fundo_azul_escuro_elegante  pl-1 rounded text-white">
             Indeterminado
           </button>
         </div>  
 
         {/* DatePicker Modal */}
         {showPicker && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-              <DatePicker
-                selected={pickerMode === "start" ? inicio : fim}
-                onChange={handleSelect}
-                showTimeSelect
-                timeFormat="HH:mm"
-                timeIntervals={15}
-                dateFormat="yyyy-MM-dd HH:mm:ss"
-                inline
-              />
-              <div className="mta-4 text-right">
-                <button onClick={() => setShowPicker(false)} className="bg-red-500 text-white px-4 py-1 rounded">
+          <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-[350px]">
+              <h2 className="text-lg font-semibold mb-4 text-black">Selecione data e hora</h2>
+
+              <div className="space-y-4">
+                {/* Calendário */}
+                <DatePicker
+                  selected={tempDate}
+                  onChange={(date) => {
+                    const updated = new Date(tempDate);
+                    updated.setFullYear(date.getFullYear(), date.getMonth(), date.getDate());
+                    setTempDate(updated);
+                  }}
+                  inline
+                  calendarClassName="text-black"
+                />
+
+                {/* Campo de hora */}
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="horaInput" className="text-black text-sm font-medium">
+                    Hora (HH:mm)
+                  </label>
+                  <input
+                    id="horaInput"
+                    type="time"
+                    value={format(tempDate, "HH:mm")}
+                    onChange={(e) => {
+                      const [hours, minutes] = e.target.value.split(":");
+                      const updated = new Date(tempDate);
+                      updated.setHours(parseInt(hours), parseInt(minutes));
+                      setTempDate(updated);
+                    }}
+                    className="border border-gray-300 rounded px-3 py-2 text-black focus:outline-none focus:ring focus:ring-blue-300"
+                  />
+                </div>
+              </div>
+
+              {/* Botões */}
+              <div className="mt-4 flex justify-end gap-2">
+                <button
+                  onClick={() => setShowPicker(false)}
+                  className="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded"
+                >
                   Cancelar
+                </button>
+                <button
+                  onClick={confirmarData}
+                  disabled={!isTempDateComplete()}
+                  className={`px-4 py-1 rounded ${
+                    isTempDateComplete()
+                      ? "bg-green-600 hover:bg-green-700 text-white"
+                      : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  }`}
+                >
+                  Confirmar
                 </button>
               </div>
             </div>
           </div>
         )}
+
+
       </header>
 
       {/* Main Content */}

@@ -2,11 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../context/DataContext";
 import logoEducere from '/educere-removebg-preview.png';
-import cracha from "../assets/envelope.png";
-import olhoAberto from "/eye.png";
-import olhoFechado from "/hidden.png";
-import emailIcon from '../assets/email.png'
-import senhaNew from '../assets/padlock.png'
+import {CircleUserRound, Lock, EyeClosed, Eye, Mail, UserRoundCog} from 'lucide-react'
 
 export default function Cadastro() {
 
@@ -111,7 +107,7 @@ export default function Cadastro() {
 
       <div className="caixaLogin max-sm:w-2/3 sm:w-1/2 lg:w-1/4 h-4/7 flex flex-col justify-center items-center bg-white bg-opacity-20 rounded-3xl shadow-lg backdrop-blur-sm pt-32">
         <img
-          src="../../usuario.png"
+          src="/usuario.png"
           alt="Ícone de usuário"
           className="max-sm:w-32 sm:w-32 lg:w-32 absolute top-2 "
         />
@@ -124,11 +120,7 @@ export default function Cadastro() {
             onChange={(e) => setNovoUsuario({ ...novoUsuario, nome: e.target.value })}
             className="w-full py-2 pl-10 pr-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-azul_claro"
           />
-          <img
-            src="../../usuarioGmail.png"
-            alt="Ícone de email"
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
-          />
+          <CircleUserRound className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-black" />
         </div>
 
         <div className="relative w-3/4 mt-5">
@@ -140,11 +132,7 @@ export default function Cadastro() {
             onChange={(e) => setNovoUsuario({ ...novoUsuario, email: e.target.value })}
             className="w-full py-2 pl-10 pr-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-azul_claro"
           />
-          <img
-            src={emailIcon}
-            alt="Ícone de email"
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
-          />
+           <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-black" />
         </div>
 
 
@@ -158,22 +146,14 @@ export default function Cadastro() {
             className="w-full py-2 pl-10 pr-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-azul_claro"
           />
 
-          <img
-            src={senhaNew}
-            alt="Ícone de senha"
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
-          />
+          <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-black" />
 
           <button
             type="button"
             onClick={() => setMostrarSenha(!mostrarSenha)}
             className="absolute right-3 top-1/2 transform -translate-y-1/2"
           >
-            <img
-              src={mostrarSenha ? olhoAberto : olhoFechado}
-              alt="Mostrar ou ocultar senha"
-              className="w-5 h-5"
-            />
+            {mostrarSenha ? <Eye className="w-5 h-5 text-black" /> : <EyeClosed className="w-5 h-5 text-black" />}
           </button>
         </div>
         
@@ -186,11 +166,8 @@ export default function Cadastro() {
             onChange={(e) => setNovoUsuario({ ...novoUsuario, role: e.target.value })}
             className="w-full py-2 pl-10 pr-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-azul_claro"
           />
-          <img
-            src= {cracha}
-            alt="Ícone de senha"
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
-          />
+           
+          <UserRoundCog className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-black" />
         </div>
 
         <div className="relative w-3/4 mt-5 flex justify-center items-center m-5">
@@ -203,7 +180,6 @@ export default function Cadastro() {
               setNovoUsuario({ ...novoUsuario, account: e.target.value })
             }
           >
-            {/* Aqui apenas desabilitamos e escondemos a opção padrão */}
             <option value="" disabled hidden>
               Atua como:
             </option>
