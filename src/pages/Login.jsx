@@ -16,7 +16,7 @@ export default function Login() {
   
   const verificarLogin = async () => {
   try {
-    const response = await fetch("http://198.168.10.250:3000/api/login", {
+    const response = await fetch("http://192.168.10.250:3000/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
