@@ -145,7 +145,24 @@ export function DataProvider({ children }) {
   };
 
 
+  useEffect(() => {
+    const usuarioStorage = JSON.parse(localStorage.getItem("usuario") || "{}");
 
+    if (usuarioStorage.NAME) setName(usuarioStorage.NAME);
+    if (usuarioStorage.EMAIL) setEmail(usuarioStorage.EMAIL);
+    if (usuarioStorage.ROLE) setCargo(usuarioStorage.ROLE);
+    if (usuarioStorage.ACCOUNT) {
+      setInstituicao((prev) =>
+        !prev.includes(usuarioStorage.ACCOUNT) ? [...prev, usuarioStorage.ACCOUNT] : prev
+      );
+    }
+
+    const inicioStorage = localStorage.getItem("inicio");
+    const fimStorage = localStorage.getItem("fim");
+
+    if (inicioStorage) setInicio(new Date(inicioStorage));
+    if (fimStorage) setFim(new Date(fimStorage));
+  }, []);
 
   useEffect(() => {
     function formatarDataMachbase(date) {

@@ -335,11 +335,9 @@ export default function TempoReal() {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis domain={[0, 10]} tick={{fill: 'white'}} label={{value:"Quantidade de Informações", offset:-2, position:"insideBottom" }} />
                   <YAxis
-                    domain={([dataMin, dataMax]) => {
-                        const range = dataMax - dataMin;
-                        const margin = Math.ceil(range * 0.15); 
-                        return [0, dataMax + margin];
-                    }}
+                    domain={['auto', 'auto']}
+                      allowDataOverflow={true}
+                      allowDecimals={true}
                     tick={{ fill: 'white' }}
                     tickFormatter={(value) => Math.floor(value)}
                     label={{
@@ -419,11 +417,9 @@ export default function TempoReal() {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis domain={[0, 10]} tick={{fill: 'white'}} label={{value:"Quantidade de Informações", offset:-2, position:"insideBottom" }} />
                   <YAxis
-                    domain={([dataMin, dataMax]) => {
-                        const range = dataMax - dataMin;
-                        const margin = Math.ceil(range * 0.15); 
-                        return [0, dataMax + margin];
-                    }}
+                    domain={['auto', 'auto']}
+                      allowDataOverflow={true}
+                      allowDecimals={true}
                     tick={{ fill: 'white' }}
                     tickFormatter={(value) => value.toFixed(1)}
                     label={{

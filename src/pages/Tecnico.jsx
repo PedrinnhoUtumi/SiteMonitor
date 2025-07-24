@@ -9,7 +9,7 @@ import axios from "axios"
 export default function Tecnico() {
     const { data, adicionarDados, name, adicionarNomes } = useContext(DataContext)
     
-    const estiloContainerGrafico = "bg-fundo_azul_escuro_elegante w-full md:w-1/2 lg:w-[31vw] h-auto m-1 p-4 rounded-md border-b";
+    const estiloContainerGrafico = "bg-fundo_azul_escuro_elegante w-full md:w-1/2 lg:w-[31vw] h-auto m-1 py-4 flex justify-center itens-center rounded-md border-b";
     const estiloContainerGrafico2 = "bg-fundo_azul_escuro_elegante w-[50vw] h-[25vh] m-1 p-2 rounded-md flex flex-row"
     const [larguraTela, setLarguraTela] = useState(window.innerWidth);
 
@@ -219,10 +219,10 @@ export default function Tecnico() {
                                 }}
                             />
                             <YAxis
-                                domain={([dataMin, dataMax]) => [
-                                Math.floor(dataMin - 1),
-                                Math.ceil(dataMax + 1),
-                                ]}
+                                type="number"
+                                domain={['auto', 'auto']}
+                                allowDataOverflow={true}
+                                allowDecimals={true}
                                 tick={{ fill: "white" }}
                                 tickFormatter={chart.yFormatter}
                                 label={{

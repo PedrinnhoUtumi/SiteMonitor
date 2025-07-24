@@ -25,19 +25,6 @@ export function Pagina(props) {
     return tempDate instanceof Date && isValid(tempDate);
 };
 
-  // const handleDateChange = (datePart) => {
-  //   const newDate = new Date(tempDate);
-  //   newDate.setFullYear(datePart.getFullYear(), datePart.getMonth(), datePart.getDate());
-  //   setTempDate(newDate);
-  // };
-
-  // const handleTimeChange = (timeStr) => {
-  //   const [hours, minutes] = timeStr.split(":");
-  //   const newDate = new Date(tempDate);
-  //   newDate.setHours(parseInt(hours), parseInt(minutes));
-  //   setTempDate(newDate);
-  // };
-
   const confirmarData = () => {
     if (!isTempDateComplete()) return;
 
@@ -110,7 +97,7 @@ export function Pagina(props) {
   };
 
   return (
-    <div className="relative flex flex-col flex-1">
+    <div className="relative flex flex-col flex-1"> 
       {/* Header */}
       <header className="flex flex-row justify-between items-center px-5 h-16 border-b bg-fundo_azul_escuro_elegante text-branco">
         <div className="flex items-center w-72">
@@ -132,9 +119,9 @@ export function Pagina(props) {
           <button onClick={() => openPicker("end")} className="bg-fundo_azul_escuro_elegante  pl-1 rounded text-white">
             {fim ? format(fim, "yyyy-MM-dd HH:mm:ss") : "Fim"}
           </button>
-          <button onClick={setIndeterminado} className="bg-fundo_azul_escuro_elegante  pl-1 rounded text-white">
+          {/* <button onClick={setIndeterminado} className="bg-fundo_azul_escuro_elegante  pl-1 rounded text-white">
             Indeterminado
-          </button>
+          </button> */}
         </div>  
 
         {/* DatePicker Modal */}
