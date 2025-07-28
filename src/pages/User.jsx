@@ -162,14 +162,14 @@ export default function User() {
         </div>
         <div className="mt-6 w-full max-w-3xl text-white">
           {modoEdicao ? (
-            <div className="flex flex-col gap-4 p-4 border rounded bg-fundo_azul_escuro_elegante">
+            <div className="flex flex-col gap-4 p-4 rounded-md  bg-fundo_azul_escuro_elegante pb-4">
               <input
                 type="text"
                 name="nome"
                 value={alteraUsuario.nome}
                 onChange={(e) => setAlteraUsuario({ ...alteraUsuario, nome: e.target.value })}
                 placeholder="Nome"
-                className="p-2 rounded text-black"
+                className="p-2 rounded-md bg-gray-200 text-black"
               />
               <input
                 type="email"
@@ -177,7 +177,7 @@ export default function User() {
                 value={alteraUsuario.email}
                 onChange={(e) => setAlteraUsuario({ ...alteraUsuario, email: e.target.value })}
                 placeholder="Email"
-                className="p-2 rounded text-black"
+                className="p-2 rounded-md bg-gray-200 text-black"
               />
               <input
                 type="text"
@@ -185,15 +185,7 @@ export default function User() {
                 value={alteraUsuario.role}
                 onChange={(e) => setAlteraUsuario({ ...alteraUsuario, role: e.target.value })}
                 placeholder="Cargo"
-                className="p-2 rounded text-black"
-              />
-              <input
-                type="text"
-                name="account"
-                value={alteraUsuario.account}
-                onChange={(e) => setAlteraUsuario({ ...alteraUsuario, account: e.target.value })}
-                placeholder="Tipo de Conta"
-                className="p-2 rounded text-black"
+                className="p-2 rounded-md bg-gray-200 text-black"
               />
 
               <div className="flex gap-4 mt-4">
@@ -216,28 +208,29 @@ export default function User() {
             
           )}
         </div>
-        <button
-          onClick={() => {
-            setAlteraUsuario({
-              nome: infoUsuario.nome,
-              email: infoUsuario.email,
-              role: infoUsuario.cargo,
-              account: infoUsuario.tipoConta,
-            });
-            setModoEdicao(true)
-          }}
-          className="bg-fundo_azul_escuro_elegante hover:bg-fonte_elegante_amarelo hover:text-white text-fonte_elegante_amarelo px-4 py-2 rounded transition-colors"
-        >
-          Editar Perfil
-        </button>
-        <nav className="m-5">
-          <button
-            onClick={handleLogout}
-            className="bg-fundo_azul_escuro_elegante p-3 pl-8 pr-8 rounded-md w-full  hover:bg-fonte_elegante_amarelo hover:text-white text-fonte_elegante_amarelo transition-colors duration-300"
-          >
-            Sair
-          </button>
-        </nav>
+        <div className="flex flex-row justify-center items-center">
+            <button
+              onClick={() => {
+                setAlteraUsuario({
+                  nome: infoUsuario.nome,
+                  email: infoUsuario.email,
+                  role: infoUsuario.cargo,
+                });
+                setModoEdicao(true)
+              }}
+              className="bg-fundo_azul_escuro_elegante h-min p-3 pl-8 pr-8 rounded-md hover:bg-fonte_elegante_amarelo hover:text-white text-fonte_elegante_amarelo transition-colors duration-300"
+            >
+              Editar Perfil
+            </button>
+            <nav className="m-5">
+              <button
+                onClick={handleLogout}
+                className="bg-fundo_azul_escuro_elegante p-3 pl-8 pr-8 rounded-md   hover:bg-fonte_elegante_amarelo hover:text-white text-fonte_elegante_amarelo transition-colors duration-300"
+              >
+                Sair
+              </button>
+            </nav>
+        </div>
       </div>
     </Pagina>
   );

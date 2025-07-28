@@ -335,7 +335,7 @@ export default function TempoReal() {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis domain={[0, 10]} tick={{fill: 'white'}} label={{value:"Quantidade de Informações", offset:-2, position:"insideBottom" }} />
                   <YAxis
-                    domain={['auto', 'auto']}
+                    domain={[-6, 70]}
                       allowDataOverflow={true}
                       allowDecimals={true}
                     tick={{ fill: 'white' }}

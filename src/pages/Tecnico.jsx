@@ -29,23 +29,72 @@ export default function Tecnico() {
         }, {});
     }, [data]);
 
-    function exportCSV() {
-        function convertToCSV(data) {
-            const headers = Object.keys(data[0]);
-            const csvRows = [];
-            csvRows.push(headers.join(','));
-            for (const row of data) {
-                const values = headers.map(header => row[header]);
-                csvRows.push(values.join(','));
-            }
-            return csvRows.join('\n');
+    function exportCSV(tabelas, filename = 'dados.csv') {
+        const tabelasIgnoradas = ['business', 'myuser', 'user_business'];
+
+        const tabelasArray = Object.entries(tabelas).filter(
+            ([nome]) => !tabelasIgnoradas.includes(nome.toLowerCase())
+        );
+
+        if (tabelasArray.length === 0) {
+            alert("Nenhuma tabela válida para exportar.");
+            return;
         }
-        const csvData = convertToCSV(data)
-        const blob = new Blob([csvData], { type: 'text/csv' })
-        const link = document.createElement('a')
-        link.href = URL.createObjectURL(blob)
-        link.download = 'dados.csv'
-        link.click()
+
+        const numLinhasPorTabela = tabelasArray.map(([_, dados]) => dados.length);
+        const maxLinhas = Math.max(...numLinhasPorTabela);
+
+        const linhasCSV = [];
+
+        // Linha 1: Nomes das tabelas centralizados
+        const linhaNomes = [];
+        tabelasArray.forEach(([nome, dados]) => {
+            const colunas = Object.keys(dados[0]);
+            const centro = Math.floor(colunas.length / 2);
+            for (let i = 0; i < colunas.length; i++) {
+                linhaNomes.push(i === centro ? nome.toUpperCase() : '');
+            }
+            linhaNomes.push(''); // coluna separadora
+        });
+        linhasCSV.push(linhaNomes.join(','));
+
+        // Linha 2: Cabeçalhos
+        const linhaCabecalhos = [];
+        tabelasArray.forEach(([_, dados]) => {
+            const colunas = Object.keys(dados[0]);
+            linhaCabecalhos.push(...colunas);
+            linhaCabecalhos.push('');
+        });
+        linhasCSV.push(linhaCabecalhos.join(','));
+
+        // Linhas de dados
+        for (let i = 0; i < maxLinhas; i++) {
+            const linha = [];
+            tabelasArray.forEach(([_, dados]) => {
+                const colunas = Object.keys(dados[0]);
+                const row = dados[i];
+                if (row) {
+                    colunas.forEach(col => {
+                        let value = row[col] ?? '';
+                        value = String(value).replace(/"/g, '""');
+                        linha.push(`"${value}"`);
+                    });
+                } else {
+                    colunas.forEach(() => linha.push(''));
+                }
+                linha.push('');
+            });
+            linhasCSV.push(linha.join(','));
+        }
+
+        const csvData = linhasCSV.join('\n');
+        const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.setAttribute('download', filename);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     }
 
     const chartsConfig = [
@@ -188,7 +237,7 @@ export default function Tecnico() {
             {larguraTela>=600 && <Cabecalho/>}
             <div className="w-full h-full flex flex-col bg-fundo_azul_claro_elegante ">
                 <div className="flex flex-col lg:flex-row flex-wrap justify-around items-center gap-6 mb-6 mt-5">
-                    {chartsConfig.map((chart, idx) => (
+                    {chartsConfig.map((chart, idx) => (       
                         <div 
                         key={idx}
                         className={`${estiloContainerGrafico} `} 
@@ -218,20 +267,45 @@ export default function Tecnico() {
                                 position: "insideBottom",
                                 }}
                             />
-                            <YAxis
-                                type="number"
-                                domain={['auto', 'auto']}
-                                allowDataOverflow={true}
-                                allowDecimals={true}
-                                tick={{ fill: "white" }}
-                                tickFormatter={chart.yFormatter}
-                                label={{
-                                value: chart.yLabel,
-                                angle: -90,
-                                position: "insideLeft",
-                                style: { textAnchor: "middle" },
-                                }}
-                            />
+                            {chart.title === "Potência Ativa" ? (
+                                <YAxis
+                                    type="number"
+                                    domain={[-6, 70]} // domínio fixo específico para Potência Ativa
+                                    tick={{ fill: "white" }}
+                                    tickFormatter={chart.yFormatter}
+                                    label={{
+                                    value: chart.yLabel,
+                                    angle: -90,
+                                    position: "insideLeft",
+                                    style: { textAnchor: "middle" },
+                                    }}
+                                />
+                                ) : (
+                                <YAxis
+                                    type="number"
+                                    domain={(() => {
+                                        const todosValores = chart.data.flatMap((item) =>
+                                        chart.lines.map((line) => item[line.dataKey]).filter((v) => typeof v === "number")
+                                        );
+                                        if (!todosValores.length) return ['auto', 'auto'];
+                                        const min = Math.min(...todosValores);
+                                        const max = Math.max(...todosValores);
+                                        const margem = (max - min) * 0.1 || 1; // margem mínima de 1 para evitar 0
+                                        return [min - margem, max + margem];
+                                    })()}
+                                    allowDataOverflow={true}
+                                    allowDecimals={true}
+                                    tick={{ fill: "white" }}
+                                    tickFormatter={chart.yFormatter}
+                                    label={{
+                                        value: chart.yLabel,
+                                        angle: -90,
+                                        position: "insideLeft",
+                                        style: { textAnchor: "middle" },
+                                    }}
+                                />
+                            )}
+
 
                             {chart.lines.map((line, lineIdx) => (
                                 <Line
@@ -312,7 +386,7 @@ export default function Tecnico() {
             
                 <div className="flex flex-row justify-around">
                     <div className={estiloContainerGrafico2}>
-                        <button className="bg-azul_mais_escuro flex items-center justify-center w-48 h-10 rounded-md" onClick={exportCSV}><Download className="mr-1" /> Exportar CSV</button>
+                        <button className="bg-azul_mais_escuro flex items-center justify-center w-48 h-10 rounded-md" onClick={() => exportCSV(tabelasSeparadas)}><Download className="mr-1" /> Exportar CSV</button>
                     </div>
                     <div className={estiloContainerGrafico2}></div>
                 </div>
