@@ -12,7 +12,7 @@ export default function Login() {
   const [senha, setSenha] = useState("");
   const navigate = useNavigate();
   const [mostrarSenha, setMostrarSenha] = useState(false);
-  console.log("Dados do contexto:", data);
+  console.clear();
   
   const verificarLogin = async () => {
   try {

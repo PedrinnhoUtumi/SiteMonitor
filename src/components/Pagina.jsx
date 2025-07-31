@@ -36,12 +36,10 @@ export function Pagina(props) {
     setShowPicker(false);
   };
 
-  console.log("Renderizando componente Pagina");
-  console.log("Estado Inicial: isMenuOpen", isMenuOpen);
 
   const toggleMenu = () => {
     setIsMenuOpen(prev => { 
-      console.log('Toggle menu, estado anterior:', prev);
+      ('Toggle menu, estado anterior:', prev);
       return !prev;
     });
   };
@@ -58,7 +56,6 @@ export function Pagina(props) {
 
 
   useEffect(() => {
-    console.log('useEffect - mudança de rota: ', location.pathname);
     const novo = rotaParaValor[location.pathname];
     if (novo !== undefined && novo !== estado) {
       setEstado(novo);
@@ -67,31 +64,25 @@ export function Pagina(props) {
 
   function handleChange(event) {
     const v = Number(event.target.value);
-    console.log('Mudando para rota:', v, 'Nova rota:', valorParaRota[v]);
     setEstado(v);
     navigate(valorParaRota[v]);
   }
 
   const openPicker = mode => {
-    console.log(`Abrindo picker para: ${mode}`);
     setPickerMode(mode);
     setShowPicker(true);
   };
 
   const handleSelect = date => {
-    console.log('Data selecionada: ', date);
     if (pickerMode === "start") {
-      console.log('Adicionando data de início');
       adicionarInicio(date);  
     } else {
-      console.log('Adicionando data de fim');
       adicionarFim(date);  
     }
     setShowPicker(false);
   };
 
   const setIndeterminado = () => {
-    console.log('Marcando como indeterminado');
     adicionarInicio(null);
     adicionarFim(null);
   };
@@ -192,7 +183,6 @@ export function Pagina(props) {
 
       {/* Main Content */}
       <main className="flex flex-col items-start flex-1 text-base text-branco bg-azul_bebe">
-        {console.log('Renderizando children da página')}
         {props.children}
       </main>
     </div>

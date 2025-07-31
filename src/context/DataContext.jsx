@@ -182,7 +182,6 @@ export function DataProvider({ children }) {
     const buscarPeriodicamente = () => {
       const inicioFormatado = formatarDataMachbase(new Date(inicio));
       const fimFormatado = formatarDataMachbase(new Date(fim));
-      console.log("⏱️ Atualizando:", inicioFormatado, fimFormatado);
       fetchMachbase(`http://192.168.3.250:3000/api?inicio=${inicioFormatado}&fim=${fimFormatado}`);
     };
 

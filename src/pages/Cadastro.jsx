@@ -35,7 +35,6 @@ export default function Cadastro() {
   }, [data]);
   const verificarUsuarioCadastrado = async () => {
     const usuarioEncontrado = usuario.find((user) => user.email === novoUsuario.email);
-    console.log("usuarioEncontrado", usuarioEncontrado);
     
     if (usuarioEncontrado) {
       return true
@@ -53,7 +52,6 @@ export default function Cadastro() {
       }
 
       const usuarioExistente = await verificarUsuarioCadastrado();
-      console.log("usuarioExistente", usuarioExistente);
       
       if (usuarioExistente) {
         alert("Usuário já cadastrado!");
@@ -68,7 +66,6 @@ export default function Cadastro() {
         account: novoUsuario.account
       };
 
-      console.log("usuarioParaEnviar", usuarioParaEnviar);
 
       const response = await fetch(`http://192.168.3.250:3000/api/MYUSER`, {
           method: "POST",
